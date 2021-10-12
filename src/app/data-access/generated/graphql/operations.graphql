@@ -1,0 +1,10 @@
+query recipes {
+  recipes {
+    id
+    name
+    photo {
+      id
+      path
+    }
+  }
+}

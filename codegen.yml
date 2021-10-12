@@ -1,0 +1,8 @@
+schema: http://localhost:3000/graphql
+generates:
+  ./src/app/data-access/generated/types/types.ts:
+    documents: "src/app/data-access/generated/graphql/**/*.graphql"
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-apollo-angular

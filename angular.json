@@ -85,9 +85,21 @@
           "options": {
             "browserTarget": "sfr-v2:build"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "sfr-v2"
+  "defaultProject": "sfr-v2",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
