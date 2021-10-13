@@ -33,7 +33,12 @@ export type RecipePhotoType = {
 
 export type RecipeType = {
   __typename?: 'RecipeType';
+  cookTime: Scalars['Int'];
+  description: Scalars['String'];
+  difficulty: Scalars['Int'];
   id: Scalars['Int'];
+  ingredients: Array<Scalars['String']>;
+  instructions: Array<Scalars['String']>;
   name: Scalars['String'];
   photo: RecipePhotoType;
 };
