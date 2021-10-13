@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
+import { SfrViewModule } from './ui/view';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { HttpLink } from 'apollo-angular/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SfrViewModule,
   ],
   providers: [
     {
