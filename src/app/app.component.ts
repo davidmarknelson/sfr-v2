@@ -1,22 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { RecipesGQL } from './data-access/generated';
-import { map, tap } from 'rxjs/operators';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'sfr-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor(private recipesGQL: RecipesGQL) {}
-
-  ngOnInit(): void {
-    this.recipesGQL
-      .watch()
-      .valueChanges.pipe(
-        map(({ data }) => data),
-        tap(console.log)
-      )
-      .subscribe();
-  }
-}
+export class SfrAppComponent {}
