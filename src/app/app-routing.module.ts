@@ -15,8 +15,13 @@ const routes: Routes = [
       {
         path: 'welcome',
         loadChildren: () =>
-          import('./features/welcome/welcome.module').then(
-            (m) => m.SfrWelcomeModule
+          import('./features/welcome').then((m) => m.SfrWelcomeModule),
+      },
+      {
+        path: 'recipes',
+        loadChildren: () =>
+          import('./features/recipes/features/recipes').then(
+            (m) => m.SfrRecipesModule
           ),
       },
     ],

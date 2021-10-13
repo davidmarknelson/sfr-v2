@@ -9,7 +9,5 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 export class SfrWelcomeComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('here');
-  }
+  ngOnInit(): void {}
 }
