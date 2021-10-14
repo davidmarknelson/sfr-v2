@@ -4,5 +4,8 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

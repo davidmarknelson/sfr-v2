@@ -1,3 +1,6 @@
+@use "../../../../assets/themes/light.scss" as sfrTheme;
+@use "sass:map";
+
 :host {
   min-height: 100%;
   display: flex;
@@ -6,4 +9,10 @@
 
 main {
   flex: 1;
+}
+
+footer {
+  background: map.get(sfrTheme.$grey-palette, 200);
+  color: map.get(sfrTheme.$grey-palette, contrast, 200);
+  padding: 1rem;
 }
