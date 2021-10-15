@@ -1,0 +1,15 @@
+@import "src/assets/css/helpers/variables.scss";
+
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 90%;
+  max-width: $screen-large;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}

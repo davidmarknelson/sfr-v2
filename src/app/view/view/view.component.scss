@@ -1,4 +1,4 @@
-@use "../../../../../assets/themes/light.scss" as sfrTheme;
+@use "src/assets/themes/light.scss" as sfrTheme;
 @use "sass:map";
 
 :host {
@@ -7,12 +7,18 @@
   flex-direction: column;
 }
 
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
 main {
   flex: 1;
+  padding-top: 64px;
 }
 
 footer {
   background: map.get(sfrTheme.$grey-palette, 200);
   color: map.get(sfrTheme.$grey-palette, contrast, 200);
-  padding: 1rem;
 }

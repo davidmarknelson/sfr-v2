@@ -2,22 +2,31 @@
 // For more information: https://material.angular.io/guide/theming
 @use "~@angular/material" as mat;
 // Plus imports for other components in your app.
-@use "./assets/themes/light.scss" as sfrTheme;
-@use "./assets/css";
+@import "./assets/themes/light.scss";
+@import "./assets/material";
+@import "./assets/css/globals/index.scss";
+
+$sfr-v2-typography: mat.define-typography-config(
+  $font-family: (
+    Helvetica,
+    Arial,
+    sans-serif,
+  ),
+);
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.core($sfr-v2-typography);
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$sfr-v2-primary: mat.define-palette(sfrTheme.$primary-green, 100);
-$sfr-v2-accent: mat.define-palette(sfrTheme.$accent-yellow, 300);
+$sfr-v2-primary: mat.define-palette($primary-green, 100);
+$sfr-v2-accent: mat.define-palette($accent-yellow, 300);
 
 // The warn palette is optional (defaults to red).
-$sfr-v2-warn: mat.define-palette(sfrTheme.$warn-red);
+$sfr-v2-warn: mat.define-palette($warn-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -44,5 +53,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
 }

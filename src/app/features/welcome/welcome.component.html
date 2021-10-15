@@ -1,4 +1,75 @@
-<a mat-flat-button sfrRoundedButton color="accent" routerLink="/recipes">
-  View Recipes
-</a>
-<a routerLink="asdf">some link</a>
+<section class="hero">
+  <sfr-container>
+    <h1 class="mat-display-3">Share Family Recipes</h1>
+  </sfr-container>
+</section>
+
+<sfr-container>
+  <section class="cta">
+    <a mat-flat-button sfrRoundedButton color="accent" routerLink="/recipes">
+      View Recipes
+    </a>
+  </section>
+
+  <!-- Sharing section -->
+  <section class="info">
+    <div class="info__text">
+      <h2 class="title p-4">
+        Finding and sharing recipes doesn’t have to be hard!
+      </h2>
+      <p>
+        You can upload your recipe and a picture of the meal you cooked. You can
+        save your favorite recipes to easily find that tasty dish you want try
+        later.
+      </p>
+    </div>
+    <figure>
+      <img src="../../../assets/images/welcome/chef.svg" />
+    </figure>
+  </section>
+
+  <!-- Ads section -->
+  <section class="info">
+    <div class="info__text">
+      <h2 class="title">Are you tired of ads overwhelming your screen?</h2>
+      <p>
+        We are, too! Time is precious and looking at ads you don’t care about is
+        annoying. That’s why this website is ad free!
+      </p>
+    </div>
+    <figure>
+      <img src="../../../assets/images/welcome/ads.svg" />
+    </figure>
+  </section>
+
+  <!-- People like you section -->
+  <section class="info">
+    <div class="info__text">
+      <h2 class="title">Recipes for people just like you!</h2>
+      <p>
+        So many sites show meals that are picture perfect. They look good, but
+        life never turns out that way. The picture of the meals for these
+        recipes are uploaded by other users like you. This gives you a more
+        realistic expectation of the dish so you will be happy with the way
+        yours turns out and you can enjoy your meal.
+      </p>
+    </div>
+    <figure>
+      <img src="../../../assets/images/welcome/eating.svg" />
+    </figure>
+  </section>
+
+  <section class="cta">
+    <a mat-flat-button sfrRoundedButton color="accent" routerLink="/signup"
+      >Sign Up</a
+    >
+    <a
+      mat-flat-button
+      sfrRoundedButton
+      color="accent"
+      routerLink="/recipes"
+      class="cta--left-space"
+      >View Recipes</a
+    >
+  </section>
+</sfr-container>

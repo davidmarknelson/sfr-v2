@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SfrViewComponent } from './shared/ui';
+import { SfrViewComponent } from './view';
 
 const routes: Routes = [
   {

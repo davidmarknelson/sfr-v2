@@ -7,6 +7,7 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { SfrAppRoutingModule } from './app-routing.module';
 import { SfrAppComponent } from './app.component';
+import { SfrViewModule } from './view/view.module';
 
 @NgModule({
   declarations: [SfrAppComponent],
@@ -15,6 +16,7 @@ import { SfrAppComponent } from './app.component';
     SfrAppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SfrViewModule,
   ],
   providers: [
     {
