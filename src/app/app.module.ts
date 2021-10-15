@@ -1,12 +1,12 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InMemoryCache } from '@apollo/client/core';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
 import { SfrAppRoutingModule } from './app-routing.module';
 import { SfrAppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { APOLLO_OPTIONS } from 'apollo-angular';
-import { InMemoryCache } from '@apollo/client/core';
-import { HttpLink } from 'apollo-angular/http';
 
 @NgModule({
   declarations: [SfrAppComponent],

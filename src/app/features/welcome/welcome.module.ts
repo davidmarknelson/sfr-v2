@@ -1,11 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { SfrDirectivesModule } from '@sfr/shared/utils';
 import { SfrWelcomeRoutingModule } from './welcome-routing.module';
 import { SfrWelcomeComponent } from './welcome.component';
 
 @NgModule({
   declarations: [SfrWelcomeComponent],
-  imports: [CommonModule, SfrWelcomeRoutingModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    SfrWelcomeRoutingModule,
+    MatButtonModule,
+    SfrDirectivesModule,
+  ],
 })
 export class SfrWelcomeModule {}
