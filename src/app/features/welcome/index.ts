@@ -1,1 +1,1 @@
-export * from './welcome.module';
+export * from './feature-welcome.module';

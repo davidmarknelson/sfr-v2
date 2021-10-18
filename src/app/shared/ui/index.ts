@@ -1,1 +1,1 @@
-export * from './container/container.module';
+export * from './container/ui-container.module';

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipesGQL } from '@sfr/data-access/generated';
 
 @Component({
   selector: 'sfr-recipes',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipes.component.scss'],
 })
 export class SfrRecipesComponent implements OnInit {
-  constructor() {}
+  constructor(private recipesGQL: RecipesGQL) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.recipesGQL.watch().valueChanges.subscribe(console.log);
+  }
 }

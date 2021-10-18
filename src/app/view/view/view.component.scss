@@ -1,5 +1,6 @@
-@use "src/assets/themes/light.scss" as sfrTheme;
+@use "src/assets/themes/main.scss" as sfrTheme;
 @use "sass:map";
+@import "/src/assets/css/helpers/variables.scss";
 
 :host {
   min-height: 100%;
@@ -11,6 +12,7 @@ header {
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 2;
 }
 
 main {
@@ -21,4 +23,10 @@ main {
 footer {
   background: map.get(sfrTheme.$grey-palette, 200);
   color: map.get(sfrTheme.$grey-palette, contrast, 200);
+}
+
+@media only screen and (max-width: $screen-small) {
+  main {
+    padding-top: 54px;
+  }
 }
