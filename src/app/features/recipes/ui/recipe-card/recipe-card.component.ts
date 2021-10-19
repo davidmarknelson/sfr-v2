@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RecipesQuery } from '@sfr/data-access/generated';
 
 @Component({
   selector: 'sfr-recipe-card',
@@ -6,8 +7,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SfrRecipeCardComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class SfrRecipeCardComponent {
+  @Input() recipe!: RecipesQuery['recipes'][0];
 }

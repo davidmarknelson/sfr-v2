@@ -1,7 +1,8 @@
-query recipes {
-  recipes {
+query recipes($skip: Float!, $take: Float!) {
+  recipes(skip: $skip, take: $take) {
     id
     name
+    description
     photo {
       id
       path

@@ -1,4 +1,6 @@
-<p>recpies</p>
-<sfr-container>
-  <sfr-recipe-card></sfr-recipe-card>
-</sfr-container>
+<div class="recipe-grid">
+  <sfr-recipe-card
+    *ngFor="let recipe of recipes"
+    [recipe]="recipe"
+  ></sfr-recipe-card>
+</div>

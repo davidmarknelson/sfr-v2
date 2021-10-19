@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RecipesQuery } from '@sfr/data-access/generated';
 
 @Component({
   selector: 'sfr-recipes-grid',
@@ -6,8 +7,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./recipes-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SfrRecipesGridComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class SfrRecipesGridComponent {
+  @Input() recipes!: RecipesQuery['recipes'] | null;
 }
