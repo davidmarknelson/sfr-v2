@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RecipesQuery } from '@sfr/data-access/generated';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { RecipesAndCountQuery } from '@sfr/data-access/generated';
 
 @Component({
   selector: 'sfr-recipes-grid',
@@ -8,5 +15,10 @@ import { RecipesQuery } from '@sfr/data-access/generated';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SfrRecipesGridComponent {
-  @Input() recipes!: RecipesQuery['recipes'] | null;
+  @Input() recipesAndCount!: RecipesAndCountQuery['recipesAndCount'] | null;
+  @Output() pageEvent: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+
+  emitPageEvent(event: PageEvent): void {
+    this.pageEvent.emit(event);
+  }
 }

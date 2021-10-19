@@ -1,3 +1,6 @@
 <sfr-container>
-  <sfr-recipes-grid [recipes]="recipes$ | async"></sfr-recipes-grid>
+  <sfr-recipes-grid
+    [recipesAndCount]="recipesAndCount$ | async"
+    (pageEvent)="updatePagination($event)"
+  ></sfr-recipes-grid>
 </sfr-container>

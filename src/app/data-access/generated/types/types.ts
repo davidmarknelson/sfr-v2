@@ -18,7 +18,7 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   recipe: RecipeType;
-  recipes: Array<RecipeType>;
+  recipesAndCount: RecipesAndCountType;
 };
 
 
@@ -27,7 +27,7 @@ export type QueryRecipeArgs = {
 };
 
 
-export type QueryRecipesArgs = {
+export type QueryRecipesAndCountArgs = {
   skip: Scalars['Float'];
   take: Scalars['Float'];
 };
@@ -50,24 +50,33 @@ export type RecipeType = {
   photo?: Maybe<RecipePhotoType>;
 };
 
-export type RecipesQueryVariables = Exact<{
+export type RecipesAndCountType = {
+  __typename?: 'RecipesAndCountType';
+  recipes: Array<RecipeType>;
+  totalCount: Scalars['Int'];
+};
+
+export type RecipesAndCountQueryVariables = Exact<{
   skip: Scalars['Float'];
   take: Scalars['Float'];
 }>;
 
 
-export type RecipesQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, photo?: { __typename?: 'RecipePhotoType', id: number, path: string } | null | undefined }> };
+export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, photo?: { __typename?: 'RecipePhotoType', id: number, path: string } | null | undefined }> } };
 
-export const RecipesDocument = gql`
-    query recipes($skip: Float!, $take: Float!) {
-  recipes(skip: $skip, take: $take) {
-    id
-    name
-    description
-    photo {
+export const RecipesAndCountDocument = gql`
+    query recipesAndCount($skip: Float!, $take: Float!) {
+  recipesAndCount(skip: $skip, take: $take) {
+    recipes {
       id
-      path
+      name
+      description
+      photo {
+        id
+        path
+      }
     }
+    totalCount
   }
 }
     `;
@@ -75,17 +84,17 @@ export const RecipesDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class RecipesGQL extends Apollo.Query<RecipesQuery, RecipesQueryVariables> {
-    document = RecipesDocument;
+  export class RecipesAndCountGQL extends Apollo.Query<RecipesAndCountQuery, RecipesAndCountQueryVariables> {
+    document = RecipesAndCountDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
-export type QueryKeySpecifier = ('recipe' | 'recipes' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('recipe' | 'recipesAndCount' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	recipe?: FieldPolicy<any> | FieldReadFunction<any>,
-	recipes?: FieldPolicy<any> | FieldReadFunction<any>
+	recipesAndCount?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type RecipePhotoTypeKeySpecifier = ('id' | 'path' | RecipePhotoTypeKeySpecifier)[];
 export type RecipePhotoTypeFieldPolicy = {
@@ -103,6 +112,11 @@ export type RecipeTypeFieldPolicy = {
 	name?: FieldPolicy<any> | FieldReadFunction<any>,
 	photo?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type RecipesAndCountTypeKeySpecifier = ('recipes' | 'totalCount' | RecipesAndCountTypeKeySpecifier)[];
+export type RecipesAndCountTypeFieldPolicy = {
+	recipes?: FieldPolicy<any> | FieldReadFunction<any>,
+	totalCount?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type StrictTypedTypePolicies = {
 	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),
@@ -115,6 +129,10 @@ export type StrictTypedTypePolicies = {
 	RecipeType?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | RecipeTypeKeySpecifier | (() => undefined | RecipeTypeKeySpecifier),
 		fields?: RecipeTypeFieldPolicy,
+	},
+	RecipesAndCountType?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | RecipesAndCountTypeKeySpecifier | (() => undefined | RecipesAndCountTypeKeySpecifier),
+		fields?: RecipesAndCountTypeFieldPolicy,
 	}
 };
 export type TypedTypePolicies = StrictTypedTypePolicies & TypePolicies;

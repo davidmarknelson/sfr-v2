@@ -23,6 +23,7 @@ main {
 footer {
   background: map.get(sfrTheme.$grey-palette, 200);
   color: map.get(sfrTheme.$grey-palette, contrast, 200);
+  margin-top: 4rem;
 }
 
 @media only screen and (max-width: $screen-small) {

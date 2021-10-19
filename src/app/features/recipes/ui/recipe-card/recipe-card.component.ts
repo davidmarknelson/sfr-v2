@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RecipesQuery } from '@sfr/data-access/generated';
+import { RecipesAndCountQuery } from '@sfr/data-access/generated';
 
 @Component({
   selector: 'sfr-recipe-card',
@@ -8,5 +8,5 @@ import { RecipesQuery } from '@sfr/data-access/generated';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SfrRecipeCardComponent {
-  @Input() recipe!: RecipesQuery['recipes'][0];
+  @Input() recipe!: RecipesAndCountQuery['recipesAndCount']['recipes'][0];
 }

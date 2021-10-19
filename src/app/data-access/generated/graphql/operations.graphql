@@ -1,11 +1,14 @@
-query recipes($skip: Float!, $take: Float!) {
-  recipes(skip: $skip, take: $take) {
-    id
-    name
-    description
-    photo {
+query recipesAndCount($skip: Float!, $take: Float!) {
+  recipesAndCount(skip: $skip, take: $take) {
+    recipes {
       id
-      path
+      name
+      description
+      photo {
+        id
+        path
+      }
     }
+    totalCount
   }
 }

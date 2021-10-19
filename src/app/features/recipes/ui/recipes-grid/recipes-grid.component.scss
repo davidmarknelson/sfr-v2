@@ -1,5 +1,9 @@
 @import "/src/assets/css/helpers/variables.scss";
 
+mat-paginator {
+  margin-top: 2rem;
+}
+
 .recipe-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

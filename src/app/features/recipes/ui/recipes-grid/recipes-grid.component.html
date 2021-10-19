@@ -1,6 +1,12 @@
 <div class="recipe-grid">
   <sfr-recipe-card
-    *ngFor="let recipe of recipes"
+    *ngFor="let recipe of (recipesAndCount || {}).recipes"
     [recipe]="recipe"
   ></sfr-recipe-card>
 </div>
+<mat-paginator
+  [length]="(recipesAndCount || {}).totalCount || 0"
+  (page)="emitPageEvent($event)"
+  aria-label="Select page"
+>
+</mat-paginator>
