@@ -1,0 +1,17 @@
+@use "src/assets/themes/main.scss" as sfrTheme;
+@use "sass:map";
+@import "/src/assets/css/helpers/variables.scss";
+
+.page-title {
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+  color: map.get(sfrTheme.$primary-green, 900);
+}
+
+@media only screen and (max-width: $screen-small) {
+  .page-title {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+}

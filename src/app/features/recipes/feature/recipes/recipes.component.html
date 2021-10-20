@@ -1,4 +1,6 @@
 <sfr-container>
+  <sfr-page-title> Browse Recipes </sfr-page-title>
+
   <sfr-recipes-grid
     [recipesAndCount]="recipesAndCount$ | async"
     (pageEvent)="updatePagination($event)"
