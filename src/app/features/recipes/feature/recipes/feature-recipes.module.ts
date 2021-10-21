@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SfrUiContainerModule } from '@sfr/shared/ui';
+import { SfrUiContainerModule, SfrUiLoaderModule } from '@sfr/shared/ui';
 import { SfrUiPageTitleModule } from '@sfr/shared/ui/page-title/ui-page-title.module';
 import { SfrUiRecipesGridModule } from '../../ui/recipes-grid/ui-recipes-grid.module';
 import { SfrRecipesRoutingModule } from './recipes-routing.module';
@@ -14,6 +14,7 @@ import { SfrRecipesComponent } from './recipes.component';
     SfrUiRecipesGridModule,
     SfrUiContainerModule,
     SfrUiPageTitleModule,
+    SfrUiLoaderModule,
   ],
 })
 export class SfrFeatureRecipesModule {}

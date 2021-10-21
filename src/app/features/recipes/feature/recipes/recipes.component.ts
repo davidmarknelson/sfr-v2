@@ -19,6 +19,7 @@ export class SfrRecipesComponent {
   recipesAndCount$: Observable<RecipesAndCountQuery['recipesAndCount']> =
     this.getRecipesWithSkipAndTake$();
   page$: Observable<number> = this.paginationService.getPageFromRoute$;
+  loading = true;
 
   constructor(
     private recipesAndCountGQL: RecipesAndCountGQL,
@@ -45,7 +46,10 @@ export class SfrRecipesComponent {
           take: PaginationDefault.pageSize,
         }).valueChanges;
       }),
-      map(({ data }) => data.recipesAndCount)
+      map(({ data, loading }) => {
+        this.loading = loading;
+        return data.recipesAndCount;
+      })
     );
   }
 }
