@@ -16,6 +16,7 @@ import { RecipesAndCountQuery } from '@sfr/data-access/generated';
 })
 export class SfrRecipesGridComponent {
   @Input() recipesAndCount!: RecipesAndCountQuery['recipesAndCount'] | null;
+  @Input() pageIndex!: number;
   @Output() pageEvent: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
   emitPageEvent(event: PageEvent): void {

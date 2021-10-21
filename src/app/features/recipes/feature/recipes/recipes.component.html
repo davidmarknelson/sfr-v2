@@ -2,7 +2,9 @@
   <sfr-page-title> Browse Recipes </sfr-page-title>
 
   <sfr-recipes-grid
+    *ngIf="page$ | async as page"
     [recipesAndCount]="recipesAndCount$ | async"
+    [pageIndex]="page - 1"
     (pageEvent)="updatePagination($event)"
   ></sfr-recipes-grid>
 </sfr-container>

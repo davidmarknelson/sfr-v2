@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   RecipesAndCountGQL,
   RecipesAndCountQuery,
 } from '@sfr/data-access/generated';
-import { PaginationDefault } from '@sfr/shared/utils';
-import { combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { PaginationDefault, SfrPaginationService } from '@sfr/shared/utils';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'sfr-recipes',
@@ -18,19 +18,19 @@ import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 export class SfrRecipesComponent {
   recipesAndCount$: Observable<RecipesAndCountQuery['recipesAndCount']> =
     this.getRecipesWithSkipAndTake$();
+  page$: Observable<number> = this.paginationService.getPageFromRoute$;
 
   constructor(
     private recipesAndCountGQL: RecipesAndCountGQL,
-    private route: ActivatedRoute,
+    private paginationService: SfrPaginationService,
     private router: Router
   ) {}
 
   updatePagination(pageEvent: PageEvent): void {
-    const skip: number =
-      pageEvent.pageSize * (pageEvent.pageIndex + 1) - pageEvent.pageSize;
     this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { skip, take: pageEvent.pageSize },
+      queryParams: {
+        page: pageEvent.pageIndex + 1,
+      },
       queryParamsHandling: 'merge',
     });
   }
@@ -38,27 +38,14 @@ export class SfrRecipesComponent {
   private getRecipesWithSkipAndTake$(): Observable<
     RecipesAndCountQuery['recipesAndCount']
   > {
-    return combineLatest([
-      this.getSkipFromRoute$(),
-      this.getTakeFromRoute$(),
-    ]).pipe(
-      distinctUntilChanged(),
-      switchMap(([skip, take]) => {
-        return this.recipesAndCountGQL.watch({ skip, take }).valueChanges;
+    return this.paginationService.getPageFromRoute$.pipe(
+      switchMap((page) => {
+        return this.recipesAndCountGQL.watch({
+          skip: this.paginationService.getSkip(page),
+          take: PaginationDefault.pageSize,
+        }).valueChanges;
       }),
       map(({ data }) => data.recipesAndCount)
-    );
-  }
-
-  private getSkipFromRoute$(): Observable<number> {
-    return this.route.queryParamMap.pipe(
-      map((paramMap) => +(paramMap.get('skip') || 0))
-    );
-  }
-
-  private getTakeFromRoute$(): Observable<number> {
-    return this.route.queryParamMap.pipe(
-      map((paramMap) => +(paramMap.get('take') || PaginationDefault.pageSize))
     );
   }
 }
