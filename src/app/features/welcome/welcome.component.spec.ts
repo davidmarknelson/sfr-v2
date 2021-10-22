@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SfrUiContainerModule } from '@sfr/shared/ui';
 import { SfrWelcomeComponent } from './welcome.component';
 
-describe('WelcomeComponent', () => {
+describe('SfrWelcomeComponent', () => {
   let component: SfrWelcomeComponent;
   let fixture: ComponentFixture<SfrWelcomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SfrWelcomeComponent],
+      imports: [SfrUiContainerModule],
     }).compileComponents();
   });
 

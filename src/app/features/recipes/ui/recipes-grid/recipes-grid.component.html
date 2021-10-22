@@ -1,9 +1,8 @@
-<div class="recipe-grid">
-  <sfr-recipe-card
-    *ngFor="let recipe of (recipesAndCount || {}).recipes"
-    [recipe]="recipe"
-  ></sfr-recipe-card>
-</div>
+<ul class="recipe-grid">
+  <li *ngFor="let recipe of (recipesAndCount || {}).recipes">
+    <sfr-recipe-card [recipe]="recipe"></sfr-recipe-card>
+  </li>
+</ul>
 <mat-paginator
   [length]="(recipesAndCount || {}).totalCount || 0"
   [pageIndex]="pageIndex"

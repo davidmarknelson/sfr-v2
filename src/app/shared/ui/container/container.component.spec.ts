@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SfrContainerComponent } from './container.component';
 
-import { ContainerComponent } from './container.component';
-
-describe('ContainerComponent', () => {
-  let component: ContainerComponent;
-  let fixture: ComponentFixture<ContainerComponent>;
+describe('SfrContainerComponent', () => {
+  let component: SfrContainerComponent;
+  let fixture: ComponentFixture<SfrContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContainerComponent ]
-    })
-    .compileComponents();
+      declarations: [SfrContainerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContainerComponent);
+    fixture = TestBed.createComponent(SfrContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

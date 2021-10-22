@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SfrLoaderComponent } from './loader.component';
 
-import { LoaderComponent } from './loader.component';
-
-describe('LoaderComponent', () => {
-  let component: LoaderComponent;
-  let fixture: ComponentFixture<LoaderComponent>;
+describe('SfrLoaderComponent', () => {
+  let component: SfrLoaderComponent;
+  let fixture: ComponentFixture<SfrLoaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoaderComponent ]
-    })
-    .compileComponents();
+      declarations: [SfrLoaderComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoaderComponent);
+    fixture = TestBed.createComponent(SfrLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
