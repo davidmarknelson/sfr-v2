@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { SfrDirectivesModule } from '@sfr/shared/utils';
+import {
+  SfrRecipePhotoPipeModule,
+  SfrRoundedButtonModule,
+} from '@sfr/shared/utils';
 import { SfrRecipeCardComponent } from './recipe-card/recipe-card.component';
 import { SfrRecipesGridComponent } from './recipes-grid.component';
 
@@ -14,7 +17,8 @@ import { SfrRecipesGridComponent } from './recipes-grid.component';
     MatPaginatorModule,
     MatCardModule,
     MatButtonModule,
-    SfrDirectivesModule,
+    SfrRoundedButtonModule,
+    SfrRecipePhotoPipeModule,
   ],
   exports: [SfrRecipesGridComponent],
 })

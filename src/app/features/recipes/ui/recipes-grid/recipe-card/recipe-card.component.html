@@ -4,7 +4,7 @@
   </mat-card-header>
   <img
     mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    [src]="recipe.photo?.path | sfrRecipePhoto"
     alt="Photo of a Shiba Inu"
   />
   <mat-card-content>
