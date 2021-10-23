@@ -1,65 +1,29 @@
-import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 import { By } from '@angular/platform-browser';
-import { RecipesAndCountQuery } from '@sfr/data-access/generated';
 import {
   SfrRecipePhotoPipeModule,
   SfrRoundedButtonModule,
 } from '@sfr/shared/utils';
+import { createMockData } from '@testing';
 import { SfrRecipeCardComponent } from './recipe-card/recipe-card.component';
 import { SfrRecipesGridComponent } from './recipes-grid.component';
 
-const recipeMockData: RecipesAndCountQuery['recipesAndCount']['recipes'][0] = {
-  __typename: 'RecipeType',
-  id: 1,
-  name: 'sandwich',
-  description: '',
-  photo: {
-    id: 1,
-    path: '/recipe-photo/1',
-  },
-};
-
-const recipesAndCountMockData: RecipesAndCountQuery['recipesAndCount'] = {
-  totalCount: 1,
-  recipes: [
-    {
-      __typename: 'RecipeType',
-      id: 1,
-      name: 'sandwich',
-      description: '',
-      photo: {
-        id: 1,
-        path: '/recipe-photo/1',
-      },
-    },
-  ],
-};
-
-@Component({
-  template: `<sfr-recipes-grid
-    [recipesAndCount]="recipesAndCount"
-  ></sfr-recipes-grid>`,
-})
-class TestHostComponent {
-  @ViewChild(SfrRecipesGridComponent) recipesGrid!: SfrRecipesGridComponent;
-  recipesAndCount!: RecipesAndCountQuery['recipesAndCount'];
-}
-
 describe('SfrRecipesGridComponent', () => {
-  let hostComponent: TestHostComponent;
-  let hostFixture: ComponentFixture<TestHostComponent>;
+  let component: SfrRecipesGridComponent;
+  let fixture: ComponentFixture<SfrRecipesGridComponent>;
+  let loader: HarnessLoader;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        SfrRecipesGridComponent,
-        SfrRecipeCardComponent,
-        TestHostComponent,
-      ],
+      declarations: [SfrRecipesGridComponent, SfrRecipeCardComponent],
       imports: [
         MatPaginatorModule,
         MatCardModule,
@@ -67,25 +31,57 @@ describe('SfrRecipesGridComponent', () => {
         SfrRoundedButtonModule,
         SfrRecipePhotoPipeModule,
       ],
+      providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();
   });
 
   describe('with an array of recipes', () => {
     beforeEach(() => {
-      hostFixture = TestBed.createComponent(TestHostComponent);
-      hostComponent = hostFixture.componentInstance;
-      hostComponent.recipesAndCount = recipesAndCountMockData;
-      hostFixture.detectChanges();
+      fixture = TestBed.createComponent(SfrRecipesGridComponent);
+      component = fixture.componentInstance;
     });
 
-    it('should display a list of recipes', () => {
-      expect(hostComponent.recipesGrid.recipesAndCount).toEqual(
-        recipesAndCountMockData
-      );
-      const recipeCards = hostFixture.debugElement.queryAll(
+    it('should display a list of recipes and have the pagination buttons disabled if too few recipes', () => {
+      component.recipesAndCount = createMockData(1);
+      fixture.detectChanges();
+      const recipeCards = fixture.debugElement.queryAll(
         By.css('sfr-recipe-card')
       );
       expect(recipeCards.length).toEqual(1);
+    });
+
+    describe('multiple pages', () => {
+      let recipeCards: DebugElement[];
+      let paginator: MatPaginatorHarness;
+
+      beforeEach(
+        waitForAsync(async () => {
+          loader = TestbedHarnessEnvironment.loader(fixture);
+          component.recipesAndCount = createMockData(9, 15);
+          fixture.detectChanges();
+          recipeCards = fixture.debugElement.queryAll(
+            By.css('sfr-recipe-card')
+          );
+          paginator = await loader.getHarness(MatPaginatorHarness);
+        })
+      );
+
+      it('should display a list of 9 recipes on the page and the pagination buttons should not be disabled', async () => {
+        expect(recipeCards.length).toEqual(9);
+        expect(await paginator.getPageSize()).toEqual(9);
+        expect(await paginator.getRangeLabel()).toEqual('1 – 9 of 15');
+      });
+      it('should emit the page number when the next button is clicked', async () => {
+        const pageEventSpy = jest.spyOn(component.pageEvent, 'emit');
+        await paginator.goToNextPage();
+        fixture.detectChanges();
+        expect(pageEventSpy).toHaveBeenCalledWith({
+          length: 15,
+          pageIndex: 1,
+          pageSize: 9,
+          previousPageIndex: 0,
+        });
+      });
     });
   });
 });

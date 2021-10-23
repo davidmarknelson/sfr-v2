@@ -6,6 +6,7 @@
 <mat-paginator
   [length]="(recipesAndCount || {}).totalCount || 0"
   [pageIndex]="pageIndex"
+  [pageSize]="9"
   (page)="emitPageEvent($event)"
   aria-label="Select page"
 >

@@ -17,7 +17,8 @@
     "module": "es2020",
     "lib": ["es2018", "dom", "esnext.asynciterable"],
     "paths": {
-      "@sfr/*": ["src/app/*"]
+      "@sfr/*": ["src/app/*"],
+      "@testing": ["src/testing"]
     }
   },
   "angularCompilerOptions": {
