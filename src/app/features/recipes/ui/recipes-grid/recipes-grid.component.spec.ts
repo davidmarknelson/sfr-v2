@@ -12,7 +12,7 @@ import {
   SfrRecipePhotoPipeModule,
   SfrRoundedButtonModule,
 } from '@sfr/shared/utils';
-import { createMockData } from '@testing';
+import { createMockRecipesAndCountData } from '@testing';
 import { SfrRecipeCardComponent } from './recipe-card/recipe-card.component';
 import { SfrRecipesGridComponent } from './recipes-grid.component';
 
@@ -42,7 +42,7 @@ describe('SfrRecipesGridComponent', () => {
     });
 
     it('should display a list of recipes and have the pagination buttons disabled if too few recipes', () => {
-      component.recipesAndCount = createMockData(1);
+      component.recipesAndCount = createMockRecipesAndCountData(1);
       fixture.detectChanges();
       const recipeCards = fixture.debugElement.queryAll(
         By.css('sfr-recipe-card')
@@ -57,7 +57,7 @@ describe('SfrRecipesGridComponent', () => {
       beforeEach(
         waitForAsync(async () => {
           loader = TestbedHarnessEnvironment.loader(fixture);
-          component.recipesAndCount = createMockData(9, 15);
+          component.recipesAndCount = createMockRecipesAndCountData(9, 15);
           fixture.detectChanges();
           recipeCards = fixture.debugElement.queryAll(
             By.css('sfr-recipe-card')
