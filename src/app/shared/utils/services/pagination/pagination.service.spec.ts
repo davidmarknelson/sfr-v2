@@ -1,18 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { SfrPaginationService } from './pagination.service';
+
+let pageObj: { page?: string } = { page: '5' };
+
+class MockActivateRoute {
+  get queryParamMap() {
+    return of(pageObj);
+  }
+}
 
 describe('SfrPaginationService', () => {
   let service: SfrPaginationService;
-  let ActivatedRouteMock: {
-    queryParamMap: Observable<{
-      page?: any;
-    }>;
-  } = {
-    queryParamMap: of({ page: '5' }),
-  };
+  let activatedRoute: ActivatedRoute;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,25 +22,30 @@ describe('SfrPaginationService', () => {
       providers: [
         {
           provide: ActivatedRoute,
-          useValue: ActivatedRouteMock,
+          useClass: MockActivateRoute,
         },
       ],
     }).compileComponents();
     service = TestBed.inject<SfrPaginationService>(SfrPaginationService);
+    activatedRoute = TestBed.inject<ActivatedRoute>(ActivatedRoute);
   });
 
   describe('getPageFromRoute$', () => {
     it('should return 5 when the query param page value is 5', () => {
+      const spy = jest.spyOn(activatedRoute, 'queryParamMap', 'get');
       service.getPageFromRoute$.subscribe((page) => {
         expect(page).toEqual(5);
       });
+      expect(spy).toHaveBeenCalled();
     });
 
     it('should return 1 when there are no query params', () => {
-      ActivatedRouteMock = { queryParamMap: of({}) };
+      const spy = jest.spyOn(activatedRoute, 'queryParamMap', 'get');
+      pageObj = {};
       service.getPageFromRoute$.subscribe((page) => {
         expect(page).toEqual(1);
       });
+      expect(spy).toHaveBeenCalled();
     });
   });
 
