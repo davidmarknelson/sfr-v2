@@ -1,0 +1,15 @@
+@use "src/assets/themes/main.scss" as sfrTheme;
+@use "sass:map";
+@import "/src/assets/css/helpers/variables.scss";
+
+:host {
+  width: 100%;
+  max-width: 500px;
+}
+
+section {
+  border-radius: $border-radius;
+  background: map.get(sfrTheme.$warn-red, 800);
+  color: map.get(sfrTheme.$warn-red, contrast, 800);
+  padding: 1rem;
+}

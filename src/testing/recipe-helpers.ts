@@ -9,6 +9,7 @@ export function createMockRecipeData(
     name: 'sandwich',
     description: '',
     photo: {
+      __typename: 'RecipePhotoType',
       id: id,
       path: '/recipe-photo/1',
     },

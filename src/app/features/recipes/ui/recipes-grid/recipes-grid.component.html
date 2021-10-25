@@ -1,13 +1,21 @@
-<ul class="recipe-grid">
-  <li *ngFor="let recipe of (recipesAndCount || {}).recipes">
-    <sfr-recipe-card [recipe]="recipe"></sfr-recipe-card>
-  </li>
-</ul>
-<mat-paginator
-  [length]="(recipesAndCount || {}).totalCount || 0"
-  [pageIndex]="pageIndex"
-  [pageSize]="pageSize"
-  (page)="emitPageEvent($event)"
-  aria-label="Select page"
->
-</mat-paginator>
+<ng-container *ngIf="(recipesAndCount || {}).recipes?.length; else noRecipes">
+  <ul class="recipe-grid">
+    <li *ngFor="let recipe of (recipesAndCount || {}).recipes">
+      <sfr-recipe-card [recipe]="recipe"></sfr-recipe-card>
+    </li>
+  </ul>
+  <mat-paginator
+    [length]="(recipesAndCount || {}).totalCount || 0"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    (page)="emitPageEvent($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</ng-container>
+
+<ng-template #noRecipes>
+  <div class="announcement">
+    <sfr-announcement> No recipes to show </sfr-announcement>
+  </div>
+</ng-template>

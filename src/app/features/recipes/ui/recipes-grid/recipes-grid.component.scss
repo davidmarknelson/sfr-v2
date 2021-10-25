@@ -4,6 +4,11 @@ mat-paginator {
   margin-top: 2rem;
 }
 
+.announcement {
+  display: flex;
+  justify-content: center;
+}
+
 .recipe-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

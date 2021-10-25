@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/announcement.module';
 import {
   SfrRecipePhotoPipeModule,
   SfrRoundedButtonModule,
@@ -19,6 +20,7 @@ import { SfrRecipesGridComponent } from './recipes-grid.component';
     MatButtonModule,
     SfrRoundedButtonModule,
     SfrRecipePhotoPipeModule,
+    SfrUiAnnouncementModule,
   ],
   exports: [SfrRecipesGridComponent],
 })
