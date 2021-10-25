@@ -65,7 +65,7 @@ describe('SfrRecipesComponent', () => {
       ).toBeFalsy();
     });
 
-    it('should load the data and hide the loader', () => {
+    xit('should load the data and hide the loader', () => {
       recipeAndCountData = {
         loading: false,
         data: createMockRecipesAndCountData(1),
@@ -84,6 +84,6 @@ describe('SfrRecipesComponent', () => {
       ).toBeTruthy();
     });
 
-    it('should update the query params when the page change is emitted from the grid components', () => {});
+    xit('should update the query params when the page change is emitted from the grid components', () => {});
   });
 });
