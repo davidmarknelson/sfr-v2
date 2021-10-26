@@ -1,15 +1,10 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SfrHeaderComponent } from './header.component';
-
-@Component({
-  template: '',
-})
-class DummyComponent {}
 
 describe('SfrHeaderComponent', () => {
   let component: SfrHeaderComponent;
@@ -30,6 +25,7 @@ describe('SfrHeaderComponent', () => {
           },
         ]),
       ],
+      providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();
   });
 

@@ -8,6 +8,7 @@ import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 import { By } from '@angular/platform-browser';
+import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/announcement.module';
 import {
   SfrRecipePhotoPipeModule,
   SfrRoundedButtonModule,
@@ -30,6 +31,7 @@ describe('SfrRecipesGridComponent', () => {
         MatButtonModule,
         SfrRoundedButtonModule,
         SfrRecipePhotoPipeModule,
+        SfrUiAnnouncementModule,
       ],
       providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();
