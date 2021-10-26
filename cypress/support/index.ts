@@ -1,4 +1,5 @@
 import '@jscutlery/cypress-harness/support';
+import 'cypress-axe';
 import './commands';
 
 declare global {

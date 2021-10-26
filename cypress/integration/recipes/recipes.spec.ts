@@ -16,13 +16,15 @@ describe('Recipes page', () => {
   });
 
   describe('no recipes', () => {
-    it('should show a message when there are no recipes', () => {
+    it('should show a message when there are no recipes and pass an accessibility check', () => {
       cy.get('sfr-page-title').should(($title) =>
         expect($title.text().trim()).equal('Browse Recipes')
       );
       cy.get('sfr-announcement').should(($announcement) =>
         expect($announcement.text().trim()).equal('No recipes to show')
       );
+      cy.injectAxe();
+      cy.checkA11y();
     });
   });
 
@@ -31,13 +33,15 @@ describe('Recipes page', () => {
       cy.addRecipes(15);
     });
 
-    it('should show 9 recipe cards', () => {
+    it('should show 9 recipe cards and pass an accessibility check', () => {
       cy.visit('http://localhost:4200/recipes');
 
       const paginator = getHarness(MatPaginatorHarness);
       cy.get('sfr-recipe-card').its('length').should('eq', 9);
       paginator.getRangeLabel().should('eq', '1 – 9 of 15');
       paginator.getPageSize().should('eq', 9);
+      cy.injectAxe();
+      cy.checkA11y();
     });
 
     it('should show 6 recipe cards on the second page with a page query param', () => {

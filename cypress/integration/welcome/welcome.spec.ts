@@ -3,6 +3,11 @@ describe('Welcome page', () => {
     cy.visit('http://localhost:4200/welcome');
   });
 
+  it('should pass accessibility checks', () => {
+    cy.injectAxe();
+    cy.checkA11y();
+  });
+
   it('should link to the recipes page in the page in the first main button', () => {
     cy.get('.cta a').first().click();
     cy.url().should('eq', 'http://localhost:4200/recipes');
