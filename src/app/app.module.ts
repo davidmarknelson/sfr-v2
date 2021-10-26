@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,6 +28,9 @@ import { SfrViewModule } from './view/view.module';
           cache: new InMemoryCache(),
           link: httpLink.create({
             uri: 'http://localhost:3000/graphql',
+            headers: new HttpHeaders({
+              'Access-Control-Allow-Credentials': 'http://localhost:3000',
+            }),
           }),
         };
       },
