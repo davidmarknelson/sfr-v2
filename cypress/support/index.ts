@@ -1,3 +1,4 @@
+import '@jscutlery/cypress-harness/support';
 import './commands';
 
 declare global {
