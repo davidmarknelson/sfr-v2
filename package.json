@@ -9,7 +9,7 @@
     "test": "npx jest",
     "generate": "graphql-codegen",
     "lint": "ng lint",
-    "e2e": "npm run cypress"
+    "e2e": "npx cypress open"
   },
   "private": true,
   "dependencies": {
