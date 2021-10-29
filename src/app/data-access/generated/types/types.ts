@@ -15,6 +15,27 @@ export type Scalars = {
   Float: number;
 };
 
+export type MessageType = {
+  __typename?: 'MessageType';
+  message: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createRecipe: RecipeType;
+  deleteRecipe: MessageType;
+};
+
+
+export type MutationCreateRecipeArgs = {
+  recipe: RecipeInput;
+};
+
+
+export type MutationDeleteRecipeArgs = {
+  id: Scalars['Float'];
+};
+
 export type Query = {
   __typename?: 'Query';
   recipe: RecipeType;
@@ -32,8 +53,24 @@ export type QueryRecipesAndCountArgs = {
   take: Scalars['Float'];
 };
 
+export type RecipeInput = {
+  cookTime: Scalars['Int'];
+  description: Scalars['String'];
+  difficulty: Scalars['Int'];
+  ingredients: Array<Scalars['String']>;
+  instructions: Array<Scalars['String']>;
+  name: Scalars['String'];
+  photos?: Maybe<Array<RecipePhotoInput>>;
+};
+
+export type RecipePhotoInput = {
+  cloudinaryPublicId: Scalars['String'];
+  path: Scalars['String'];
+};
+
 export type RecipePhotoType = {
   __typename?: 'RecipePhotoType';
+  cloudinaryPublicId: Scalars['String'];
   id: Scalars['Int'];
   path: Scalars['String'];
 };
@@ -47,7 +84,7 @@ export type RecipeType = {
   ingredients: Array<Scalars['String']>;
   instructions: Array<Scalars['String']>;
   name: Scalars['String'];
-  photo?: Maybe<RecipePhotoType>;
+  photos: Array<RecipePhotoType>;
 };
 
 export type RecipesAndCountType = {
@@ -62,7 +99,7 @@ export type RecipesAndCountQueryVariables = Exact<{
 }>;
 
 
-export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, photo?: { __typename?: 'RecipePhotoType', id: number, path: string } | null | undefined }> } };
+export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string }> }> } };
 
 export const RecipesAndCountDocument = gql`
     query recipesAndCount($skip: Float!, $take: Float!) {
@@ -71,7 +108,7 @@ export const RecipesAndCountDocument = gql`
       id
       name
       description
-      photo {
+      photos {
         id
         path
       }
@@ -91,17 +128,27 @@ export const RecipesAndCountDocument = gql`
       super(apollo);
     }
   }
+export type MessageTypeKeySpecifier = ('message' | MessageTypeKeySpecifier)[];
+export type MessageTypeFieldPolicy = {
+	message?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type MutationKeySpecifier = ('createRecipe' | 'deleteRecipe' | MutationKeySpecifier)[];
+export type MutationFieldPolicy = {
+	createRecipe?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteRecipe?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type QueryKeySpecifier = ('recipe' | 'recipesAndCount' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	recipe?: FieldPolicy<any> | FieldReadFunction<any>,
 	recipesAndCount?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type RecipePhotoTypeKeySpecifier = ('id' | 'path' | RecipePhotoTypeKeySpecifier)[];
+export type RecipePhotoTypeKeySpecifier = ('cloudinaryPublicId' | 'id' | 'path' | RecipePhotoTypeKeySpecifier)[];
 export type RecipePhotoTypeFieldPolicy = {
+	cloudinaryPublicId?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	path?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type RecipeTypeKeySpecifier = ('cookTime' | 'description' | 'difficulty' | 'id' | 'ingredients' | 'instructions' | 'name' | 'photo' | RecipeTypeKeySpecifier)[];
+export type RecipeTypeKeySpecifier = ('cookTime' | 'description' | 'difficulty' | 'id' | 'ingredients' | 'instructions' | 'name' | 'photos' | RecipeTypeKeySpecifier)[];
 export type RecipeTypeFieldPolicy = {
 	cookTime?: FieldPolicy<any> | FieldReadFunction<any>,
 	description?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -110,7 +157,7 @@ export type RecipeTypeFieldPolicy = {
 	ingredients?: FieldPolicy<any> | FieldReadFunction<any>,
 	instructions?: FieldPolicy<any> | FieldReadFunction<any>,
 	name?: FieldPolicy<any> | FieldReadFunction<any>,
-	photo?: FieldPolicy<any> | FieldReadFunction<any>
+	photos?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type RecipesAndCountTypeKeySpecifier = ('recipes' | 'totalCount' | RecipesAndCountTypeKeySpecifier)[];
 export type RecipesAndCountTypeFieldPolicy = {
@@ -118,6 +165,14 @@ export type RecipesAndCountTypeFieldPolicy = {
 	totalCount?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type StrictTypedTypePolicies = {
+	MessageType?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MessageTypeKeySpecifier | (() => undefined | MessageTypeKeySpecifier),
+		fields?: MessageTypeFieldPolicy,
+	},
+	Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier),
+		fields?: MutationFieldPolicy,
+	},
 	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),
 		fields?: QueryFieldPolicy,

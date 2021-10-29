@@ -4,7 +4,7 @@ query recipesAndCount($skip: Float!, $take: Float!) {
       id
       name
       description
-      photo {
+      photos {
         id
         path
       }

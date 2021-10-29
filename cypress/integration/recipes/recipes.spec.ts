@@ -30,7 +30,7 @@ describe('Recipes page', () => {
 
   describe('recipes', () => {
     beforeEach(() => {
-      cy.addRecipes(15);
+      cy.addRecipes(2);
     });
 
     it('should show 9 recipe cards and pass an accessibility check', () => {
@@ -38,7 +38,7 @@ describe('Recipes page', () => {
 
       const paginator = getHarness(MatPaginatorHarness);
       cy.get('sfr-recipe-card').its('length').should('eq', 9);
-      paginator.getRangeLabel().should('eq', '1 – 9 of 15');
+      paginator.getRangeLabel().should('eq', '1 – 9 of 16');
       paginator.getPageSize().should('eq', 9);
       cy.injectAxe();
       cy.checkA11y();
@@ -55,9 +55,9 @@ describe('Recipes page', () => {
         cy.wait('@gqlrecipesAndCountQuery');
       });
 
-      paginator.getRangeLabel().should('eq', '10 – 15 of 15');
+      paginator.getRangeLabel().should('eq', '10 – 16 of 16');
       cy.url().should('eq', 'http://localhost:4200/recipes?page=2');
-      cy.get('sfr-recipe-card').its('length').should('eq', 6);
+      cy.get('sfr-recipe-card').its('length').should('eq', 7);
     });
 
     it('should show 9 recipe cards on the first page after visiting the first page', () => {
@@ -67,7 +67,7 @@ describe('Recipes page', () => {
       cy.visit('http://localhost:4200/recipes?page=2');
 
       const paginator = getHarness(MatPaginatorHarness);
-      paginator.getRangeLabel().should('eq', '10 – 15 of 15');
+      paginator.getRangeLabel().should('eq', '10 – 16 of 16');
       paginator.goToFirstPage().then(() => {
         cy.wait('@gqlrecipesAndCountQuery');
       });

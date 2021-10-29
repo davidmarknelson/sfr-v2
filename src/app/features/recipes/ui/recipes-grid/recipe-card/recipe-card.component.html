@@ -4,7 +4,7 @@
   </mat-card-header>
   <img
     mat-card-image
-    [src]="recipe.photo?.path | sfrRecipePhoto"
+    [src]="recipe.photos?.[0]?.path | sfrRecipePhoto"
     [alt]="'Photo of ' + recipe.name"
   />
   <mat-card-content>
