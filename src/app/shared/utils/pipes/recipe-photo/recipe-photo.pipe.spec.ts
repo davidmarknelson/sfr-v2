@@ -1,6 +1,6 @@
 import { SfrRecipePhotoPipe } from './recipe-photo.pipe';
 
-describe('RecipePhotoPipe', () => {
+describe('SfrRecipePhotoPipe', () => {
   const pipe = new SfrRecipePhotoPipe();
 
   it('should return the provided value if it there is text', () => {

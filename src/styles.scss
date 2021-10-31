@@ -2,11 +2,11 @@
 // For more information: https://material.angular.io/guide/theming
 @use "~@angular/material" as mat;
 // Plus imports for other components in your app.
-@import "./assets/themes/main.scss";
+@import "./assets/themes";
 @import "./assets/material";
 @import "./assets/css/globals/index.scss";
 
-$sfr-v2-typography: mat.define-typography-config(
+$sfr-typography: mat.define-typography-config(
   $font-family: (
     Helvetica,
     Arial,
@@ -17,25 +17,37 @@ $sfr-v2-typography: mat.define-typography-config(
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core($sfr-v2-typography);
+@include mat.core($sfr-typography);
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$sfr-v2-primary: mat.define-palette($primary-green, 100);
-$sfr-v2-accent: mat.define-palette($accent-yellow, 300);
+$sfr-primary: mat.define-palette($primary-green, 100);
+$sfr-primary-dark: mat.define-palette($primary-green, 800);
+$sfr-accent: mat.define-palette($accent-yellow, 300);
+$sfr-accent-dark: mat.define-palette($accent-yellow, 800);
 
 // The warn palette is optional (defaults to red).
-$sfr-v2-warn: mat.define-palette($warn-red);
+$sfr-warn: mat.define-palette($warn-red);
+$sfr-warn-dark: mat.define-palette($warn-red, 800);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$sfr-v2-theme: mat.define-light-theme(
+$sfr-theme: mat.define-light-theme(
   (
     color: (
-      primary: $sfr-v2-primary,
-      accent: $sfr-v2-accent,
-      warn: $sfr-v2-warn,
+      primary: $sfr-primary,
+      accent: $sfr-accent,
+      warn: $sfr-warn,
+    ),
+  )
+);
+$sfr-dark-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $sfr-primary-dark,
+      accent: $sfr-accent-dark,
+      warn: $sfr-warn-dark,
     ),
   )
 );
@@ -43,10 +55,10 @@ $sfr-v2-theme: mat.define-light-theme(
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($sfr-v2-theme);
+@include mat.all-component-themes($sfr-theme);
+@include mat.pseudo-checkbox-color($sfr-dark-theme);
 
 /* You can add global styles to this file, and also import other style files */
-
 html,
 body {
   height: 100%;

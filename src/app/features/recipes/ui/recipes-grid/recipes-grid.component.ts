@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { RecipesAndCountQuery } from '@sfr/data-access/generated';
-import { PaginationDefault } from '@sfr/shared/utils';
+import { PaginationDefault } from '@sfr/shared/utils/defaults';
 
 @Component({
   selector: 'sfr-recipes-grid',

@@ -1,6 +1,10 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ recipe.name }}</mat-card-title>
+    <mat-card-title>
+      <h2>
+        {{ recipe.name }}
+      </h2>
+    </mat-card-title>
   </mat-card-header>
   <img
     mat-card-image
@@ -13,7 +17,17 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button sfrRoundedButton>LIKE</button>
-    <button mat-button sfrRoundedButton>SHARE</button>
+    <div class="card-actions">
+      <a
+        mat-flat-button
+        sfrRoundedButton
+        color="accent"
+        [routerLink]="recipe.name | sfrUrlReplaceSpace"
+      >
+        View
+        <span class="cdk-visually-hidden">{{ recipe.name }}</span>
+        <mat-icon aria-hidden="true">chevron_right</mat-icon>
+      </a>
+    </div>
   </mat-card-actions>
 </mat-card>

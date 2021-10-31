@@ -7,6 +7,13 @@ const routes: Routes = [
     path: '',
     component: SfrRecipesComponent,
   },
+  {
+    path: ':name',
+    loadChildren: () =>
+      import('../recipe/feature-recipe.module').then(
+        (m) => m.SfrFeatureRecipeModule
+      ),
+  },
 ];
 
 @NgModule({

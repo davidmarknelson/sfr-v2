@@ -1,5 +1,3 @@
-@use "src/assets/themes/main.scss" as sfrTheme;
-@use "sass:map";
 @import "/src/assets/css/helpers/variables.scss";
 
 :host {
@@ -21,8 +19,8 @@ main {
 }
 
 footer {
-  background: map.get(sfrTheme.$grey-palette, 200);
-  color: map.get(sfrTheme.$grey-palette, contrast, 200);
+  background: $gray-light;
+  color: $gray-light-contrast;
   margin-top: 4rem;
   padding-top: 2rem;
   padding-bottom: 2rem;

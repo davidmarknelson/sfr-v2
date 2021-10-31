@@ -9,7 +9,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 import { SfrAppRoutingModule } from './app-routing.module';
 import { SfrAppComponent } from './app.component';
-import { PaginationDefault } from './shared/utils';
+import { PaginationDefault } from './shared/utils/defaults';
 import { SfrViewModule } from './view/view.module';
 
 @NgModule({

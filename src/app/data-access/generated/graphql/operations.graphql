@@ -12,3 +12,20 @@ query recipesAndCount($skip: Float!, $take: Float!) {
     totalCount
   }
 }
+
+query recipe($name: String!) {
+  recipe(name: $name) {
+    cookTime
+    description
+    difficulty
+    id
+    ingredients
+    instructions
+    name
+    photos {
+      id
+      path
+      cloudinaryPublicId
+    }
+  }
+}

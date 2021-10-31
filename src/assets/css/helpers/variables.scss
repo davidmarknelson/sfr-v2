@@ -1,5 +1,19 @@
+@use "src/assets/themes" as sfrTheme;
+@use "sass:map";
+
 $screen-small: 600px;
 $screen-medium: 960px;
 $screen-large: 1280px;
 
+$max-width-component: 500px;
+
 $border-radius: 15px;
+
+$primary: map.get(sfrTheme.$primary-green, 200);
+$primary-contrast: map.get(sfrTheme.$primary-green, contrast, 200);
+$primary-dark: map.get(sfrTheme.$primary-green, 800);
+$primary-dark-contrast: map.get(sfrTheme.$primary-green, contrast, 800);
+$gray-light: map.get(sfrTheme.$grey-palette, 200);
+$gray-light-contrast: map.get(sfrTheme.$grey-palette, contrast, 200);
+$red-dark: map.get(sfrTheme.$warn-red, 800);
+$red-dark-contrast: map.get(sfrTheme.$warn-red, contrast, 800);

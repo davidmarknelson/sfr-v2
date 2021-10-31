@@ -1,0 +1,53 @@
+<sfr-container>
+  <ng-container *ngIf="recipe$ | async as recipe">
+    <sfr-page-title>{{ recipe.name }}</sfr-page-title>
+
+    <div class="recipe__img-and-meta">
+      <figure class="recipe__img-container">
+        <img
+          [src]="recipe.photos[0]?.path | sfrRecipePhoto"
+          [alt]="'Photo of ' + recipe.name"
+          class="recipe__img"
+        />
+      </figure>
+
+      <section class="recipe__meta-container">
+        <p>{{ recipe.description }}</p>
+      </section>
+    </div>
+
+    <section class="recipe__list">
+      <h2 class="mat-title recipe__list--center">Ingredients</h2>
+
+      <mat-selection-list aria-label="Ingredients">
+        <mat-list-option
+          *ngFor="let ingredient of recipe.ingredients"
+          checkboxPosition="before"
+          color="primary"
+        >
+          {{ ingredient }}
+        </mat-list-option>
+      </mat-selection-list>
+    </section>
+
+    <section class="recipe__list">
+      <h2 class="mat-title recipe__list--center">Instructions</h2>
+
+      <mat-selection-list aria-label="Instructions">
+        <mat-list-option
+          *ngFor="let instruction of recipe.instructions"
+          checkboxPosition="before"
+          color="primary"
+        >
+          {{ instruction }}
+        </mat-list-option>
+      </mat-selection-list>
+    </section>
+  </ng-container>
+
+  <sfr-loader *ngIf="loading && !error"></sfr-loader>
+
+  <div *ngIf="error" class="announcement">
+    <sfr-announcement> No recipe found </sfr-announcement>
+  </div>
+</sfr-container>

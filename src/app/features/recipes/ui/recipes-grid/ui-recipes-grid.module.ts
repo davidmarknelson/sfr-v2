@@ -2,12 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/announcement.module';
+import { RouterModule } from '@angular/router';
+import { SfrUiAnnouncementModule } from '@sfr/shared/ui';
+import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import {
   SfrRecipePhotoPipeModule,
-  SfrRoundedButtonModule,
-} from '@sfr/shared/utils';
+  SfrUrlReplaceSpaceModule,
+} from '@sfr/shared/utils/pipes';
 import { SfrRecipeCardComponent } from './recipe-card/recipe-card.component';
 import { SfrRecipesGridComponent } from './recipes-grid.component';
 
@@ -21,6 +24,9 @@ import { SfrRecipesGridComponent } from './recipes-grid.component';
     SfrRoundedButtonModule,
     SfrRecipePhotoPipeModule,
     SfrUiAnnouncementModule,
+    MatIconModule,
+    RouterModule,
+    SfrUrlReplaceSpaceModule,
   ],
   exports: [SfrRecipesGridComponent],
 })

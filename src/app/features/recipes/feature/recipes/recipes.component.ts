@@ -5,7 +5,8 @@ import {
   RecipesAndCountGQL,
   RecipesAndCountQuery,
 } from '@sfr/data-access/generated';
-import { PaginationDefault, SfrPaginationService } from '@sfr/shared/utils';
+import { PaginationDefault } from '@sfr/shared/utils/defaults';
+import { SfrPaginationService } from '@sfr/shared/utils/services';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 

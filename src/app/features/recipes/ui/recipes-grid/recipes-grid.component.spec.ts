@@ -8,7 +8,7 @@ import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 import { By } from '@angular/platform-browser';
-import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/announcement.module';
+import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/ui-announcement.module';
 import {
   SfrRecipePhotoPipeModule,
   SfrRoundedButtonModule,

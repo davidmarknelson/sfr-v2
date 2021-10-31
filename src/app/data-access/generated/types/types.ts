@@ -44,7 +44,7 @@ export type Query = {
 
 
 export type QueryRecipeArgs = {
-  id: Scalars['Float'];
+  name: Scalars['String'];
 };
 
 
@@ -101,6 +101,13 @@ export type RecipesAndCountQueryVariables = Exact<{
 
 export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string }> }> } };
 
+export type RecipeQueryVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type RecipeQuery = { __typename?: 'Query', recipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: number, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
+
 export const RecipesAndCountDocument = gql`
     query recipesAndCount($skip: Float!, $take: Float!) {
   recipesAndCount(skip: $skip, take: $take) {
@@ -123,6 +130,35 @@ export const RecipesAndCountDocument = gql`
   })
   export class RecipesAndCountGQL extends Apollo.Query<RecipesAndCountQuery, RecipesAndCountQueryVariables> {
     document = RecipesAndCountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RecipeDocument = gql`
+    query recipe($name: String!) {
+  recipe(name: $name) {
+    cookTime
+    description
+    difficulty
+    id
+    ingredients
+    instructions
+    name
+    photos {
+      id
+      path
+      cloudinaryPublicId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RecipeGQL extends Apollo.Query<RecipeQuery, RecipeQueryVariables> {
+    document = RecipeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

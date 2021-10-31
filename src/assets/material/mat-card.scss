@@ -1,3 +1,5 @@
+@import "/src/assets/css/helpers/variables.scss";
+
 .mat-card {
-  border-radius: 1rem !important;
+  border-radius: $border-radius !important;
 }
