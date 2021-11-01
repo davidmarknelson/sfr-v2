@@ -39,6 +39,15 @@
     font-size: 1rem;
   }
 
+  &__stats-container {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
   &__list {
     margin-top: 4rem;
 
@@ -49,7 +58,7 @@
 }
 
 @media only screen and (max-width: $screen-small) {
-  .recipe__img-and-description {
+  .recipe__img-and-meta {
     grid-template-columns: repeat(1, 1fr);
   }
 }

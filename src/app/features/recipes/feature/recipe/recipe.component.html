@@ -13,6 +13,30 @@
 
       <section class="recipe__meta-container">
         <p>{{ recipe.description }}</p>
+
+        <div class="recipe__stats-container">
+          <section
+            matTooltip="Difficulty (out of 5)"
+            matTooltipPosition="above"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Difficulty icon"
+              class="sfr-icon sfr-icon--large"
+              >local_fire_department</mat-icon
+            >
+            <p>{{ recipe.difficulty }}</p>
+          </section>
+          <section matTooltip="Cook time in minutes" matTooltipPosition="above">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Cook time icon"
+              class="sfr-icon sfr-icon--large"
+              >schedule</mat-icon
+            >
+            <p>{{ recipe.cookTime }}</p>
+          </section>
+        </div>
       </section>
     </div>
 
