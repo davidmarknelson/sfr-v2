@@ -18,6 +18,22 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="card-actions">
+      <div class="card-actions__stat">
+        <section class="card-actions__stat">
+          <mat-icon aria-hidden="true">local_fire_department</mat-icon>
+          <p>
+            <span class="cdk-visually-hidden">Difficulty out of 5: </span
+            >{{ recipe.difficulty }}
+          </p>
+        </section>
+        <section class="card-actions__stat card-actions--space-left">
+          <mat-icon aria-hidden="true">schedule</mat-icon>
+          <p>
+            <span class="cdk-visually-hidden">Cook time in minutes: </span
+            >{{ recipe.cookTime }}
+          </p>
+        </section>
+      </div>
       <a
         mat-flat-button
         sfrRoundedButton

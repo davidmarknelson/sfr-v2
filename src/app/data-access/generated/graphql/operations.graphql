@@ -4,6 +4,8 @@ query recipesAndCount($skip: Float!, $take: Float!) {
       id
       name
       description
+      difficulty
+      cookTime
       photos {
         id
         path

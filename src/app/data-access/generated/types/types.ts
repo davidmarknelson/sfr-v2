@@ -99,7 +99,7 @@ export type RecipesAndCountQueryVariables = Exact<{
 }>;
 
 
-export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string }> }> } };
+export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, difficulty: number, cookTime: number, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string }> }> } };
 
 export type RecipeQueryVariables = Exact<{
   name: Scalars['String'];
@@ -115,6 +115,8 @@ export const RecipesAndCountDocument = gql`
       id
       name
       description
+      difficulty
+      cookTime
       photos {
         id
         path
