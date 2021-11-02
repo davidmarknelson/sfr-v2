@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   SfrUiAnnouncementModule,
   SfrUiContainerModule,
@@ -25,7 +24,6 @@ import { SfrRecipeComponent } from './recipe.component';
     SfrRecipePhotoPipeModule,
     MatListModule,
     MatIconModule,
-    MatTooltipModule,
   ],
 })
 export class SfrFeatureRecipeModule {}

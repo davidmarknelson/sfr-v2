@@ -48,10 +48,38 @@ Cypress.Commands.add('addRecipes', (multipliedBy: number = 1) => {
             }
           }`,
           variables: {
-            recipe,
+            recipe: {
+              ...recipe,
+              name: `${i} ${recipe.name}`,
+            },
           },
         });
       });
     }
+  });
+});
+Cypress.Commands.add('addRecipe', (recipeName: string = 'Egg muffin') => {
+  cy.fixture('../fixtures/recipes').then((recipes) => {
+    const recipe = recipes.find((recipe) => recipe.name === recipeName);
+    cy.request('post', 'http://localhost:3000/graphql', {
+      query: `mutation createRecipe($recipe:RecipeInput!) {
+            createRecipe(recipe:$recipe) {
+              cookTime
+              description
+              difficulty
+              id
+              ingredients
+              instructions
+              name
+              photos {
+                id
+                path
+              }
+            }
+          }`,
+      variables: {
+        recipe,
+      },
+    });
   });
 });

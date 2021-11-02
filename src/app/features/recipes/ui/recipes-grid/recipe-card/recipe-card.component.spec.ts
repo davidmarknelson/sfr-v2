@@ -2,10 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import {
   SfrRecipePhotoPipeModule,
-  SfrRoundedButtonModule,
-} from '@sfr/shared/utils';
+  SfrUrlReplaceSpaceModule,
+} from '@sfr/shared/utils/pipes';
 import { createMockRecipeData } from '@testing';
 import { SfrRecipeCardComponent } from './recipe-card.component';
 
@@ -21,6 +24,9 @@ describe('SfrRecipeCardComponent', () => {
         MatButtonModule,
         SfrRoundedButtonModule,
         SfrRecipePhotoPipeModule,
+        RouterTestingModule,
+        SfrUrlReplaceSpaceModule,
+        MatIconModule,
       ],
       providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();

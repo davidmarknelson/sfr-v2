@@ -15,26 +15,17 @@
         <p>{{ recipe.description }}</p>
 
         <div class="recipe__stats-container">
-          <section
-            matTooltip="Difficulty (out of 5)"
-            matTooltipPosition="above"
-          >
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Difficulty icon"
-              class="sfr-icon sfr-icon--large"
+          <section>
+            <mat-icon aria-hidden="true" class="sfr-icon sfr-icon--large"
               >local_fire_department</mat-icon
             >
-            <p>{{ recipe.difficulty }}</p>
+            <p>Difficulty: {{ recipe.difficulty }}</p>
           </section>
-          <section matTooltip="Cook time in minutes" matTooltipPosition="above">
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Cook time icon"
-              class="sfr-icon sfr-icon--large"
+          <section>
+            <mat-icon aria-hidden="true" class="sfr-icon sfr-icon--large"
               >schedule</mat-icon
             >
-            <p>{{ recipe.cookTime }}</p>
+            <p>Cook Time: {{ recipe.cookTime }} min.</p>
           </section>
         </div>
       </section>
@@ -72,6 +63,7 @@
   <sfr-loader *ngIf="loading && !error"></sfr-loader>
 
   <div *ngIf="error" class="announcement">
+    <h1 class="cdk-visually-hidden">Error</h1>
     <sfr-announcement> No recipe found </sfr-announcement>
   </div>
 </sfr-container>

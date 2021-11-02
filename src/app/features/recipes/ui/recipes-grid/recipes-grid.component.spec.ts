@@ -5,14 +5,17 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/ui-announcement.module';
+import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import {
   SfrRecipePhotoPipeModule,
-  SfrRoundedButtonModule,
-} from '@sfr/shared/utils';
+  SfrUrlReplaceSpaceModule,
+} from '@sfr/shared/utils/pipes';
 import { createMockRecipesAndCountData } from '@testing';
 import { SfrRecipeCardComponent } from './recipe-card/recipe-card.component';
 import { SfrRecipesGridComponent } from './recipes-grid.component';
@@ -32,6 +35,9 @@ describe('SfrRecipesGridComponent', () => {
         SfrRoundedButtonModule,
         SfrRecipePhotoPipeModule,
         SfrUiAnnouncementModule,
+        SfrUrlReplaceSpaceModule,
+        RouterTestingModule,
+        MatIconModule,
       ],
       providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();

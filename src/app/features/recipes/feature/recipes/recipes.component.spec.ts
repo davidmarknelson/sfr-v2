@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { RecipesAndCountGQL } from '@sfr/data-access/generated';
 import { SfrUiContainerModule, SfrUiLoaderModule } from '@sfr/shared/ui';
 import { SfrUiPageTitleModule } from '@sfr/shared/ui/page-title/ui-page-title.module';
-import { SfrPaginationService } from '@sfr/shared/utils';
+import { SfrPaginationService } from '@sfr/shared/utils/services';
 import { createMockRecipesAndCountData } from '@testing';
 import { of } from 'rxjs';
 import { SfrUiRecipesGridModule } from '../../ui/recipes-grid/ui-recipes-grid.module';
