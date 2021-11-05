@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "~@angular/material" as mat;
 
 $dark-primary-text: rgba(black, 0.87);
 $dark-secondary-text: rgba(black, 0.54);
@@ -179,4 +180,30 @@ $light-theme-foreground-palette: (
   slider-min: rgba(black, 0.87),
   slider-off: rgba(black, 0.26),
   slider-off-active: rgba(black, 0.38),
+);
+
+$sfr-primary: mat.define-palette($primary-green, 100);
+$sfr-primary-dark: mat.define-palette($primary-green, 800);
+$sfr-accent: mat.define-palette($accent-yellow, 300);
+$sfr-accent-dark: mat.define-palette($accent-yellow, 800);
+$sfr-warn: mat.define-palette($warn-red);
+$sfr-warn-dark: mat.define-palette($warn-red, 800);
+
+$sfr-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $sfr-primary,
+      accent: $sfr-accent,
+      warn: $sfr-warn,
+    ),
+  )
+);
+$sfr-darker-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $sfr-primary-dark,
+      accent: $sfr-accent-dark,
+      warn: $sfr-warn-dark,
+    ),
+  )
 );

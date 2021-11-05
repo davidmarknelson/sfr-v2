@@ -14,51 +14,12 @@ $sfr-typography: mat.define-typography-config(
   ),
 );
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core($sfr-typography);
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$sfr-primary: mat.define-palette($primary-green, 100);
-$sfr-primary-dark: mat.define-palette($primary-green, 800);
-$sfr-accent: mat.define-palette($accent-yellow, 300);
-$sfr-accent-dark: mat.define-palette($accent-yellow, 800);
-
-// The warn palette is optional (defaults to red).
-$sfr-warn: mat.define-palette($warn-red);
-$sfr-warn-dark: mat.define-palette($warn-red, 800);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$sfr-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $sfr-primary,
-      accent: $sfr-accent,
-      warn: $sfr-warn,
-    ),
-  )
-);
-$sfr-dark-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $sfr-primary-dark,
-      accent: $sfr-accent-dark,
-      warn: $sfr-warn-dark,
-    ),
-  )
-);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include mat.all-component-themes($sfr-theme);
-@include mat.pseudo-checkbox-color($sfr-dark-theme);
+@include mat.pseudo-checkbox-color($sfr-darker-theme);
 
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
 html,
 body {
   height: 100%;
