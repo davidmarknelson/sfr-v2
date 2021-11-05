@@ -51,6 +51,7 @@ Cypress.Commands.add('addRecipes', (multipliedBy: number = 1) => {
             recipe: {
               ...recipe,
               name: `${i} ${recipe.name}`,
+              photos: i === 0 ? recipe.photos : [],
             },
           },
         });

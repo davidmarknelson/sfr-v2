@@ -18,19 +18,15 @@ import { of } from 'rxjs';
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { SfrRecipeComponent } from './recipe.component';
 
-let nameObj: { name?: string } = { name: 'Egg muffin' };
-
 class MockActivateRoute {
   get paramMap() {
-    return of(nameObj);
+    return of({ get: () => 'Egg muffin' });
   }
 }
 
-xdescribe('SfrRecipeComponent', () => {
+describe('SfrRecipeComponent', () => {
   let component: SfrRecipeComponent;
   let fixture: ComponentFixture<SfrRecipeComponent>;
-  let recipeService: RecipeGQL;
-  let route: ActivatedRoute;
   let recipeData: any = null;
 
   beforeEach(async () => {
@@ -66,14 +62,26 @@ xdescribe('SfrRecipeComponent', () => {
   });
 
   beforeEach(() => {
-    recipeService = TestBed.inject<RecipeGQL>(RecipeGQL);
-    route = TestBed.inject<ActivatedRoute>(ActivatedRoute);
     fixture = TestBed.createComponent(SfrRecipeComponent);
     component = fixture.componentInstance;
   });
 
   describe('No recipe', () => {
     it('should show a message', () => {
+      recipeData = {
+        errors: [
+          {
+            message: 'Not Found',
+            extentions: {
+              code: '404',
+              response: {
+                statusCode: 404,
+                message: 'Not Found',
+              },
+            },
+          },
+        ],
+      };
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('sfr-loader'))).toBeFalsy();
       expect(
@@ -90,10 +98,12 @@ xdescribe('SfrRecipeComponent', () => {
         },
       };
       fixture.detectChanges();
+
       expect(fixture.debugElement.query(By.css('sfr-loader'))).toBeFalsy();
       expect(
         fixture.debugElement.query(By.css('sfr-announcement'))
       ).toBeFalsy();
+      expect(fixture.debugElement.query(By.css('sfr-page-title'))).toBeTruthy();
     });
   });
 });

@@ -8,6 +8,8 @@ export function createMockRecipeData(
     id: id,
     name: 'sandwich',
     description: '',
+    cookTime: 20,
+    difficulty: 1,
     photos: [
       {
         __typename: 'RecipePhotoType',

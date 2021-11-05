@@ -1,7 +1,6 @@
 import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import { FieldPolicy, FieldReadFunction, TypePolicies, TypePolicy } from '@apollo/client/cache';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -166,66 +165,3 @@ export const RecipeDocument = gql`
       super(apollo);
     }
   }
-export type MessageTypeKeySpecifier = ('message' | MessageTypeKeySpecifier)[];
-export type MessageTypeFieldPolicy = {
-	message?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type MutationKeySpecifier = ('createRecipe' | 'deleteRecipe' | MutationKeySpecifier)[];
-export type MutationFieldPolicy = {
-	createRecipe?: FieldPolicy<any> | FieldReadFunction<any>,
-	deleteRecipe?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type QueryKeySpecifier = ('recipe' | 'recipesAndCount' | QueryKeySpecifier)[];
-export type QueryFieldPolicy = {
-	recipe?: FieldPolicy<any> | FieldReadFunction<any>,
-	recipesAndCount?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type RecipePhotoTypeKeySpecifier = ('cloudinaryPublicId' | 'id' | 'path' | RecipePhotoTypeKeySpecifier)[];
-export type RecipePhotoTypeFieldPolicy = {
-	cloudinaryPublicId?: FieldPolicy<any> | FieldReadFunction<any>,
-	id?: FieldPolicy<any> | FieldReadFunction<any>,
-	path?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type RecipeTypeKeySpecifier = ('cookTime' | 'description' | 'difficulty' | 'id' | 'ingredients' | 'instructions' | 'name' | 'photos' | RecipeTypeKeySpecifier)[];
-export type RecipeTypeFieldPolicy = {
-	cookTime?: FieldPolicy<any> | FieldReadFunction<any>,
-	description?: FieldPolicy<any> | FieldReadFunction<any>,
-	difficulty?: FieldPolicy<any> | FieldReadFunction<any>,
-	id?: FieldPolicy<any> | FieldReadFunction<any>,
-	ingredients?: FieldPolicy<any> | FieldReadFunction<any>,
-	instructions?: FieldPolicy<any> | FieldReadFunction<any>,
-	name?: FieldPolicy<any> | FieldReadFunction<any>,
-	photos?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type RecipesAndCountTypeKeySpecifier = ('recipes' | 'totalCount' | RecipesAndCountTypeKeySpecifier)[];
-export type RecipesAndCountTypeFieldPolicy = {
-	recipes?: FieldPolicy<any> | FieldReadFunction<any>,
-	totalCount?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type StrictTypedTypePolicies = {
-	MessageType?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | MessageTypeKeySpecifier | (() => undefined | MessageTypeKeySpecifier),
-		fields?: MessageTypeFieldPolicy,
-	},
-	Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier),
-		fields?: MutationFieldPolicy,
-	},
-	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),
-		fields?: QueryFieldPolicy,
-	},
-	RecipePhotoType?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | RecipePhotoTypeKeySpecifier | (() => undefined | RecipePhotoTypeKeySpecifier),
-		fields?: RecipePhotoTypeFieldPolicy,
-	},
-	RecipeType?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | RecipeTypeKeySpecifier | (() => undefined | RecipeTypeKeySpecifier),
-		fields?: RecipeTypeFieldPolicy,
-	},
-	RecipesAndCountType?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | RecipesAndCountTypeKeySpecifier | (() => undefined | RecipesAndCountTypeKeySpecifier),
-		fields?: RecipesAndCountTypeFieldPolicy,
-	}
-};
-export type TypedTypePolicies = StrictTypedTypePolicies & TypePolicies;

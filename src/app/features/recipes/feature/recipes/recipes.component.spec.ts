@@ -14,7 +14,6 @@ import { SfrRecipesComponent } from './recipes.component';
 describe('SfrRecipesComponent', () => {
   let component: SfrRecipesComponent;
   let fixture: ComponentFixture<SfrRecipesComponent>;
-  let recipesAndCountService: RecipesAndCountGQL;
   let recipeAndCountData: any = null;
 
   beforeEach(async () => {
@@ -49,8 +48,6 @@ describe('SfrRecipesComponent', () => {
   });
 
   beforeEach(() => {
-    recipesAndCountService =
-      TestBed.inject<RecipesAndCountGQL>(RecipesAndCountGQL);
     fixture = TestBed.createComponent(SfrRecipesComponent);
     component = fixture.componentInstance;
   });
@@ -65,17 +62,16 @@ describe('SfrRecipesComponent', () => {
       ).toBeFalsy();
     });
 
-    xit('should load the data and hide the loader', () => {
+    it('should load the data and hide the loader', () => {
       recipeAndCountData = {
         loading: false,
-        data: createMockRecipesAndCountData(1),
+        data: { recipesAndCount: createMockRecipesAndCountData(1) },
       };
 
       fixture.detectChanges();
 
       expect(component.loading).toEqual(false);
 
-      expect(fixture.debugElement.query(By.css('sfr-loader'))).toBeFalsy();
       expect(
         fixture.debugElement.query(By.css('sfr-recipes-grid'))
       ).toBeTruthy();
@@ -83,7 +79,5 @@ describe('SfrRecipesComponent', () => {
         fixture.debugElement.query(By.css('sfr-recipe-card'))
       ).toBeTruthy();
     });
-
-    xit('should update the query params when the page change is emitted from the grid components', () => {});
   });
 });
