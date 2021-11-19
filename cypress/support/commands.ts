@@ -1,86 +1,92 @@
-Cypress.Commands.add('deleteAllRecipes', () => {
-  cy.request('post', 'http://localhost:3000/graphql', {
-    query: `query recipesAndCount($skip: Float!, $take: Float!) {
-      recipesAndCount(skip: $skip, take: $take) {
-        recipes {
-          id
-        }
+Cypress.Commands.add('addRecipes', (multipliedBy: number = 1) => {
+  cy.createUser().then(($user) => {
+    return cy.fixture('../fixtures/recipes').then((recipes) => {
+      let updatedRecipes: any[] = [];
+      for (let i = 0; i < multipliedBy; i++) {
+        updatedRecipes = [
+          ...updatedRecipes,
+          ...recipes.map((recipe) => {
+            return {
+              ...recipe,
+              name: `${i} ${recipe.name}`,
+            };
+          }),
+        ];
       }
-    }
-    `,
-    variables: {
-      skip: 0,
-      take: 50,
-    },
-  }).then(($res) => {
-    $res.body.data.recipesAndCount.recipes?.forEach((recipe) => {
-      cy.request('post', 'http://localhost:3000/graphql', {
-        query: `mutation deleteRecipe($id:Float!) {
-          deleteRecipe(id:$id) {
-            message
-          }
-        }`,
-        variables: {
-          id: recipe.id,
+      cy.request({
+        headers: {
+          authorization: `Bearer ${$user.body.data.signup.accessToken}`,
+        },
+        method: 'post',
+        url: 'http://localhost:3000/graphql',
+        body: {
+          query: `mutation testingCreateRecipes($recipes: [RecipeInput!]!) {
+                testingCreateRecipes(recipes: $recipes) {
+                  message
+                }
+              }`,
+          variables: {
+            recipes: updatedRecipes,
+          },
         },
       });
     });
   });
 });
-Cypress.Commands.add('addRecipes', (multipliedBy: number = 1) => {
-  cy.fixture('../fixtures/recipes').then((recipes) => {
-    for (let i = 0; i < multipliedBy; i++) {
-      recipes.forEach((recipe) => {
-        cy.request('post', 'http://localhost:3000/graphql', {
+Cypress.Commands.add('addRecipe', (recipeName: string = 'Egg muffin') => {
+  cy.createUser().then(($user) => {
+    cy.fixture('../fixtures/recipes').then((recipes) => {
+      const recipe = recipes.find((recipe) => recipe.name === recipeName);
+      cy.request({
+        headers: {
+          authorization: `Bearer ${$user.body.data.signup.accessToken}`,
+        },
+        method: 'post',
+        url: 'http://localhost:3000/graphql',
+        body: {
           query: `mutation createRecipe($recipe:RecipeInput!) {
-            createRecipe(recipe:$recipe) {
-              cookTime
-              description
-              difficulty
-              id
-              ingredients
-              instructions
-              name
-              photos {
+              createRecipe(recipe:$recipe) {
+                cookTime
+                description
+                difficulty
                 id
-                path
+                ingredients
+                instructions
+                name
+                photos {
+                  id
+                  path
+                }
               }
-            }
-          }`,
+            }`,
           variables: {
-            recipe: {
-              ...recipe,
-              name: `${i} ${recipe.name}`,
-              photos: i === 0 ? recipe.photos : [],
-            },
+            recipe,
           },
-        });
+        },
       });
-    }
+    });
   });
 });
-Cypress.Commands.add('addRecipe', (recipeName: string = 'Egg muffin') => {
-  cy.fixture('../fixtures/recipes').then((recipes) => {
-    const recipe = recipes.find((recipe) => recipe.name === recipeName);
+Cypress.Commands.add('createUser', () => {
+  cy.fixture('../fixtures/user').then((user) => {
     cy.request('post', 'http://localhost:3000/graphql', {
-      query: `mutation createRecipe($recipe:RecipeInput!) {
-            createRecipe(recipe:$recipe) {
-              cookTime
-              description
-              difficulty
-              id
-              ingredients
-              instructions
-              name
-              photos {
-                id
-                path
-              }
-            }
-          }`,
+      query: `mutation signup($user: UserInput!) {
+        signup(user: $user) {
+          accessToken
+        }
+      }`,
       variables: {
-        recipe,
+        user,
       },
     });
+  });
+});
+Cypress.Commands.add('resetDatabase', () => {
+  cy.request('post', 'http://localhost:3000/graphql', {
+    query: `mutation testingResetDatabase {
+      testingResetDatabase {
+          message
+        }
+      }`,
   });
 });

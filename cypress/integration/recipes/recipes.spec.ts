@@ -4,7 +4,7 @@ import { aliasQuery } from '../../utils';
 
 describe('Recipes page', () => {
   before(() => {
-    cy.deleteAllRecipes();
+    cy.resetDatabase();
   });
 
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('Recipes page', () => {
   });
 
   afterEach(() => {
-    cy.deleteAllRecipes();
+    cy.resetDatabase();
   });
 
   describe('no recipes', () => {

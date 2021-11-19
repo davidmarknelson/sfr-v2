@@ -3,7 +3,7 @@ import { getAllHarnesses } from '@jscutlery/cypress-harness';
 
 describe('Recipe page', () => {
   before(() => {
-    cy.deleteAllRecipes();
+    cy.resetDatabase();
   });
 
   describe('no recipe', () => {
@@ -17,7 +17,7 @@ describe('Recipe page', () => {
     });
   });
 
-  describe.only('recipes', () => {
+  describe('recipes', () => {
     before(() => {
       cy.addRecipe();
       cy.visit('http://localhost:4200/recipes/Egg-muffin');

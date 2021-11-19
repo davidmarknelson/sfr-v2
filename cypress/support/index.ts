@@ -5,9 +5,10 @@ import './commands';
 declare global {
   namespace Cypress {
     interface Chainable {
-      deleteAllRecipes(): Chainable<any>;
       addRecipes(multipliedBy?: number): Chainable<any>;
       addRecipe(recipeName?: string): Chainable<any>;
+      createUser(): Chainable<any>;
+      resetDatabase(): Chainable<any>;
     }
   }
 }
