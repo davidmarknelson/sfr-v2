@@ -1,0 +1,136 @@
+<sfr-container [isSmall]="true">
+  <sfr-page-title> Signup </sfr-page-title>
+
+  <form [formGroup]="form" class="form" (submit)="submit()">
+    <mat-form-field class="form__input">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="Username"
+        formControlName="username"
+        required
+      />
+      <mat-error
+        *ngIf="username.invalid && (username.dirty || username.touched)"
+      >
+        <p *ngIf="username.errors?.required">
+          This field is required<span class="cdk-visually-hidden"
+            >Username</span
+          >
+        </p>
+        <p *ngIf="username.errors?.minlength">
+          Username must be at least 5 characters
+        </p>
+        <p *ngIf="username.errors?.maxlength">
+          Username must not be longer than 25 characters
+        </p>
+        <p *ngIf="username.errors?.pattern">
+          Username must not contain a space
+        </p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__input">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" formControlName="email" required />
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+        <p *ngIf="email.errors?.required">
+          This field is required<span class="cdk-visually-hidden">Email</span>
+        </p>
+        <p *ngIf="email.errors?.email">This must be a valid email</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__input">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        placeholder="Password"
+        formControlName="password"
+        [errorStateMatcher]="errorMatcher"
+        required
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="togglePasswordVisibility()"
+        [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility" : "visibility_off"
+        }}</mat-icon>
+      </button>
+      <mat-error
+        *ngIf="
+          (password.invalid || form.getError('passwordMatch')) &&
+          (password.dirty || password.touched)
+        "
+      >
+        <p *ngIf="password.errors?.required">
+          This field is required<span class="cdk-visually-hidden"
+            >Password</span
+          >
+        </p>
+        <p *ngIf="password.errors?.pattern">
+          Password must contain a letter, a number, a special character, and be
+          at least 12 characters long
+        </p>
+        <p *ngIf="form.getError('passwordMatch')">Passwords must match</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__input">
+      <mat-label>Password Confirmation</mat-label>
+      <input
+        matInput
+        [type]="hidePasswordConfirmation ? 'password' : 'text'"
+        placeholder="Password Confirmation"
+        formControlName="passwordConfirmation"
+        [errorStateMatcher]="errorMatcher"
+        required
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="togglePasswordConfirmationVisibility()"
+        [attr.aria-label]="
+          hidePasswordConfirmation
+            ? 'Show password confirmation'
+            : 'Hide password confirmation'
+        "
+        [attr.aria-pressed]="hidePasswordConfirmation"
+      >
+        <mat-icon>{{
+          hidePasswordConfirmation ? "visibility" : "visibility_off"
+        }}</mat-icon>
+      </button>
+      <mat-error
+        *ngIf="
+          (passwordConfirmation.invalid || form.getError('passwordMatch')) &&
+          (passwordConfirmation.dirty || passwordConfirmation.touched)
+        "
+      >
+        <p *ngIf="passwordConfirmation.errors?.required">
+          This field is required<span class="cdk-visually-hidden"
+            >Password Confirmation</span
+          >
+        </p>
+        <p *ngIf="form.getError('passwordMatch')">Passwords must match</p>
+      </mat-error>
+    </mat-form-field>
+
+    <sfr-announcement *ngIf="errorMessage">
+      {{ errorMessage }}
+    </sfr-announcement>
+
+    <div class="form__actions">
+      <button mat-flat-button sfrRoundedButton color="accent" type="submit">
+        Signup
+      </button>
+    </div>
+  </form>
+</sfr-container>

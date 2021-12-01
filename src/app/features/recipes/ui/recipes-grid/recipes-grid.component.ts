@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { RecipesAndCountQuery } from '@sfr/data-access/generated';
-import { PaginationDefault } from '@sfr/shared/utils/defaults';
+import { PaginationConstants } from '@sfr/shared/utils/constants';
 
 @Component({
   selector: 'sfr-recipes-grid',
@@ -19,7 +19,7 @@ export class SfrRecipesGridComponent {
   @Input() recipesAndCount!: RecipesAndCountQuery['recipesAndCount'] | null;
   @Input() pageIndex!: number;
   @Output() pageEvent: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
-  pageSize = PaginationDefault.pageSize;
+  pageSize = PaginationConstants.pageSize;
 
   emitPageEvent(event: PageEvent): void {
     this.pageEvent.emit(event);

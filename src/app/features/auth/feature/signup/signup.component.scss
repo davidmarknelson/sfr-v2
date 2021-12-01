@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  &__input {
+    flex: 1 1 auto;
+  }
+
+  &__actions {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+sfr-announcement {
+  margin-bottom: 1.5rem;
+}

@@ -26,6 +26,20 @@ const routes: Routes = [
             './features/recipes/feature/recipes/feature-recipes.module'
           ).then((m) => m.SfrFeatureRecipesModule),
       },
+      {
+        path: 'signup',
+        loadChildren: () =>
+          import('./features/auth/feature/signup/feature-signup.module').then(
+            (m) => m.SfrFeatureSignupModule
+          ),
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./features/auth/feature/profile/profile.module').then(
+            (m) => m.SfrFeatureProfileModule
+          ),
+      },
     ],
   },
 ];

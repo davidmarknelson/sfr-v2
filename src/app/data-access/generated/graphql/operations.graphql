@@ -31,3 +31,15 @@ query recipe($name: String!) {
     }
   }
 }
+
+mutation signup($user: UserInput!) {
+  signup(user: $user) {
+    accessToken
+  }
+}
+
+query refreshToken {
+  refreshToken {
+    accessToken
+  }
+}

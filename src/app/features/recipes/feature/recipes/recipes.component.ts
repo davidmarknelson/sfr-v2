@@ -5,7 +5,7 @@ import {
   RecipesAndCountGQL,
   RecipesAndCountQuery,
 } from '@sfr/data-access/generated';
-import { PaginationDefault } from '@sfr/shared/utils/defaults';
+import { PaginationConstants } from '@sfr/shared/utils/constants';
 import { SfrPaginationService } from '@sfr/shared/utils/services';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -44,7 +44,7 @@ export class SfrRecipesComponent {
       switchMap((page) => {
         return this.recipesAndCountGQL.watch({
           skip: this.paginationService.getSkip(page),
-          take: PaginationDefault.pageSize,
+          take: PaginationConstants.pageSize,
         }).valueChanges;
       }),
       map(({ data, loading }) => {

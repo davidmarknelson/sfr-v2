@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PaginationDefault } from '../../defaults';
+import { PaginationConstants } from '../../constants';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,6 @@ export class SfrPaginationService {
   }
 
   getSkip(page: number): number {
-    return (page - 1) * PaginationDefault.pageSize;
+    return (page - 1) * PaginationConstants.pageSize;
   }
 }

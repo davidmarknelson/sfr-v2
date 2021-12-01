@@ -186,8 +186,7 @@ $sfr-primary: mat.define-palette($primary-green, 100);
 $sfr-primary-dark: mat.define-palette($primary-green, 800);
 $sfr-accent: mat.define-palette($accent-yellow, 300);
 $sfr-accent-dark: mat.define-palette($accent-yellow, 800);
-$sfr-warn: mat.define-palette($warn-red);
-$sfr-warn-dark: mat.define-palette($warn-red, 800);
+$sfr-warn: mat.define-palette($warn-red, 700);
 
 $sfr-theme: mat.define-light-theme(
   (
@@ -203,7 +202,7 @@ $sfr-darker-theme: mat.define-light-theme(
     color: (
       primary: $sfr-primary-dark,
       accent: $sfr-accent-dark,
-      warn: $sfr-warn-dark,
+      warn: $sfr-warn,
     ),
   )
 );

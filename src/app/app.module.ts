@@ -1,15 +1,14 @@
-import { HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InMemoryCache } from '@apollo/client/core';
-import { APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular/http';
-import { environment } from 'src/environments/environment';
 import { SfrAppRoutingModule } from './app-routing.module';
 import { SfrAppComponent } from './app.component';
-import { PaginationDefault } from './shared/utils/defaults';
+import { GraphQLModule } from './graphql.module';
+import { PaginationConstants } from './shared/utils/constants';
+import { SfrAuthService } from './shared/utils/services';
 import { SfrViewModule } from './view/view.module';
 
 @NgModule({
@@ -20,26 +19,24 @@ import { SfrViewModule } from './view/view.module';
     BrowserAnimationsModule,
     HttpClientModule,
     SfrViewModule,
+    GraphQLModule,
   ],
   providers: [
     {
-      provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: `${environment.apiUrl}/graphql`,
-            headers: new HttpHeaders({
-              'Access-Control-Allow-Credentials': `${environment.apiUrl}`,
-            }),
-          }),
-        };
+      provide: APP_INITIALIZER,
+      useFactory: (authService: SfrAuthService) => {
+        return () => authService.refreshOrClearToken$();
       },
-      deps: [HttpLink],
+      multi: true,
+      deps: [SfrAuthService],
     },
     {
       provide: MAT_PAGINATOR_DEFAULT_OPTIONS,
-      useValue: PaginationDefault,
+      useValue: PaginationConstants,
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
     },
   ],
   bootstrap: [SfrAppComponent],

@@ -14,6 +14,25 @@ export type Scalars = {
   Float: number;
 };
 
+export type AccessTokenType = {
+  __typename?: 'AccessTokenType';
+  accessToken: Scalars['String'];
+};
+
+/** Levels of difficulty for a recipe */
+export enum Difficulty {
+  /** Highest difficulty */
+  Five = 'Five',
+  /** Second highest difficulty */
+  Four = 'Four',
+  /** Lowest difficulty */
+  One = 'One',
+  /** Medium difficulty */
+  Three = 'Three',
+  /** Second lowest difficulty */
+  Two = 'Two'
+}
+
 export type MessageType = {
   __typename?: 'MessageType';
   message: Scalars['String'];
@@ -23,6 +42,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createRecipe: RecipeType;
   deleteRecipe: MessageType;
+  signup: AccessTokenType;
 };
 
 
@@ -35,10 +55,23 @@ export type MutationDeleteRecipeArgs = {
   id: Scalars['Float'];
 };
 
+
+export type MutationSignupArgs = {
+  user: UserInput;
+};
+
 export type Query = {
   __typename?: 'Query';
+  login: AccessTokenType;
   recipe: RecipeType;
   recipesAndCount: RecipesAndCountType;
+  refreshToken: AccessTokenType;
+};
+
+
+export type QueryLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
@@ -53,9 +86,10 @@ export type QueryRecipesAndCountArgs = {
 };
 
 export type RecipeInput = {
+  /** Number of minutes it takes to cook the meal */
   cookTime: Scalars['Int'];
   description: Scalars['String'];
-  difficulty: Scalars['Int'];
+  difficulty: Difficulty;
   ingredients: Array<Scalars['String']>;
   instructions: Array<Scalars['String']>;
   name: Scalars['String'];
@@ -76,14 +110,22 @@ export type RecipePhotoType = {
 
 export type RecipeType = {
   __typename?: 'RecipeType';
+  /** Number of minutes it takes to cook the meal */
   cookTime: Scalars['Int'];
+  creator: RecipeUserType;
   description: Scalars['String'];
-  difficulty: Scalars['Int'];
+  difficulty: Difficulty;
   id: Scalars['Int'];
   ingredients: Array<Scalars['String']>;
   instructions: Array<Scalars['String']>;
   name: Scalars['String'];
   photos: Array<RecipePhotoType>;
+};
+
+export type RecipeUserType = {
+  __typename?: 'RecipeUserType';
+  id: Scalars['Int'];
+  username: Scalars['String'];
 };
 
 export type RecipesAndCountType = {
@@ -92,20 +134,40 @@ export type RecipesAndCountType = {
   totalCount: Scalars['Int'];
 };
 
+export type UserInput = {
+  email: Scalars['String'];
+  /** Must contain a letter, a number, a special character, and be at least 12 characters long */
+  password: Scalars['String'];
+  /** Must be between 5 and 25 characters long and not contain a space */
+  username: Scalars['String'];
+};
+
 export type RecipesAndCountQueryVariables = Exact<{
   skip: Scalars['Float'];
   take: Scalars['Float'];
 }>;
 
 
-export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, difficulty: number, cookTime: number, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string }> }> } };
+export type RecipesAndCountQuery = { __typename?: 'Query', recipesAndCount: { __typename?: 'RecipesAndCountType', totalCount: number, recipes: Array<{ __typename?: 'RecipeType', id: number, name: string, description: string, difficulty: Difficulty, cookTime: number, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string }> }> } };
 
 export type RecipeQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
 
 
-export type RecipeQuery = { __typename?: 'Query', recipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: number, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
+export type RecipeQuery = { __typename?: 'Query', recipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: Difficulty, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
+
+export type SignupMutationVariables = Exact<{
+  user: UserInput;
+}>;
+
+
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AccessTokenType', accessToken: string } };
+
+export type RefreshTokenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RefreshTokenQuery = { __typename?: 'Query', refreshToken: { __typename?: 'AccessTokenType', accessToken: string } };
 
 export const RecipesAndCountDocument = gql`
     query recipesAndCount($skip: Float!, $take: Float!) {
@@ -160,6 +222,42 @@ export const RecipeDocument = gql`
   })
   export class RecipeGQL extends Apollo.Query<RecipeQuery, RecipeQueryVariables> {
     document = RecipeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SignupDocument = gql`
+    mutation signup($user: UserInput!) {
+  signup(user: $user) {
+    accessToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SignupGQL extends Apollo.Mutation<SignupMutation, SignupMutationVariables> {
+    document = SignupDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RefreshTokenDocument = gql`
+    query refreshToken {
+  refreshToken {
+    accessToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RefreshTokenGQL extends Apollo.Query<RefreshTokenQuery, RefreshTokenQueryVariables> {
+    document = RefreshTokenDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
