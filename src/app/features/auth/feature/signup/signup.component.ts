@@ -72,11 +72,11 @@ export class SfrSignupComponent {
             password: this.password.value,
           },
         },
-        { errorPolicy: 'all' }
+        { errorPolicy: 'all', fetchPolicy: 'no-cache' }
       )
       .subscribe((res) => {
         if (!res.errors) {
-          this.authService.signin(res.data?.signup.accessToken!);
+          this.authService.login(res.data?.signup.accessToken!);
           this.router.navigate(['profile']);
         } else {
           this.errorMessage = res.errors[0].extensions?.response.message;
@@ -94,7 +94,6 @@ export class SfrSignupComponent {
             Validators.required,
             Validators.maxLength(25),
             Validators.minLength(5),
-            // Must not contain a space
             Validators.pattern(regexConstants.notContainSpace),
           ],
         ],

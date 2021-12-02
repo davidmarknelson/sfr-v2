@@ -4,11 +4,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { SfrPaginationService } from './pagination.service';
 
-let pageObj: { page?: string } = { page: '5' };
-
+let page: string | null = '5';
 class MockActivateRoute {
   get queryParamMap() {
-    return of(pageObj);
+    return of({
+      get: () => page,
+    });
   }
 }
 
@@ -31,21 +32,23 @@ describe('SfrPaginationService', () => {
   });
 
   describe('getPageFromRoute$', () => {
-    it('should return 5 when the query param page value is 5', () => {
+    it('should return 5 when the query param page value is 5', (done) => {
       const spy = jest.spyOn(activatedRoute, 'queryParamMap', 'get');
       service.getPageFromRoute$.subscribe((page) => {
         expect(page).toEqual(5);
+        expect(spy).toHaveBeenCalled();
+        done();
       });
-      expect(spy).toHaveBeenCalled();
     });
 
-    it('should return 1 when there are no query params', () => {
+    it('should return 1 when there are no query params', (done) => {
       const spy = jest.spyOn(activatedRoute, 'queryParamMap', 'get');
-      pageObj = {};
+      page = null;
       service.getPageFromRoute$.subscribe((page) => {
         expect(page).toEqual(1);
+        expect(spy).toHaveBeenCalled();
+        done();
       });
-      expect(spy).toHaveBeenCalled();
     });
   });
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SfrUnauthenticatedGuard } from './shared/utils/guards';
 import { SfrViewComponent } from './view';
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'signup',
+        canActivate: [SfrUnauthenticatedGuard],
         loadChildren: () =>
           import('./features/auth/feature/signup/feature-signup.module').then(
             (m) => m.SfrFeatureSignupModule

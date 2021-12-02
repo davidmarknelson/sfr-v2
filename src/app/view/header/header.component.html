@@ -2,10 +2,26 @@
   <a routerLink="/welcome" class="logo-link">
     <img src="../../../../assets/images/header/sfr-logo.svg" alt="Site logo" />
   </a>
-  <a routerLink="/recipes" mat-flat-button color="primary" sfrRoundedButton>
-    Recipes
-  </a>
-  <a routerLink="/signup" mat-flat-button color="primary" sfrRoundedButton>
-    Signup
-  </a>
+  <div>
+    <a routerLink="/recipes" mat-flat-button color="primary" sfrRoundedButton>
+      Recipes
+    </a>
+    <ng-container *ngIf="(isAuthenticated$ | async) === false">
+      <a routerLink="/signup" mat-flat-button color="primary" sfrRoundedButton>
+        Signup
+      </a>
+      <a routerLink="/login" mat-flat-button color="primary" sfrRoundedButton>
+        Login
+      </a>
+    </ng-container>
+    <button
+      mat-flat-button
+      color="primary"
+      sfrRoundedButton
+      *ngIf="isAuthenticated$ | async"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </div>
 </mat-toolbar>
