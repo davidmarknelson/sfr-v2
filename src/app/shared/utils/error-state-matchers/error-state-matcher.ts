@@ -8,11 +8,6 @@ export class SfrErrorStateMatcher implements ErrorStateMatcher {
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
   ): boolean {
-    // console.log(
-    //   'in matcher',
-    //   control?.value,
-    //   control?.invalid || this.formErrors.some((err) => form?.hasError(err))
-    // );
     return !!(
       control &&
       (control.dirty || control.touched) &&
