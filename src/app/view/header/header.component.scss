@@ -3,14 +3,6 @@
 
 @include mat.button-color($sfr-darker-theme);
 
-.logo-link {
-  display: flex;
-
-  & img {
-    width: 112px;
-  }
-}
-
-mat-toolbar {
-  justify-content: space-between;
+img {
+  width: 112px;
 }

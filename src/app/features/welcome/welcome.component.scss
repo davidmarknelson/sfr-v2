@@ -17,25 +17,13 @@
 }
 
 .cta {
-  display: flex;
-  justify-content: center;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
 .info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: none;
-  column-gap: 2rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
-
-  &__text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 
   & img {
     width: 100%;
@@ -48,10 +36,5 @@
   .hero {
     padding-top: 2rem;
     padding-bottom: 2rem;
-  }
-
-  .info {
-    grid-template-columns: none;
-    grid-template-rows: repeat(2, 1fr);
   }
 }

@@ -2,19 +2,27 @@
   <ng-container *ngIf="recipe$ | async as recipe">
     <sfr-page-title>{{ recipe.name }}</sfr-page-title>
 
-    <div class="recipe__img-and-meta">
-      <figure class="recipe__img-container">
+    <div
+      gdColumns="repeat(2, 1fr)"
+      gdGap="4rem"
+      gdColumns.lt-sm="repeat(1, 1fr)"
+    >
+      <figure class="img-container">
         <img
           [src]="recipe.photos[0]?.path | sfrRecipePhoto"
           [alt]="'Photo of ' + recipe.name"
-          class="recipe__img"
+          class="img"
         />
       </figure>
 
-      <section class="recipe__meta-container">
+      <section class="meta-container" fxLayout="column" fxLayoutAlign="center">
         <p>{{ recipe.description }}</p>
 
-        <div class="recipe__stats-container">
+        <div
+          class="stats-container"
+          fxLayout="row wrap"
+          fxLayoutAlign="space-around"
+        >
           <section>
             <mat-icon aria-hidden="true" class="sfr-icon sfr-icon--large"
               >local_fire_department</mat-icon
@@ -31,8 +39,8 @@
       </section>
     </div>
 
-    <section class="recipe__list">
-      <h2 class="mat-title recipe__list--center">Ingredients</h2>
+    <section class="list">
+      <h2 class="mat-title list--center">Ingredients</h2>
 
       <mat-selection-list aria-label="Ingredients">
         <mat-list-option
@@ -45,8 +53,8 @@
       </mat-selection-list>
     </section>
 
-    <section class="recipe__list">
-      <h2 class="mat-title recipe__list--center">Instructions</h2>
+    <section class="list">
+      <h2 class="mat-title list--center">Instructions</h2>
 
       <mat-selection-list aria-label="Instructions">
         <mat-list-option
@@ -62,7 +70,7 @@
 
   <sfr-loader *ngIf="loading && !error"></sfr-loader>
 
-  <div *ngIf="error" class="announcement">
+  <div *ngIf="error" class="announcement" fxLayout="row" fxLayoutAlign="center">
     <h1 class="cdk-visually-hidden">Error</h1>
     <sfr-announcement> No recipe found </sfr-announcement>
   </div>

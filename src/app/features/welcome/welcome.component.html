@@ -5,7 +5,7 @@
 </section>
 
 <sfr-container>
-  <section class="cta">
+  <section class="cta" fxLayout="row" fxLayoutAlign="center">
     <a mat-flat-button sfrRoundedButton color="accent" routerLink="/recipes">
       View Recipes
       <mat-icon aria-hidden="true">chevron_right</mat-icon>
@@ -13,8 +13,14 @@
   </section>
 
   <!-- Sharing section -->
-  <section class="info">
-    <div class="info__text">
+  <section
+    class="info"
+    gdColumns="repeat(2, 1fr)"
+    gdGap="2rem"
+    gdColumns.lt-sm="none"
+    gdRow.lt-sm="repeat(2, 1fr)"
+  >
+    <div fxLayout="column" fxLayoutAlign="center">
       <h2 class="title p-4">
         Finding and sharing recipes doesn’t have to be hard!
       </h2>
@@ -33,8 +39,14 @@
   </section>
 
   <!-- Ads section -->
-  <section class="info">
-    <div class="info__text">
+  <section
+    class="info"
+    gdColumns="repeat(2, 1fr)"
+    gdGap="2rem"
+    gdColumns.lt-sm="none"
+    gdRow.lt-sm="repeat(2, 1fr)"
+  >
+    <div fxLayout="column" fxLayoutAlign="center">
       <h2 class="title">Are you tired of ads overwhelming your screen?</h2>
       <p>
         We are, too! Time is precious and looking at ads you don’t care about is
@@ -50,8 +62,14 @@
   </section>
 
   <!-- People like you section -->
-  <section class="info">
-    <div class="info__text">
+  <section
+    class="info"
+    gdColumns="repeat(2, 1fr)"
+    gdGap="2rem"
+    gdColumns.lt-sm="none"
+    gdRow.lt-sm="repeat(2, 1fr)"
+  >
+    <div fxLayout="column" fxLayoutAlign="center">
       <h2 class="title">Recipes for people just like you!</h2>
       <p>
         So many sites show meals that are picture perfect. They look good, but
@@ -69,7 +87,7 @@
     </figure>
   </section>
 
-  <section class="cta">
+  <section class="cta" fxLayout="row" fxLayoutAlign="center">
     <a mat-flat-button sfrRoundedButton color="accent" routerLink="/recipes"
       >View Recipes
       <mat-icon aria-hidden="true">chevron_right</mat-icon>
