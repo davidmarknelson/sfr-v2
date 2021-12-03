@@ -1,14 +1,15 @@
 <sfr-container [isSmall]="true">
   <sfr-page-title> Signup </sfr-page-title>
 
-  <form [formGroup]="form" class="form" (submit)="submit()">
-    <mat-form-field class="form__input">
+  <form [formGroup]="form" fxLayout="column wrap" (submit)="submit()">
+    <mat-form-field>
       <mat-label>Username</mat-label>
       <input
         matInput
         placeholder="Username"
         formControlName="username"
         required
+        fxFlex="1 1 auto"
       />
       <mat-error
         *ngIf="username.invalid && (username.dirty || username.touched)"
@@ -30,9 +31,15 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form__input">
+    <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" formControlName="email" required />
+      <input
+        matInput
+        placeholder="Email"
+        formControlName="email"
+        required
+        fxFlex="1 1 auto"
+      />
       <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
         <p *ngIf="email.errors?.required">
           This field is required<span class="cdk-visually-hidden">Email</span>
@@ -41,7 +48,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form__input">
+    <mat-form-field>
       <mat-label>Password</mat-label>
       <input
         matInput
@@ -50,6 +57,7 @@
         formControlName="password"
         [errorStateMatcher]="errorMatcher"
         required
+        fxFlex="1 1 auto"
       />
       <button
         mat-icon-button
@@ -82,7 +90,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form__input">
+    <mat-form-field>
       <mat-label>Password Confirmation</mat-label>
       <input
         matInput
@@ -91,6 +99,7 @@
         formControlName="passwordConfirmation"
         [errorStateMatcher]="errorMatcher"
         required
+        fxFlex="1 1 auto"
       />
       <button
         mat-icon-button
@@ -127,7 +136,7 @@
       {{ errorMessage }}
     </sfr-announcement>
 
-    <div class="form__actions">
+    <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="flex-end">
       <button mat-flat-button sfrRoundedButton color="accent" type="submit">
         Signup
       </button>

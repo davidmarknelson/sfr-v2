@@ -1,5 +1,10 @@
 <ng-container *ngIf="(recipesAndCount || {}).recipes?.length; else noRecipes">
-  <ul class="recipe-grid">
+  <ul
+    gdColumns="repeat(3, 1fr)"
+    gdGap="2rem"
+    gdColumns.lt-md="repeat(2, 1fr)"
+    gdColumns.lt-sm="repeat(1, 1fr)"
+  >
     <li *ngFor="let recipe of (recipesAndCount || {}).recipes">
       <sfr-recipe-card [recipe]="recipe"></sfr-recipe-card>
     </li>
@@ -15,7 +20,7 @@
 </ng-container>
 
 <ng-template #noRecipes>
-  <div class="announcement">
+  <div fxLayout="row" fxLayoutAlign="center">
     <sfr-announcement> No recipes to show </sfr-announcement>
   </div>
 </ng-template>
