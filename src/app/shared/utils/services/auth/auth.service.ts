@@ -27,7 +27,7 @@ export class SfrAuthService {
   ) {}
 
   refreshOrClearToken$(): Observable<string | null> {
-    if (this.isTokenValid()) {
+    if (!this.isTokenExpired()) {
       return this.refreshTokenGQL
         .fetch(
           {},
@@ -38,7 +38,7 @@ export class SfrAuthService {
         .pipe(
           map(({ data }) => data.refreshToken.accessToken),
           tap((accessToken) => {
-            this.login(accessToken);
+            this.authenticate(accessToken);
           })
         );
     } else {
@@ -47,13 +47,13 @@ export class SfrAuthService {
     }
   }
 
-  isTokenValid(): boolean {
+  isTokenExpired(): boolean {
     return !this.jwtHelper.isTokenExpired(
       localStorage.getItem(authConstants.authTokenName)!
     );
   }
 
-  login(token: string): void {
+  authenticate(token: string): void {
     localStorage.setItem(authConstants.authTokenName, token);
     this.isAuthenticatedSubj$.next(true);
   }

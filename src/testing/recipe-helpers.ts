@@ -1,4 +1,4 @@
-import { RecipesAndCountQuery } from '@sfr/data-access/generated';
+import { Difficulty, RecipesAndCountQuery } from '@sfr/data-access/generated';
 
 export function createMockRecipeData(
   id: number = 1
@@ -9,7 +9,7 @@ export function createMockRecipeData(
     name: 'sandwich',
     description: '',
     cookTime: 20,
-    difficulty: 1,
+    difficulty: Difficulty.One,
     photos: [
       {
         __typename: 'RecipePhotoType',

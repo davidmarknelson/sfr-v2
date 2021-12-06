@@ -76,7 +76,7 @@ export class SfrSignupComponent {
       )
       .subscribe((res) => {
         if (!res.errors) {
-          this.authService.login(res.data?.signup.accessToken!);
+          this.authService.authenticate(res.data?.signup.accessToken!);
           this.router.navigate(['profile']);
         } else {
           this.errorMessage = res.errors[0].extensions?.response.message;
