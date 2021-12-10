@@ -7,7 +7,7 @@ import { SfrFooterComponent } from '../footer/footer.component';
 import { SfrHeaderComponent } from '../header/header.component';
 import { SfrViewComponent } from './view.component';
 
-describe('ViewComponent', () => {
+describe.skip('ViewComponent', () => {
   let component: SfrViewComponent;
   let fixture: ComponentFixture<SfrViewComponent>;
 

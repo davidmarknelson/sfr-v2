@@ -25,7 +25,6 @@ class MockActivateRoute {
 }
 
 describe('SfrRecipeComponent', () => {
-  let component: SfrRecipeComponent;
   let fixture: ComponentFixture<SfrRecipeComponent>;
   let recipeData: any = null;
 
@@ -63,7 +62,6 @@ describe('SfrRecipeComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SfrRecipeComponent);
-    component = fixture.componentInstance;
   });
 
   describe('No recipe', () => {

@@ -3,7 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { RefreshTokenGQL } from '@sfr/data-access/generated';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { filter, map, shareReplay, tap } from 'rxjs/operators';
+import { catchError, filter, map, shareReplay, tap } from 'rxjs/operators';
 import { authConstants } from '../../constants';
 
 @Injectable({
@@ -39,6 +39,10 @@ export class SfrAuthService {
           map(({ data }) => data.refreshToken.accessToken),
           tap((accessToken) => {
             this.authenticate(accessToken);
+          }),
+          catchError(() => {
+            this.clearAuthState();
+            return of(null);
           })
         );
     } else {

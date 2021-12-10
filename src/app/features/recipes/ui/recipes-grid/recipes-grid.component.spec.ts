@@ -1,7 +1,7 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
@@ -62,17 +62,13 @@ describe('SfrRecipesGridComponent', () => {
       let recipeCards: DebugElement[];
       let paginator: MatPaginatorHarness;
 
-      beforeEach(
-        waitForAsync(async () => {
-          loader = TestbedHarnessEnvironment.loader(fixture);
-          component.recipesAndCount = createMockRecipesAndCountData(9, 15);
-          fixture.detectChanges();
-          recipeCards = fixture.debugElement.queryAll(
-            By.css('sfr-recipe-card')
-          );
-          paginator = await loader.getHarness(MatPaginatorHarness);
-        })
-      );
+      beforeEach(async () => {
+        loader = TestbedHarnessEnvironment.loader(fixture);
+        component.recipesAndCount = createMockRecipesAndCountData(9, 15);
+        fixture.detectChanges();
+        recipeCards = fixture.debugElement.queryAll(By.css('sfr-recipe-card'));
+        paginator = await loader.getHarness(MatPaginatorHarness);
+      });
 
       it('should display a list of 9 recipes on the page and the pagination buttons should not be disabled', async () => {
         expect(recipeCards.length).toEqual(9);

@@ -2,9 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import { RefreshTokenGQL } from '@sfr/data-access/generated';
 import { authTestingHelpers } from '@testing';
 import { Apollo } from 'apollo-angular';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { authConstants } from '../../constants';
 import { SfrAuthService } from './auth.service';
+
+let refreshTokenGqlReturn: any = of({
+  data: { refreshToken: { accessToken: 'token' } },
+});
 
 describe('AuthService', () => {
   let authService: SfrAuthService;
@@ -17,9 +21,7 @@ describe('AuthService', () => {
           provide: RefreshTokenGQL,
           useValue: {
             fetch: () => {
-              return of({
-                data: { refreshToken: { accessToken: 'token' } },
-              });
+              return refreshTokenGqlReturn;
             },
           },
         },
@@ -58,6 +60,25 @@ describe('AuthService', () => {
       const isTokenExpiredSpy = jest
         .spyOn(authService, 'isTokenExpired')
         .mockReturnValue(true);
+      const localStorageSpy = jest.spyOn(
+        window.localStorage.__proto__,
+        'removeItem'
+      );
+      authService.refreshOrClearToken$().subscribe((result) => {
+        expect(isTokenExpiredSpy).toHaveBeenCalled();
+        expect(localStorageSpy).toHaveBeenCalledWith(
+          authConstants.authTokenName
+        );
+        expect(result).toEqual(null);
+        done();
+      });
+    });
+
+    it('should clear the auth state if there is a BE error', (done) => {
+      refreshTokenGqlReturn = throwError('error');
+      const isTokenExpiredSpy = jest
+        .spyOn(authService, 'isTokenExpired')
+        .mockReturnValue(false);
       const localStorageSpy = jest.spyOn(
         window.localStorage.__proto__,
         'removeItem'

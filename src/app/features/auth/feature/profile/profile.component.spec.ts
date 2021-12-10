@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SfrProfileComponent } from './profile.component';
 
-import { ProfileComponent } from './profile.component';
-
-describe('ProfileComponent', () => {
-  let component: ProfileComponent;
-  let fixture: ComponentFixture<ProfileComponent>;
+describe('SfrProfileComponent', () => {
+  let component: SfrProfileComponent;
+  let fixture: ComponentFixture<SfrProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
-    })
-    .compileComponents();
+      declarations: [SfrProfileComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileComponent);
+    fixture = TestBed.createComponent(SfrProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

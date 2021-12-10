@@ -5,6 +5,7 @@ describe('Welcome page', () => {
 
   it('should pass accessibility checks', () => {
     cy.injectAxe();
+    cy.get('h1');
     cy.checkA11y();
   });
 
