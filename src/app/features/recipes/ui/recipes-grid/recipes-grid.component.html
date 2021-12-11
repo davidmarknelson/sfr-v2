@@ -5,7 +5,10 @@
     gdColumns.lt-md="repeat(2, 1fr)"
     gdColumns.lt-sm="repeat(1, 1fr)"
   >
-    <li *ngFor="let recipe of (recipesAndCount || {}).recipes">
+    <li
+      *ngFor="let recipe of (recipesAndCount || {}).recipes"
+      fxLayout="column"
+    >
       <sfr-recipe-card [recipe]="recipe"></sfr-recipe-card>
     </li>
   </ul>

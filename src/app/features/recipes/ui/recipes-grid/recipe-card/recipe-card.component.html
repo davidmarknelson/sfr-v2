@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card fxFlex="1 1 auto" fxLayout="column">
   <mat-card-header>
     <mat-card-title>
       <h2>
@@ -6,12 +6,13 @@
       </h2>
     </mat-card-title>
   </mat-card-header>
-  <img
-    mat-card-image
-    [src]="recipe.photos?.[0]?.path | sfrRecipePhoto"
-    [alt]="'Photo of ' + recipe.name"
-  />
-  <mat-card-content>
+  <figure class="img-container">
+    <img
+      [src]="recipe.photos?.[0]?.path | sfrRecipePhoto"
+      [alt]="'Photo of ' + recipe.name"
+    />
+  </figure>
+  <mat-card-content fxFlex="1 0 auto">
     <p>
       {{ recipe.description }}
     </p>

@@ -1,3 +1,26 @@
+:host {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .space-left {
   margin-left: 1rem;
+}
+
+.img-container {
+  display: block;
+  position: relative;
+  padding-top: 75%;
+  margin: 0 -16px 16px -16px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
