@@ -24,3 +24,21 @@ img {
   right: 0;
   top: 0;
 }
+
+mat-card-content > p {
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: "";
+    width: 0;
+    height: 20px;
+    width: 150px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, white);
+  }
+}
