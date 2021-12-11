@@ -2,6 +2,7 @@ import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -93,7 +94,7 @@ export type RecipeInput = {
   ingredients: Array<Scalars['String']>;
   instructions: Array<Scalars['String']>;
   name: Scalars['String'];
-  photos?: Maybe<Array<RecipePhotoInput>>;
+  photos?: InputMaybe<Array<RecipePhotoInput>>;
 };
 
 export type RecipePhotoInput = {
@@ -157,6 +158,11 @@ export type RecipeQueryVariables = Exact<{
 
 export type RecipeQuery = { __typename?: 'Query', recipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: Difficulty, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
 
+export type RefreshTokenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RefreshTokenQuery = { __typename?: 'Query', refreshToken: { __typename?: 'AccessTokenType', accessToken: string } };
+
 export type SignupMutationVariables = Exact<{
   user: UserInput;
 }>;
@@ -164,10 +170,13 @@ export type SignupMutationVariables = Exact<{
 
 export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AccessTokenType', accessToken: string } };
 
-export type RefreshTokenQueryVariables = Exact<{ [key: string]: never; }>;
+export type LoginQueryVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
 
 
-export type RefreshTokenQuery = { __typename?: 'Query', refreshToken: { __typename?: 'AccessTokenType', accessToken: string } };
+export type LoginQuery = { __typename?: 'Query', login: { __typename?: 'AccessTokenType', accessToken: string } };
 
 export const RecipesAndCountDocument = gql`
     query recipesAndCount($skip: Float!, $take: Float!) {
@@ -227,6 +236,24 @@ export const RecipeDocument = gql`
       super(apollo);
     }
   }
+export const RefreshTokenDocument = gql`
+    query refreshToken {
+  refreshToken {
+    accessToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RefreshTokenGQL extends Apollo.Query<RefreshTokenQuery, RefreshTokenQueryVariables> {
+    document = RefreshTokenDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const SignupDocument = gql`
     mutation signup($user: UserInput!) {
   signup(user: $user) {
@@ -245,9 +272,9 @@ export const SignupDocument = gql`
       super(apollo);
     }
   }
-export const RefreshTokenDocument = gql`
-    query refreshToken {
-  refreshToken {
+export const LoginDocument = gql`
+    query login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
     accessToken
   }
 }
@@ -256,8 +283,8 @@ export const RefreshTokenDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class RefreshTokenGQL extends Apollo.Query<RefreshTokenQuery, RefreshTokenQueryVariables> {
-    document = RefreshTokenDocument;
+  export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
+    document = LoginDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

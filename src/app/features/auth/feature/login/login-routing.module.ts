@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SfrRecipesComponent } from './recipes.component';
+import { SfrLoginComponent } from './login.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: SfrRecipesComponent,
-  },
-];
+const routes: Routes = [{ path: '', component: SfrLoginComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SfrRecipesRoutingModule {}
+export class LoginRoutingModule {}

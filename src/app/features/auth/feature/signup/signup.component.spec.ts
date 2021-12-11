@@ -90,21 +90,11 @@ describe('SignupComponent', () => {
 
   describe('Password and password confirmation input types', () => {
     it('should initially start as a password type for the password input', async () => {
-      formFieldHarness = await loader.getHarness(
-        MatFormFieldHarness.with({ floatingLabelText: 'Password *' })
-      );
       expect(component.hidePassword).toEqual(true);
-      expect(formFieldHarness).toBeTruthy();
     });
 
     it('should initially start as a password type for the password confirmation input', async () => {
-      formFieldHarness = await loader.getHarness(
-        MatFormFieldHarness.with({
-          floatingLabelText: 'Password Confirmation *',
-        })
-      );
       expect(component.hidePasswordConfirmation).toEqual(true);
-      expect(formFieldHarness).toBeTruthy();
     });
 
     it('should have a function that changes the hidePassword and hidePasswordConfirmation properties', () => {
