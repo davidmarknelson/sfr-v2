@@ -20,9 +20,10 @@
         <a routerLink="/signup" mat-menu-item>Sign up</a>
         <a routerLink="/login" mat-menu-item>Login</a>
       </ng-container>
-      <a *ngIf="isAuthenticated$ | async" routerLink="/logout" mat-menu-item
-        >Logout</a
-      >
+      <ng-container *ngIf="isAuthenticated$ | async">
+        <a routerLink="/create-recipe" mat-menu-item>Create recipe</a>
+        <a routerLink="/logout" mat-menu-item>Logout</a>
+      </ng-container>
     </mat-menu>
   </nav>
 
@@ -51,15 +52,25 @@
         Login
       </a>
     </ng-container>
-    <button
-      mat-flat-button
-      color="primary"
-      sfrRoundedButton
-      *ngIf="isAuthenticated$ | async"
-      (click)="logout()"
-      class="ml-1"
-    >
-      Logout
-    </button>
+    <ng-container *ngIf="isAuthenticated$ | async">
+      <a
+        class="ml-1"
+        routerLink="/create-recipe"
+        mat-flat-button
+        color="primary"
+        sfrRoundedButton
+      >
+        Create recipe
+      </a>
+      <button
+        mat-flat-button
+        color="primary"
+        sfrRoundedButton
+        (click)="logout()"
+        class="ml-1"
+      >
+        Logout
+      </button>
+    </ng-container>
   </nav>
 </mat-toolbar>

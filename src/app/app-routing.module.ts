@@ -36,6 +36,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'create-recipe',
+        canActivate: [SfrAuthenticatedGuard],
+        loadChildren: () =>
+          import(
+            './features/recipes/features/create-edit-recipe/create-edit-recipe.module'
+          ).then((m) => m.SfrCreateEditRecipeFeatureModule),
+      },
+      {
         path: 'signup',
         canActivate: [SfrUnauthenticatedGuard],
         loadChildren: () =>

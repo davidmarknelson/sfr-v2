@@ -53,7 +53,7 @@ export class SfrAuthService {
 
   isTokenExpired(): boolean {
     try {
-      return !this.jwtHelper.isTokenExpired(
+      return this.jwtHelper.isTokenExpired(
         localStorage.getItem(authConstants.authTokenName)!
       );
     } catch {
