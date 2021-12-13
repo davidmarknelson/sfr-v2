@@ -28,4 +28,4 @@ import { SfrRecipeComponent } from './recipe.component';
     FlexLayoutModule,
   ],
 })
-export class SfrFeatureRecipeModule {}
+export class SfrRecipeFeatureModule {}

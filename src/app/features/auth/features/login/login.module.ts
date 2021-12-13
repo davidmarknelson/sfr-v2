@@ -12,14 +12,14 @@ import {
   SfrUiPageTitleModule,
 } from '@sfr/shared/ui';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
-import { SignupRoutingModule } from './signup-routing.module';
-import { SfrSignupComponent } from './signup.component';
+import { LoginRoutingModule } from './login-routing.module';
+import { SfrLoginComponent } from './login.component';
 
 @NgModule({
-  declarations: [SfrSignupComponent],
+  declarations: [SfrLoginComponent],
   imports: [
     CommonModule,
-    SignupRoutingModule,
+    LoginRoutingModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -32,4 +32,4 @@ import { SfrSignupComponent } from './signup.component';
     FlexLayoutModule,
   ],
 })
-export class SfrFeatureSignupModule {}
+export class SfrLoginFeatureModule {}

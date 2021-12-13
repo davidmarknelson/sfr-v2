@@ -20,4 +20,4 @@ import { SfrWelcomeComponent } from './welcome.component';
     FlexLayoutModule,
   ],
 })
-export class SfrFeatureWelcomeModule {}
+export class SfrWelcomeFeatureModule {}

@@ -19,8 +19,8 @@ describe.skip('SfrHeaderComponent', () => {
           {
             path: 'welcome',
             loadChildren: () =>
-              import('../../features/welcome/feature-welcome.module').then(
-                (m) => m.SfrFeatureWelcomeModule
+              import('../../features/welcome/welcome.module').then(
+                (m) => m.SfrWelcomeFeatureModule
               ),
           },
         ]),

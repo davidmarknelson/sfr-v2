@@ -8,7 +8,7 @@ import { SfrUiPageTitleModule } from '@sfr/shared/ui/page-title/ui-page-title.mo
 import { SfrPaginationService } from '@sfr/shared/utils/services';
 import { createMockRecipesAndCountData } from '@testing';
 import { of } from 'rxjs';
-import { SfrUiRecipesGridModule } from '../../ui/recipes-grid/ui-recipes-grid.module';
+import { SfrRecipesGridUiModule } from '../../ui/recipes-grid/recipes-grid.module';
 import { SfrRecipesComponent } from './recipes.component';
 
 describe('SfrRecipesComponent', () => {
@@ -20,7 +20,7 @@ describe('SfrRecipesComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SfrRecipesComponent],
       imports: [
-        SfrUiRecipesGridModule,
+        SfrRecipesGridUiModule,
         SfrUiContainerModule,
         SfrUiPageTitleModule,
         SfrUiLoaderModule,

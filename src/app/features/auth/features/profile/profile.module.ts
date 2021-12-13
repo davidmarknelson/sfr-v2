@@ -7,4 +7,4 @@ import { SfrProfileComponent } from './profile.component';
   declarations: [SfrProfileComponent],
   imports: [CommonModule, ProfileRoutingModule],
 })
-export class SfrFeatureProfileModule {}
+export class SfrProfileFeatureModule {}

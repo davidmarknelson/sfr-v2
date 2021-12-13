@@ -17,46 +17,46 @@ const routes: Routes = [
       {
         path: 'welcome',
         loadChildren: () =>
-          import('./features/welcome/feature-welcome.module').then(
-            (m) => m.SfrFeatureWelcomeModule
+          import('./features/welcome/welcome.module').then(
+            (m) => m.SfrWelcomeFeatureModule
           ),
       },
       {
         path: 'recipes/:name',
         loadChildren: () =>
-          import(
-            './features/recipes/feature/recipe/feature-recipe.module'
-          ).then((m) => m.SfrFeatureRecipeModule),
+          import('./features/recipes/features/recipe/recipe.module').then(
+            (m) => m.SfrRecipeFeatureModule
+          ),
       },
       {
         path: 'recipes',
         loadChildren: () =>
-          import(
-            './features/recipes/feature/recipes/feature-recipes.module'
-          ).then((m) => m.SfrFeatureRecipesModule),
+          import('./features/recipes/features/recipes/recipes.module').then(
+            (m) => m.SfrRecipesFeatureModule
+          ),
       },
       {
         path: 'signup',
         canActivate: [SfrUnauthenticatedGuard],
         loadChildren: () =>
-          import('./features/auth/feature/signup/feature-signup.module').then(
-            (m) => m.SfrFeatureSignupModule
+          import('./features/auth/features/signup/signup.module').then(
+            (m) => m.SfrSignupFeatureModule
           ),
       },
       {
         path: 'login',
         canActivate: [SfrUnauthenticatedGuard],
         loadChildren: () =>
-          import('./features/auth/feature/login/login.module').then(
-            (m) => m.SfrFeatureLoginModule
+          import('./features/auth/features/login/login.module').then(
+            (m) => m.SfrLoginFeatureModule
           ),
       },
       {
         path: 'profile',
         canActivate: [SfrAuthenticatedGuard],
         loadChildren: () =>
-          import('./features/auth/feature/profile/profile.module').then(
-            (m) => m.SfrFeatureProfileModule
+          import('./features/auth/features/profile/profile.module').then(
+            (m) => m.SfrProfileFeatureModule
           ),
       },
     ],

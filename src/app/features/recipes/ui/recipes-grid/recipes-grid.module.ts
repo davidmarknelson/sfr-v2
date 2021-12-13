@@ -34,4 +34,4 @@ import { SfrRecipesGridComponent } from './recipes-grid.component';
   ],
   exports: [SfrRecipesGridComponent],
 })
-export class SfrUiRecipesGridModule {}
+export class SfrRecipesGridUiModule {}

@@ -5,7 +5,7 @@ import {
   SfrUiLoaderModule,
   SfrUiPageTitleModule,
 } from '@sfr/shared/ui';
-import { SfrUiRecipesGridModule } from '../../ui/recipes-grid/ui-recipes-grid.module';
+import { SfrRecipesGridUiModule } from '../../ui/recipes-grid/recipes-grid.module';
 import { SfrRecipesRoutingModule } from './recipes-routing.module';
 import { SfrRecipesComponent } from './recipes.component';
 
@@ -14,10 +14,10 @@ import { SfrRecipesComponent } from './recipes.component';
   imports: [
     CommonModule,
     SfrRecipesRoutingModule,
-    SfrUiRecipesGridModule,
+    SfrRecipesGridUiModule,
     SfrUiContainerModule,
     SfrUiPageTitleModule,
     SfrUiLoaderModule,
   ],
 })
-export class SfrFeatureRecipesModule {}
+export class SfrRecipesFeatureModule {}
