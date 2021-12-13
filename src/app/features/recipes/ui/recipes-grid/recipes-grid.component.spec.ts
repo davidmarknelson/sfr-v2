@@ -8,6 +8,7 @@ import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/ui-announcement.module';
@@ -38,6 +39,7 @@ describe('SfrRecipesGridComponent', () => {
         SfrUrlReplaceSpaceModule,
         RouterTestingModule,
         MatIconModule,
+        MatTooltipModule,
       ],
       providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();

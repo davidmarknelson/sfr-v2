@@ -1,7 +1,11 @@
 <mat-card fxFlex="1 1 auto" fxLayout="column">
   <mat-card-header>
     <mat-card-title>
-      <h2>
+      <h2
+        [matTooltip]="recipe.name"
+        matTooltipPosition="above"
+        matTooltipShowDelay="500"
+      >
         {{ recipe.name }}
       </h2>
     </mat-card-title>

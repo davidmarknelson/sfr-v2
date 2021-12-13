@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import {
@@ -27,6 +28,7 @@ describe('SfrRecipeCardComponent', () => {
         RouterTestingModule,
         SfrUrlReplaceSpaceModule,
         MatIconModule,
+        MatTooltipModule,
       ],
       providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();

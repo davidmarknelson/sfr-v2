@@ -3,3 +3,14 @@
 .mat-card {
   border-radius: $border-radius !important;
 }
+
+.mat-card-header .mat-card-title {
+  display: grid;
+  margin-bottom: 0 !important;
+
+  & > h2 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
