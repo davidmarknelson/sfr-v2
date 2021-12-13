@@ -1,0 +1,5 @@
+@import "../helpers/variables.scss";
+
+.rounded-corners .mat-menu-panel {
+  border-radius: $border-radius;
+}

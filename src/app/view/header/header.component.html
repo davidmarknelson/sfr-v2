@@ -2,15 +2,52 @@
   <a routerLink="/welcome" fxLayout="row">
     <img src="../../../../assets/images/header/sfr-logo.svg" alt="Site logo" />
   </a>
-  <nav>
+
+  <!-- Mobile navigation -->
+  <nav fxHide.gt-xs="true">
+    <button
+      mat-flat-button
+      color="primary"
+      [matMenuTriggerFor]="menu"
+      aria-label="Open menu"
+      sfrRoundedButton
+    >
+      Menu
+    </button>
+    <mat-menu #menu="matMenu">
+      <a routerLink="/recipes" mat-menu-item>Recipes</a>
+      <ng-container *ngIf="(isAuthenticated$ | async) === false">
+        <a routerLink="/signup" mat-menu-item>Sign up</a>
+        <a routerLink="/login" mat-menu-item>Login</a>
+      </ng-container>
+      <a *ngIf="isAuthenticated$ | async" routerLink="/logout" mat-menu-item
+        >Logout</a
+      >
+    </mat-menu>
+  </nav>
+
+  <!-- Desktop navigation -->
+  <nav fxHide.lt-sm="true">
     <a routerLink="/recipes" mat-flat-button color="primary" sfrRoundedButton>
       Recipes
     </a>
     <ng-container *ngIf="(isAuthenticated$ | async) === false">
-      <a routerLink="/signup" mat-flat-button color="primary" sfrRoundedButton>
+      <a
+        class="ml-1"
+        routerLink="/signup"
+        mat-flat-button
+        color="primary"
+        sfrRoundedButton
+      >
         Sign up
       </a>
-      <a routerLink="/login" mat-flat-button color="primary" sfrRoundedButton>
+      <a
+        class="ml-1"
+        routerLink="/login"
+        mat-flat-button
+        color="primary"
+        sfrRoundedButton
+      >
         Login
       </a>
     </ng-container>
@@ -20,6 +57,7 @@
       sfrRoundedButton
       *ngIf="isAuthenticated$ | async"
       (click)="logout()"
+      class="ml-1"
     >
       Logout
     </button>

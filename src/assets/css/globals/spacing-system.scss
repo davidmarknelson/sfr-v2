@@ -1,0 +1,50 @@
+$sizes: 0 1 2 3 4;
+
+@each $size in $sizes {
+  .p-#{$size} {
+    padding: #{$size}rem !important;
+  }
+  .py-#{$size} {
+    padding-top: #{$size}rem !important;
+    padding-bottom: #{$size}rem !important;
+  }
+  .px-#{$size} {
+    padding-left: #{$size}rem !important;
+    padding-right: #{$size}rem !important;
+  }
+  .pt-#{$size} {
+    padding-top: #{$size}rem !important;
+  }
+  .pr-#{$size} {
+    padding-right: #{$size}rem !important;
+  }
+  .pb-#{$size} {
+    padding-bottom: #{$size}rem !important;
+  }
+  .pl-#{$size} {
+    padding-left: #{$size}rem !important;
+  }
+  .m-#{$size} {
+    margin: #{$size}rem !important;
+  }
+  .my-#{$size} {
+    margin-top: #{$size}rem !important;
+    margin-bottom: #{$size}rem !important;
+  }
+  .mx-#{$size} {
+    margin-left: #{$size}rem !important;
+    margin-right: #{$size}rem !important;
+  }
+  .mt-#{$size} {
+    margin-top: #{$size}rem !important;
+  }
+  .mr-#{$size} {
+    margin-right: #{$size}rem !important;
+  }
+  .mb-#{$size} {
+    margin-bottom: #{$size}rem !important;
+  }
+  .ml-#{$size} {
+    margin-left: #{$size}rem !important;
+  }
+}

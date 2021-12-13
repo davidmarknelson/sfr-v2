@@ -2,6 +2,7 @@
 @import "/src/assets/themes";
 
 @include mat.button-color($sfr-darker-theme);
+@include mat.menu-color($sfr-darker-theme);
 
 img {
   width: 112px;
