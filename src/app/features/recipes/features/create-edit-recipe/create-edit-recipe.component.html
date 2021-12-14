@@ -1,1 +1,24 @@
-<p>create-edit-recipe works!</p>
+<sfr-container>
+  <sfr-page-title> Create Recipe </sfr-page-title>
+  <form [formGroup]="form" fxLayout="column wrap" (submit)="submit()">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="Name"
+        formControlName="name"
+        required
+        fxFlex="1 1 auto"
+      />
+      <mat-hint>Must not be longer than 256 characters</mat-hint>
+      <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
+        <p *ngIf="name.errors?.required">
+          This field is required<span class="cdk-visually-hidden">Name</span>
+        </p>
+        <p *ngIf="name.errors?.maxlength">
+          Name must not be longer than 256 characters
+        </p>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</sfr-container>

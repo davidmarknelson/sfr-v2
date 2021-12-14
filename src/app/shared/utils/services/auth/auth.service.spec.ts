@@ -43,7 +43,7 @@ describe('AuthService', () => {
   });
 
   describe('refreshOrClearToken$', () => {
-    it('should refresh the oken and login the user', (done) => {
+    it('should refresh the token and login the user', (done) => {
       const isTokenExpiredSpy = jest
         .spyOn(authService, 'isTokenExpired')
         .mockReturnValue(false);
@@ -95,21 +95,21 @@ describe('AuthService', () => {
   });
 
   describe('isTokenExpired', () => {
-    it('should return true with a token that is not expired', () => {
+    it('should return false with a token that is not expired', () => {
       const localStorageSpy = jest
         .spyOn(window.localStorage.__proto__, 'getItem')
         .mockReturnValue(authTestingHelpers.validJwt);
       const validToken = authService.isTokenExpired();
-      expect(validToken).toEqual(true);
+      expect(validToken).toEqual(false);
       expect(localStorageSpy).toHaveBeenCalledWith(authConstants.authTokenName);
     });
 
-    it('should return false with an expired token', () => {
+    it('should return true with an expired token', () => {
       const localStorageSpy = jest
         .spyOn(window.localStorage.__proto__, 'getItem')
         .mockReturnValue(authTestingHelpers.expiredJwt);
       const validToken = authService.isTokenExpired();
-      expect(validToken).toEqual(false);
+      expect(validToken).toEqual(true);
       expect(localStorageSpy).toHaveBeenCalledWith(authConstants.authTokenName);
     });
   });

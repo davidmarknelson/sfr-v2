@@ -11,6 +11,10 @@
         required
         fxFlex="1 1 auto"
       />
+      <mat-hint
+        >Must be between 5 and 25 characters and must not contain a
+        space</mat-hint
+      >
       <mat-error
         *ngIf="username.invalid && (username.dirty || username.touched)"
       >
@@ -59,6 +63,10 @@
         required
         fxFlex="1 1 auto"
       />
+      <mat-hint>
+        Must contain a letter, a number, a special character, and be at least 12
+        characters long
+      </mat-hint>
       <button
         mat-icon-button
         matSuffix

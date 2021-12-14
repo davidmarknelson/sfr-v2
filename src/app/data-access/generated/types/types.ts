@@ -20,6 +20,12 @@ export type AccessTokenType = {
   accessToken: Scalars['String'];
 };
 
+export type ConstantsType = {
+  __typename?: 'ConstantsType';
+  recipeConstants: RecipeConstants;
+  userConstants: UserConstants;
+};
+
 /** Levels of difficulty for a recipe */
 export enum Difficulty {
   /** Highest difficulty */
@@ -63,6 +69,8 @@ export type MutationSignupArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  /** This will always return null. This endpoint was added to make the enum constants available to the front end code generator. */
+  constants: ConstantsType;
   login: AccessTokenType;
   recipe: RecipeType;
   recipesAndCount: RecipesAndCountType;
@@ -85,6 +93,13 @@ export type QueryRecipesAndCountArgs = {
   skip: Scalars['Float'];
   take: Scalars['Float'];
 };
+
+/** Constants for the recipe rules. */
+export enum RecipeConstants {
+  DescriptionMaxLength = 'DescriptionMaxLength',
+  /** Max length of the name property */
+  NameMaxLength = 'NameMaxLength'
+}
 
 export type RecipeInput = {
   /** Number of minutes it takes to cook the meal */
@@ -135,6 +150,16 @@ export type RecipesAndCountType = {
   totalCount: Scalars['Int'];
 };
 
+/** Constants for the user rules. */
+export enum UserConstants {
+  /** Regex for the password property */
+  PasswordRegex = 'PasswordRegex',
+  /** Max length of the username property */
+  UsernameMaxLength = 'UsernameMaxLength',
+  /** Min length of the username property */
+  UsernameMinLength = 'UsernameMinLength'
+}
+
 export type UserInput = {
   email: Scalars['String'];
   /** Must contain a letter, a number, a special character, and be at least 12 characters long */
@@ -163,13 +188,6 @@ export type RefreshTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type RefreshTokenQuery = { __typename?: 'Query', refreshToken: { __typename?: 'AccessTokenType', accessToken: string } };
 
-export type SignupMutationVariables = Exact<{
-  user: UserInput;
-}>;
-
-
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AccessTokenType', accessToken: string } };
-
 export type LoginQueryVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -177,6 +195,20 @@ export type LoginQueryVariables = Exact<{
 
 
 export type LoginQuery = { __typename?: 'Query', login: { __typename?: 'AccessTokenType', accessToken: string } };
+
+export type SignupMutationVariables = Exact<{
+  user: UserInput;
+}>;
+
+
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AccessTokenType', accessToken: string } };
+
+export type CreateRecipeMutationVariables = Exact<{
+  recipe: RecipeInput;
+}>;
+
+
+export type CreateRecipeMutation = { __typename?: 'Mutation', createRecipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: Difficulty, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
 
 export const RecipesAndCountDocument = gql`
     query recipesAndCount($skip: Float!, $take: Float!) {
@@ -254,6 +286,24 @@ export const RefreshTokenDocument = gql`
       super(apollo);
     }
   }
+export const LoginDocument = gql`
+    query login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    accessToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
+    document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const SignupDocument = gql`
     mutation signup($user: UserInput!) {
   signup(user: $user) {
@@ -272,10 +322,21 @@ export const SignupDocument = gql`
       super(apollo);
     }
   }
-export const LoginDocument = gql`
-    query login($email: String!, $password: String!) {
-  login(email: $email, password: $password) {
-    accessToken
+export const CreateRecipeDocument = gql`
+    mutation createRecipe($recipe: RecipeInput!) {
+  createRecipe(recipe: $recipe) {
+    cookTime
+    description
+    difficulty
+    id
+    ingredients
+    instructions
+    name
+    photos {
+      id
+      path
+      cloudinaryPublicId
+    }
   }
 }
     `;
@@ -283,8 +344,8 @@ export const LoginDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
-    document = LoginDocument;
+  export class CreateRecipeGQL extends Apollo.Mutation<CreateRecipeMutation, CreateRecipeMutationVariables> {
+    document = CreateRecipeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -12,6 +12,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { apiUserConstants } from '@sfr/data-access/constants';
 import { SignupGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
@@ -114,17 +115,17 @@ describe('SignupComponent', () => {
       );
     });
 
-    it('should show an error if the username is shorter than 5 characters', async () => {
+    it(`should show an error if the username is shorter than ${apiUserConstants.usernameMinLength} characters`, async () => {
       component.username.setValue('1234');
       component.username.markAsTouched();
       fixture.detectChanges();
       expect((component.username.errors || {})['minlength']).toBeTruthy();
       expect(await formFieldHarness.getTextErrors()).toEqual([
-        'Username must be at least 5 characters',
+        `Username must be at least ${apiUserConstants.usernameMinLength} characters`,
       ]);
     });
 
-    it('should show an error if the username is longer than 25 characters', async () => {
+    it(`should show an error if the username is longer than ${apiUserConstants.usernameMaxLength} characters`, async () => {
       let longText = 'a'.padEnd(26, 'a');
       component.username.setValue(longText);
       component.username.markAsTouched();
@@ -137,7 +138,7 @@ describe('SignupComponent', () => {
       fixture.detectChanges();
       expect((component.username.errors || {})['maxlength']).toBeTruthy();
       expect(await formFieldHarness.getTextErrors()).toEqual([
-        'Username must not be longer than 25 characters',
+        `Username must not be longer than ${apiUserConstants.usernameMaxLength} characters`,
       ]);
     });
 

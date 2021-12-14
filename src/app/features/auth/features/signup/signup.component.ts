@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { apiUserConstants } from '@sfr/data-access/constants';
 import { SignupGQL } from '@sfr/data-access/generated';
 import { regexConstants } from '@sfr/shared/utils/constants';
 import { SfrErrorStateMatcher } from '@sfr/shared/utils/error-state-matchers';
@@ -92,8 +93,8 @@ export class SfrSignupComponent {
           '',
           [
             Validators.required,
-            Validators.maxLength(25),
-            Validators.minLength(5),
+            Validators.maxLength(apiUserConstants.usernameMaxLength),
+            Validators.minLength(apiUserConstants.usernameMinLength),
             Validators.pattern(regexConstants.notContainSpace),
           ],
         ],
@@ -102,9 +103,7 @@ export class SfrSignupComponent {
           '',
           [
             Validators.required,
-            Validators.pattern(
-              /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$+%^&*-]).{12,}$/
-            ),
+            Validators.pattern(new RegExp(apiUserConstants.passwordRegex)),
           ],
         ],
         passwordConfirmation: ['', Validators.required],

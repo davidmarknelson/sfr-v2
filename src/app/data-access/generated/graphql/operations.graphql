@@ -38,14 +38,31 @@ query refreshToken {
   }
 }
 
+query login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    accessToken
+  }
+}
+
 mutation signup($user: UserInput!) {
   signup(user: $user) {
     accessToken
   }
 }
 
-query login($email: String!, $password: String!) {
-  login(email: $email, password: $password) {
-    accessToken
+mutation createRecipe($recipe: RecipeInput!) {
+  createRecipe(recipe: $recipe) {
+    cookTime
+    description
+    difficulty
+    id
+    ingredients
+    instructions
+    name
+    photos {
+      id
+      path
+      cloudinaryPublicId
+    }
   }
 }
