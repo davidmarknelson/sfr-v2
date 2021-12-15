@@ -20,12 +20,6 @@ export type AccessTokenType = {
   accessToken: Scalars['String'];
 };
 
-export type ConstantsType = {
-  __typename?: 'ConstantsType';
-  recipeConstants: RecipeConstants;
-  userConstants: UserConstants;
-};
-
 /** Levels of difficulty for a recipe */
 export enum Difficulty {
   /** Highest difficulty */
@@ -69,8 +63,6 @@ export type MutationSignupArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  /** This will always return null. This endpoint was added to make the enum constants available to the front end code generator. */
-  constants: ConstantsType;
   login: AccessTokenType;
   recipe: RecipeType;
   recipesAndCount: RecipesAndCountType;
@@ -93,13 +85,6 @@ export type QueryRecipesAndCountArgs = {
   skip: Scalars['Float'];
   take: Scalars['Float'];
 };
-
-/** Constants for the recipe rules. */
-export enum RecipeConstants {
-  DescriptionMaxLength = 'DescriptionMaxLength',
-  /** Max length of the name property */
-  NameMaxLength = 'NameMaxLength'
-}
 
 export type RecipeInput = {
   /** Number of minutes it takes to cook the meal */
@@ -149,16 +134,6 @@ export type RecipesAndCountType = {
   recipes: Array<RecipeType>;
   totalCount: Scalars['Int'];
 };
-
-/** Constants for the user rules. */
-export enum UserConstants {
-  /** Regex for the password property */
-  PasswordRegex = 'PasswordRegex',
-  /** Max length of the username property */
-  UsernameMaxLength = 'UsernameMaxLength',
-  /** Min length of the username property */
-  UsernameMinLength = 'UsernameMinLength'
-}
 
 export type UserInput = {
   email: Scalars['String'];

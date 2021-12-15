@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "npx jest",
     "test:e2e": "npx cypress open",
-    "generate": "graphql-codegen",
+    "generate": "graphql-codegen && node copy-api-constants.ts",
     "lint": "ng lint"
   },
   "private": true,
