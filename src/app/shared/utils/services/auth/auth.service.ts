@@ -10,7 +10,6 @@ import { authConstants } from '../../constants';
   providedIn: 'root',
 })
 export class SfrAuthService {
-  private jwtHelper = new JwtHelperService();
   private isAuthenticatedSubj$: BehaviorSubject<boolean | null> =
     new BehaviorSubject<boolean | null>(null);
   get isAuthenticated$(): Observable<boolean> {
@@ -23,7 +22,8 @@ export class SfrAuthService {
 
   constructor(
     private apollo: Apollo,
-    private refreshTokenGQL: RefreshTokenGQL
+    private refreshTokenGQL: RefreshTokenGQL,
+    private jwtHelper: JwtHelperService
   ) {}
 
   refreshOrClearToken$(): Observable<string | null> {
@@ -51,14 +51,17 @@ export class SfrAuthService {
     }
   }
 
+  getTokenPayload(): {
+    username: string;
+    sub: number;
+    iat: number;
+    exp: number;
+  } | null {
+    return this.jwtHelper.decodeToken(this.jwtHelper.tokenGetter());
+  }
+
   isTokenExpired(): boolean {
-    try {
-      return this.jwtHelper.isTokenExpired(
-        localStorage.getItem(authConstants.authTokenName)!
-      );
-    } catch {
-      return true;
-    }
+    return this.jwtHelper.isTokenExpired(this.jwtHelper.tokenGetter());
   }
 
   authenticate(token: string): void {

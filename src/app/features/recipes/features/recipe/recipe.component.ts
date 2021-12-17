@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeGQL, RecipeQuery } from '@sfr/data-access/generated';
+import { SfrAuthService } from '@sfr/shared/utils/services';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
@@ -15,8 +16,13 @@ export class SfrRecipeComponent {
     this.getRecipeFromRoute$();
   loading = true;
   error = false;
+  decodedToken = this.authService.getTokenPayload();
 
-  constructor(private recipeGQL: RecipeGQL, private route: ActivatedRoute) {}
+  constructor(
+    private recipeGQL: RecipeGQL,
+    private route: ActivatedRoute,
+    private authService: SfrAuthService
+  ) {}
 
   private getRecipeFromRoute$(): Observable<RecipeQuery['recipe'] | null> {
     return this.route.paramMap.pipe(

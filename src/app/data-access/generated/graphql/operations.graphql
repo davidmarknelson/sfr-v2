@@ -24,6 +24,10 @@ query recipe($name: String!) {
     ingredients
     instructions
     name
+    creator {
+      id
+      username
+    }
     photos {
       id
       path

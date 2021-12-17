@@ -19,7 +19,7 @@
         <p>{{ recipe.description }}</p>
 
         <div
-          class="stats-container"
+          class="mt-2 text-center"
           fxLayout="row wrap"
           fxLayoutAlign="space-around"
         >
@@ -36,11 +36,21 @@
             <p>Cook Time: {{ recipe.cookTime }} min.</p>
           </section>
         </div>
+        <section
+          *ngIf="decodedToken?.sub === recipe.creator.id"
+          class="mt-2"
+          fxLayout="row wrap"
+          fxLayoutAlign="space-around"
+        >
+          <a routerLink="edit" mat-flat-button color="primary" sfrRoundedButton
+            >Edit</a
+          >
+        </section>
       </section>
     </div>
 
-    <section class="list">
-      <h2 class="mat-title list--center">Ingredients</h2>
+    <section class="mt-4">
+      <h2 class="mat-title text-center">Ingredients</h2>
 
       <mat-selection-list aria-label="Ingredients">
         <mat-list-option
@@ -53,8 +63,8 @@
       </mat-selection-list>
     </section>
 
-    <section class="list">
-      <h2 class="mat-title list--center">Instructions</h2>
+    <section class="mt-4">
+      <h2 class="mat-title text-center">Instructions</h2>
 
       <mat-selection-list aria-label="Instructions">
         <mat-list-option

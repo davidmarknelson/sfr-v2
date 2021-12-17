@@ -1,4 +1,31 @@
-import { Difficulty, RecipesAndCountQuery } from '@sfr/data-access/generated';
+import { RecipeQuery, RecipesAndCountQuery } from '@sfr/data-access/generated';
+
+export function createMockRecipeFullData(
+  id: number = 1
+): RecipeQuery['recipe'] {
+  return {
+    __typename: 'RecipeType',
+    id: id,
+    name: 'sandwich',
+    description: 'some description',
+    cookTime: 20,
+    difficulty: 1,
+    instructions: ['make sandwich'],
+    ingredients: ['meat and bread'],
+    creator: {
+      id: 1,
+      username: 'some-user',
+    },
+    photos: [
+      {
+        __typename: 'RecipePhotoType',
+        id: id,
+        path: '/recipe-photo/1',
+        cloudinaryPublicId: 'someCloudinaryPublicId',
+      },
+    ],
+  };
+}
 
 export function createMockRecipeData(
   id: number = 1
@@ -9,7 +36,7 @@ export function createMockRecipeData(
     name: 'sandwich',
     description: '',
     cookTime: 20,
-    difficulty: Difficulty.One,
+    difficulty: 1,
     photos: [
       {
         __typename: 'RecipePhotoType',

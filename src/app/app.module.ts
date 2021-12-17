@@ -5,10 +5,11 @@ import { MAT_MENU_DEFAULT_OPTIONS } from '@angular/material/menu';
 import { MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
 import { SfrAppRoutingModule } from './app-routing.module';
 import { SfrAppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
-import { PaginationConstants } from './shared/utils/constants';
+import { authConstants, PaginationConstants } from './shared/utils/constants';
 import { SfrAuthService } from './shared/utils/services';
 import { SfrViewModule } from './view/view.module';
 
@@ -21,6 +22,13 @@ import { SfrViewModule } from './view/view.module';
     HttpClientModule,
     SfrViewModule,
     GraphQLModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem(authConstants.authTokenName);
+        },
+      },
+    }),
   ],
   providers: [
     {
