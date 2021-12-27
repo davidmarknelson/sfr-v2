@@ -14,7 +14,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { createMockRecipeFullData } from '@sfr-testing';
+import { createMockRecipeFullData } from '@sfr-testing/helpers';
 import {
   apiRecipeConstants,
   apiRecipeMessageConstants,

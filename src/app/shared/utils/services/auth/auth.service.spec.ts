@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { authTestingHelpers } from '@sfr-testing';
+import { authTestingHelpers } from '@sfr-testing/helpers';
 import { RefreshTokenGQL } from '@sfr/data-access/generated';
 import { Apollo } from 'apollo-angular';
 import { of, throwError } from 'rxjs';

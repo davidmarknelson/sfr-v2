@@ -6,7 +6,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { createMockRecipeFullData } from '@sfr-testing';
+import { createMockRecipeFullData } from '@sfr-testing/helpers';
 import { RecipeGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
