@@ -13,6 +13,10 @@ describe('Create recipe page', () => {
     cy.addRecipe(recipeNameConstants.morningGloryMuffins);
   });
 
+  beforeEach(() => {
+    cy.loginUser();
+  });
+
   it('should pass an accessibility check', () => {
     cy.injectAxe();
     cy.get('h1');
@@ -22,7 +26,9 @@ describe('Create recipe page', () => {
   describe('Name', () => {
     it('should show an error if the name is empty', () => {
       cy.get('[formcontrolname="name"').clear().blur();
-      cy.get('mat-error').should('contain.text', 'This field is requiredName');
+      getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Name *' }))
+        .getTextErrors()
+        .should('contain', 'This field is requiredName');
     });
 
     it('should show an error if the name is too long', () => {
@@ -30,20 +36,20 @@ describe('Create recipe page', () => {
         .clear()
         .type('a'.padEnd(101, 'a'))
         .blur();
-      cy.get('mat-error').should(
-        'contain.text',
-        'Name must not be longer than 100 characters'
-      );
+      getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Name *' }))
+        .getTextErrors()
+        .should('contain', 'Name must not be longer than 100 characters');
     });
   });
 
   describe('Description', () => {
     it('should show an error if the description is empty', () => {
       cy.get('[formcontrolname="description"').clear().blur();
-      cy.get('mat-error').should(
-        'contain.text',
-        'This field is requiredDescription'
-      );
+      getHarness(
+        MatFormFieldHarness.with({ floatingLabelText: 'Description *' })
+      )
+        .getTextErrors()
+        .should('contain', 'This field is requiredDescription');
     });
 
     it('should show an error if the description is too long', () => {
@@ -51,25 +57,30 @@ describe('Create recipe page', () => {
         .clear()
         .type('a'.padEnd(513, 'a'))
         .blur();
-      cy.get('mat-error').should(
-        'contain.text',
-        'Description must not be longer than 512 characters'
-      );
+      getHarness(
+        MatFormFieldHarness.with({ floatingLabelText: 'Description *' })
+      )
+        .getTextErrors()
+        .should(
+          'contain',
+          'Description must not be longer than 512 characters'
+        );
     });
   });
 
   describe('Cook time', () => {
     it('should show an error if the cookTime is empty', () => {
       cy.get('[formcontrolname="cookTime"').clear().blur();
-      cy.get('mat-error').should(
-        'contain.text',
-        'This field is requiredCook Time'
-      );
+      getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Cook Time *' }))
+        .getTextErrors()
+        .should('contain', 'This field is requiredCook Time');
     });
 
     it('should show an error if the cookTime does not only contain numbers', () => {
       cy.get('[formcontrolname="cookTime"').clear().type('asdf').blur();
-      cy.get('mat-error').should('contain.text', 'Must contain only numbers');
+      getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Cook Time *' }))
+        .getTextErrors()
+        .should('contain', 'Must contain only numbers');
     });
   });
 
@@ -78,20 +89,17 @@ describe('Create recipe page', () => {
       const difficulty = getHarness(MatSelectHarness);
       difficulty.open();
       difficulty.close();
-      cy.get('mat-error').should(
-        'contain.text',
-        'This field is requiredDifficulty'
-      );
+      getHarness(
+        MatFormFieldHarness.with({ floatingLabelText: 'Difficulty *' })
+      )
+        .getTextErrors()
+        .should('contain', 'This field is requiredDifficulty');
     });
   });
 
   describe('Ingredients', () => {
     it('should show an error if the ingredient does not have a value', () => {
-      const ingredient = getHarness(
-        MatInputHarness.with({ placeholder: 'Ingredient' })
-      );
-      ingredient.setValue('');
-      cy.get('[type="submit"]').focus();
+      cy.get('[formarrayname="ingredients"]').find('input').clear().blur();
       const ingredientField = getHarness(
         MatFormFieldHarness.with({ floatingLabelText: 'Ingredient *' })
       );
@@ -115,9 +123,6 @@ describe('Create recipe page', () => {
     });
 
     it('should initialize without an error then show an error if the ingredient does not have a value (new row)', () => {
-      const ingredients = getAllHarnesses(
-        MatInputHarness.with({ placeholder: 'Ingredient' })
-      );
       const ingredientFields = getAllHarnesses(
         MatFormFieldHarness.with({ floatingLabelText: 'Ingredient *' })
       );
@@ -126,10 +131,11 @@ describe('Create recipe page', () => {
           await $ingredientFields[$ingredientFields.length - 1].getTextErrors()
         ).to.not.contain('This field is requiredIngredient 2');
       });
-      ingredients.then(($ingredients) => {
-        $ingredients[$ingredients.length - 1].setValue('');
-      });
-      cy.get('[type="submit"]').focus();
+      cy.get('[formarrayname="ingredients"]')
+        .find('input')
+        .last()
+        .clear()
+        .blur();
       ingredientFields.then(async ($ingredientFields) => {
         expect(
           await $ingredientFields[$ingredientFields.length - 1].getTextErrors()
@@ -147,11 +153,7 @@ describe('Create recipe page', () => {
 
   describe('Instructions', () => {
     it('should show an error if the instruction does not have a value', () => {
-      const instruction = getHarness(
-        MatInputHarness.with({ placeholder: 'Instruction' })
-      );
-      instruction.setValue('');
-      cy.get('[type="submit"]').focus();
+      cy.get('[formarrayname="instructions"]').find('input').clear().blur();
       const instructionField = getHarness(
         MatFormFieldHarness.with({ floatingLabelText: 'Instruction *' })
       );
@@ -175,9 +177,6 @@ describe('Create recipe page', () => {
     });
 
     it('should initialize without an error then show an error if the instruction does not have a value (new row)', () => {
-      const instructions = getAllHarnesses(
-        MatInputHarness.with({ placeholder: 'Instruction' })
-      );
       const instructionsFields = getAllHarnesses(
         MatFormFieldHarness.with({ floatingLabelText: 'Instruction *' })
       );
@@ -188,10 +187,11 @@ describe('Create recipe page', () => {
           ].getTextErrors()
         ).to.not.contain('This field is requiredInstruction 2');
       });
-      instructions.then(($instructions) => {
-        $instructions[$instructions.length - 1].setValue('');
-      });
-      cy.get('[type="submit"]').focus();
+      cy.get('[formarrayname="instructions"]')
+        .find('input')
+        .last()
+        .clear()
+        .blur();
       instructionsFields.then(async ($instructionsFields) => {
         expect(
           await $instructionsFields[
