@@ -7,6 +7,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipeFullData } from '@sfr-testing/helpers';
+import { MockAuthService } from '@sfr-testing/mocks';
 import { RecipeGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
@@ -60,9 +61,7 @@ describe('SfrRecipeComponent', () => {
         },
         {
           provide: SfrAuthService,
-          useValue: {
-            getTokenPayload: jest.fn().mockReturnValue({ sub: 1 }),
-          },
+          useClass: MockAuthService,
         },
       ],
     }).compileComponents();

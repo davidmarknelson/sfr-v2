@@ -1,14 +1,8 @@
 import { TestBed } from '@angular/core/testing';
+import { MockAuthService } from '@sfr-testing/mocks';
 import { of } from 'rxjs';
 import { SfrAuthService } from '../../services';
 import { SfrUnauthenticatedGuard } from './unauthenticated.guard';
-
-let authState: boolean = true;
-class MockAuthService {
-  get isAuthenticated$() {
-    return of(authState);
-  }
-}
 
 describe('SfrUnauthenticatedGuard', () => {
   let guard: SfrUnauthenticatedGuard;
@@ -37,8 +31,9 @@ describe('SfrUnauthenticatedGuard', () => {
   });
 
   it('should return true if the user is unauthenticated', (done) => {
-    authState = false;
-    const spy = jest.spyOn(service, 'isAuthenticated$', 'get');
+    const spy = jest
+      .spyOn(service, 'isAuthenticated$', 'get')
+      .mockReturnValue(of(false));
     guard.canActivate().subscribe((result) => {
       expect(result).toEqual(true);
       expect(spy).toHaveBeenCalled();

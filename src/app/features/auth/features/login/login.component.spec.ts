@@ -12,6 +12,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockAuthService } from '@sfr-testing/mocks';
 import { LoginGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
@@ -63,11 +64,7 @@ describe('SfrLoginComponent', () => {
         },
         {
           provide: SfrAuthService,
-          useValue: {
-            authenticate: jest.fn(() => {
-              return;
-            }),
-          },
+          useClass: MockAuthService,
         },
         {
           provide: Router,

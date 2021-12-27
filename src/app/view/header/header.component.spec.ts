@@ -5,8 +5,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockAuthService } from '@sfr-testing/mocks';
 import { SfrAuthService } from '@sfr/shared/utils/services';
-import { of } from 'rxjs';
 import { SfrHeaderComponent } from './header.component';
 
 describe('SfrHeaderComponent', () => {
@@ -33,12 +33,7 @@ describe('SfrHeaderComponent', () => {
         { provide: MATERIAL_SANITY_CHECKS, useValue: false },
         {
           provide: SfrAuthService,
-          useValue: {
-            logout: jest.fn(() => {
-              return;
-            }),
-            isAuthenticated$: of(true),
-          },
+          useValue: MockAuthService,
         },
       ],
     }).compileComponents();
