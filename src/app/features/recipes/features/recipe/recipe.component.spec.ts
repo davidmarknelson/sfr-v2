@@ -4,9 +4,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
-import { createMockRecipeData } from '@sfr-testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { createMockRecipeFullData } from '@sfr-testing';
 import { RecipeGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
@@ -15,17 +15,18 @@ import {
   SfrUiPageTitleModule,
 } from '@sfr/shared/ui';
 import { SfrRecipePhotoPipeModule } from '@sfr/shared/utils/pipes';
+import { SfrAuthService } from '@sfr/shared/utils/services';
 import { of } from 'rxjs';
-import { RecipeRoutingModule } from './recipe-routing.module';
 import { SfrRecipeComponent } from './recipe.component';
 
 class MockActivateRoute {
   get paramMap() {
     return of({ get: () => 'Egg muffin' });
   }
+  snapshot = {};
 }
 
-describe.skip('SfrRecipeComponent', () => {
+describe('SfrRecipeComponent', () => {
   let fixture: ComponentFixture<SfrRecipeComponent>;
   let recipeData: any = null;
 
@@ -33,7 +34,7 @@ describe.skip('SfrRecipeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SfrRecipeComponent],
       imports: [
-        RecipeRoutingModule,
+        RouterTestingModule,
         SfrUiContainerModule,
         SfrUiPageTitleModule,
         SfrUiLoaderModule,
@@ -42,7 +43,6 @@ describe.skip('SfrRecipeComponent', () => {
         MatListModule,
         MatIconModule,
         MatTooltipModule,
-        BrowserAnimationsModule,
       ],
       providers: [
         { provide: MATERIAL_SANITY_CHECKS, useValue: false },
@@ -57,6 +57,12 @@ describe.skip('SfrRecipeComponent', () => {
         {
           provide: ActivatedRoute,
           useClass: MockActivateRoute,
+        },
+        {
+          provide: SfrAuthService,
+          useValue: {
+            getTokenPayload: jest.fn().mockReturnValue({ sub: 1 }),
+          },
         },
       ],
     }).compileComponents();
@@ -94,7 +100,7 @@ describe.skip('SfrRecipeComponent', () => {
     it('should show a recipe', () => {
       recipeData = {
         data: {
-          recipe: createMockRecipeData(),
+          recipe: createMockRecipeFullData(),
         },
       };
       fixture.detectChanges();

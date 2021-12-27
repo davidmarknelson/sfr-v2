@@ -1,12 +1,15 @@
 import { Location } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SfrAuthService } from '@sfr/shared/utils/services';
+import { of } from 'rxjs';
 import { SfrHeaderComponent } from './header.component';
 
-describe.skip('SfrHeaderComponent', () => {
+describe('SfrHeaderComponent', () => {
   let component: SfrHeaderComponent;
   let fixture: ComponentFixture<SfrHeaderComponent>;
 
@@ -15,6 +18,7 @@ describe.skip('SfrHeaderComponent', () => {
       declarations: [SfrHeaderComponent],
       imports: [
         MatToolbarModule,
+        MatMenuModule,
         RouterTestingModule.withRoutes([
           {
             path: 'welcome',
@@ -25,7 +29,18 @@ describe.skip('SfrHeaderComponent', () => {
           },
         ]),
       ],
-      providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
+      providers: [
+        { provide: MATERIAL_SANITY_CHECKS, useValue: false },
+        {
+          provide: SfrAuthService,
+          useValue: {
+            logout: jest.fn(() => {
+              return;
+            }),
+            isAuthenticated$: of(true),
+          },
+        },
+      ],
     }).compileComponents();
   });
 
