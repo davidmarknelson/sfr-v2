@@ -26,7 +26,14 @@ describe('SfrPaginationService', () => {
 
   describe('getPageFromRoute$', () => {
     it('should return 2 when the query param page value is 2', (done) => {
-      const spy = jest.spyOn(activatedRoute, 'queryParamMap', 'get');
+      const spy = jest
+        .spyOn(activatedRoute, 'queryParamMap', 'get')
+        .mockReturnValue(
+          of({
+            ...paramMapDefault,
+            get: () => '2',
+          })
+        );
       service.getPageFromRoute$.subscribe((page) => {
         expect(page).toEqual(2);
         expect(spy).toHaveBeenCalled();
@@ -35,14 +42,7 @@ describe('SfrPaginationService', () => {
     });
 
     it('should return 1 when there are no query params', (done) => {
-      const spy = jest
-        .spyOn(activatedRoute, 'queryParamMap', 'get')
-        .mockReturnValue(
-          of({
-            ...paramMapDefault,
-            get: () => null,
-          })
-        );
+      const spy = jest.spyOn(activatedRoute, 'queryParamMap', 'get');
       service.getPageFromRoute$.subscribe((page) => {
         expect(page).toEqual(1);
         expect(spy).toHaveBeenCalled();

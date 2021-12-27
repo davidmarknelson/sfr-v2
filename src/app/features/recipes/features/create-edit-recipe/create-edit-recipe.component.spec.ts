@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipeFullData } from '@sfr-testing/helpers';
+import { paramMapDefault } from '@sfr-testing/mock-helpers';
+import { MockActivateRoute } from '@sfr-testing/mocks';
 import {
   apiRecipeConstants,
   apiRecipeMessageConstants,
@@ -31,20 +33,6 @@ import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
 import { of } from 'rxjs';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 
-let pageTitle: string = 'Create Recipe';
-let paramMapName: string | null = 'Egg-muffin';
-class MockActivateRoute {
-  get data() {
-    return of({
-      title: pageTitle,
-    });
-  }
-  get paramMap() {
-    return of({
-      get: () => paramMapName,
-    });
-  }
-}
 describe('SfrCreateEditRecipeComponent', () => {
   let component: SfrCreateEditRecipeComponent;
   let fixture: ComponentFixture<SfrCreateEditRecipeComponent>;
@@ -105,24 +93,30 @@ describe('SfrCreateEditRecipeComponent', () => {
     fixture = TestBed.createComponent(SfrCreateEditRecipeComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
+    jest
+      .spyOn(activatedRoute, 'data', 'get')
+      .mockReturnValue(of({ title: 'Create Recipe' }));
   });
 
   describe('Initialization', () => {
-    let titleSpy: any;
-    let paramSpy: any;
-
-    beforeEach(() => {
-      titleSpy = jest.spyOn(activatedRoute, 'data', 'get');
-      paramSpy = jest.spyOn(activatedRoute, 'paramMap', 'get');
-    });
-
     it('should get the title of the page', () => {
+      let titleSpy = jest
+        .spyOn(activatedRoute, 'data', 'get')
+        .mockReturnValue(of({ title: 'Create Recipe' }));
       fixture.detectChanges();
       expect(titleSpy).toHaveBeenCalled();
       expect(component.title).toEqual('Create Recipe');
     });
 
     it('should get the name of the recipe and load the recipe data in the form', () => {
+      let paramSpy = jest
+        .spyOn(activatedRoute, 'paramMap', 'get')
+        .mockReturnValue(
+          of({
+            ...paramMapDefault,
+            get: () => 'sandwich',
+          })
+        );
       fixture.detectChanges();
       expect(paramSpy).toHaveBeenCalled();
       expect(component.loading).toEqual(false);
@@ -130,7 +124,7 @@ describe('SfrCreateEditRecipeComponent', () => {
     });
 
     it('should get create the form without loading data', () => {
-      paramMapName = null;
+      let paramSpy = jest.spyOn(activatedRoute, 'paramMap', 'get');
       fixture.detectChanges();
       expect(paramSpy).toHaveBeenCalled();
       expect(component.loading).toEqual(false);
@@ -296,7 +290,6 @@ describe('SfrCreateEditRecipeComponent', () => {
 
   describe('submit', () => {
     it('should create a recipe and route to the newly created recipe', () => {
-      paramMapName = '';
       fixture.detectChanges();
       const routerSpy = jest.spyOn(router, 'navigate');
       component.name.setValue('sandwich');

@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipeFullData } from '@sfr-testing/helpers';
-import { MockAuthService } from '@sfr-testing/mocks';
+import { MockActivateRoute, MockAuthService } from '@sfr-testing/mocks';
 import { RecipeGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
@@ -19,13 +19,6 @@ import { SfrRecipePhotoPipeModule } from '@sfr/shared/utils/pipes';
 import { SfrAuthService } from '@sfr/shared/utils/services';
 import { of } from 'rxjs';
 import { SfrRecipeComponent } from './recipe.component';
-
-class MockActivateRoute {
-  get paramMap() {
-    return of({ get: () => 'Egg muffin' });
-  }
-  snapshot = {};
-}
 
 describe('SfrRecipeComponent', () => {
   let fixture: ComponentFixture<SfrRecipeComponent>;
