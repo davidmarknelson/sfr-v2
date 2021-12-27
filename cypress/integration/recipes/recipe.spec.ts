@@ -19,6 +19,8 @@ describe('Recipe page', () => {
 
   describe('recipes', () => {
     before(() => {
+      cy.createUser();
+      cy.loginUser();
       cy.addRecipe();
       cy.visit('http://localhost:4200/recipes/Egg-muffin');
     });

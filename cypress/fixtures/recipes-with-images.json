@@ -21,7 +21,12 @@
     ],
     "cookTime": 20,
     "difficulty": 1,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1579036167/sfr_unsigned/dxn8zrmi9wymwfrvdx4m.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/dxn8zrmi9wymwfrvdx4m"
+      }
+    ]
   },
   {
     "name": "Hummus without tahini",
@@ -43,7 +48,12 @@
     ],
     "cookTime": 5,
     "difficulty": 1,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1579456786/sfr_unsigned/nl37stgppixvpf1xtomh.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/nl37stgppixvpf1xtomh"
+      }
+    ]
   },
   {
     "name": "Morning Glory Muffins",
@@ -73,7 +83,12 @@
     ],
     "cookTime": 20,
     "difficulty": 1,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1583115420/sfr_unsigned/mssdp7oiouqjbrf3ddqp.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/mssdp7oiouqjbrf3ddqp"
+      }
+    ]
   },
   {
     "name": "Apple Sausage Butternut Squash",
@@ -102,7 +117,12 @@
     ],
     "cookTime": 40,
     "difficulty": 2,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1583356307/sfr_unsigned/vz5h3r5wfoabi9wbcvxp.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/vz5h3r5wfoabi9wbcvxp"
+      }
+    ]
   },
   {
     "name": "Zucchini Bread",
@@ -133,7 +153,12 @@
     ],
     "cookTime": 50,
     "difficulty": 1,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1583356804/sfr_unsigned/xjfbt5qxwabk9zxchhf0.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/xjfbt5qxwabk9zxchhf0"
+      }
+    ]
   },
   {
     "name": "Coconut Chicken Curry",
@@ -164,7 +189,12 @@
     ],
     "cookTime": 15,
     "difficulty": 1,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1583357372/sfr_unsigned/gkvtbtt2ml5irsbklc1r.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/gkvtbtt2ml5irsbklc1r"
+      }
+    ]
   },
   {
     "name": "Cauliflower Fried Rice",
@@ -191,7 +221,12 @@
     ],
     "cookTime": 20,
     "difficulty": 1,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1584890900/sfr_unsigned/f0fcjgchwwx52sovknec.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/f0fcjgchwwx52sovknec"
+      }
+    ]
   },
   {
     "name": "Healthy Turkey and Egg Casserole",
@@ -223,6 +258,11 @@
     ],
     "cookTime": 45,
     "difficulty": 1,
-    "photos": []
+    "photos": [
+      {
+        "path": "https://res.cloudinary.com/dcwjkxleo/image/upload/v1584917884/sfr_unsigned/zfuh0kjvlx7curstb0le.jpg",
+        "cloudinaryPublicId": "sfr_unsigned/zfuh0kjvlx7curstb0le"
+      }
+    ]
   }
 ]

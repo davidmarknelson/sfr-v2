@@ -29,7 +29,7 @@ describe('Signup page', () => {
       );
     });
 
-    it('should show an error if the username is too short', () => {
+    it('should show an error if the username is too long', () => {
       cy.get('[formcontrolname="username"')
         .clear()
         .type('a'.padEnd(26, 'a'))

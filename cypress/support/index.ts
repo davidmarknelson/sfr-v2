@@ -8,6 +8,7 @@ declare global {
       addRecipes(multipliedBy?: number): Chainable<any>;
       addRecipe(recipeName?: string): Chainable<any>;
       createUser(): Chainable<any>;
+      loginUser(): Chainable<any>;
       resetDatabase(): Chainable<any>;
     }
   }

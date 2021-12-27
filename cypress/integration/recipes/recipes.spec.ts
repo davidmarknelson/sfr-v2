@@ -30,6 +30,8 @@ describe('Recipes page', () => {
 
   describe('recipes', () => {
     beforeEach(() => {
+      cy.createUser();
+      cy.loginUser();
       cy.addRecipes(2);
     });
 
