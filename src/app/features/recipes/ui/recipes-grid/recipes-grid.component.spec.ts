@@ -11,13 +11,13 @@ import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { createMockRecipesAndCountData } from '@sfr-testing';
 import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/ui-announcement.module';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import {
   SfrRecipePhotoPipeModule,
   SfrUrlReplaceSpaceModule,
 } from '@sfr/shared/utils/pipes';
-import { createMockRecipesAndCountData } from '@testing';
 import { SfrRecipeCardComponent } from './recipe-card/recipe-card.component';
 import { SfrRecipesGridComponent } from './recipes-grid.component';
 

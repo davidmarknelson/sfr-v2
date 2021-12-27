@@ -14,6 +14,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { createMockRecipeFullData } from '@sfr-testing';
 import {
   apiRecipeConstants,
   apiRecipeMessageConstants,
@@ -27,7 +28,6 @@ import {
 } from '@sfr/shared/ui';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
-import { createMockRecipeFullData } from '@testing';
 import { of } from 'rxjs';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 
