@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot } from '@angular/router';
+import { JwtDefault } from '@sfr-testing/mock-helpers';
 import { MockAuthService } from '@sfr-testing/mocks';
 import { RecipeGQL } from '@sfr/data-access/generated';
 import { of } from 'rxjs';
@@ -41,7 +42,9 @@ describe('SfrCreatorGuard', () => {
   });
 
   it('should return true if the user is the creator', (done) => {
-    const spy = jest.spyOn(service, 'getTokenPayload');
+    const spy = jest
+      .spyOn(service, 'getTokenPayload')
+      .mockReturnValue(JwtDefault.decodedJwt);
     guard.canActivate(routeParam).subscribe((result) => {
       expect(result).toEqual(true);
       expect(spy).toHaveBeenCalled();
@@ -50,14 +53,10 @@ describe('SfrCreatorGuard', () => {
   });
 
   it('should return false if the user is not the creator', (done) => {
-    const spy = jest
-      .spyOn(service, 'getTokenPayload')
-      .mockReturnValue({
-        username: 'some-user',
-        sub: 2,
-        iat: 12345,
-        exp: 12345,
-      });
+    const spy = jest.spyOn(service, 'getTokenPayload').mockReturnValue({
+      ...JwtDefault.decodedJwt,
+      sub: 2,
+    });
     guard.canActivate(routeParam).subscribe((result) => {
       expect(result).toEqual(false);
       expect(spy).toHaveBeenCalled();

@@ -22,7 +22,9 @@ describe('SfrUnauthenticatedGuard', () => {
   });
 
   it('should return false if the user is authenticated', (done) => {
-    const spy = jest.spyOn(service, 'isAuthenticated$', 'get');
+    const spy = jest
+      .spyOn(service, 'isAuthenticated$', 'get')
+      .mockReturnValue(of(true));
     guard.canActivate().subscribe((result) => {
       expect(result).toEqual(false);
       expect(spy).toHaveBeenCalled();
@@ -31,9 +33,8 @@ describe('SfrUnauthenticatedGuard', () => {
   });
 
   it('should return true if the user is unauthenticated', (done) => {
-    const spy = jest
-      .spyOn(service, 'isAuthenticated$', 'get')
-      .mockReturnValue(of(false));
+    const spy = jest.spyOn(service, 'isAuthenticated$', 'get');
+
     guard.canActivate().subscribe((result) => {
       expect(result).toEqual(true);
       expect(spy).toHaveBeenCalled();
