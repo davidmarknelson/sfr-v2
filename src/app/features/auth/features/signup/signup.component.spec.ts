@@ -12,7 +12,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockAuthService } from '@sfr-testing/mocks';
+import { MockAuthService, MockRouter } from '@sfr-testing/mocks';
 import { apiUserConstants } from '@sfr/data-access/constants';
 import { SignupGQL } from '@sfr/data-access/generated';
 import {
@@ -69,9 +69,7 @@ describe('SignupComponent', () => {
         },
         {
           provide: Router,
-          useValue: {
-            navigate: jest.fn().mockResolvedValue(true),
-          },
+          useClass: MockRouter,
         },
       ],
     }).compileComponents();
