@@ -1,0 +1,188 @@
+<form
+  *ngIf="form"
+  [formGroup]="form"
+  fxLayout="column wrap"
+  (submit)="submit()"
+>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" formControlName="name" required />
+    <mat-hint>{{ recipeMessageConstants.nameMaxLength }}</mat-hint>
+    <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
+      <p *ngIf="name.errors?.required">
+        This field is required<span class="cdk-visually-hidden">Name</span>
+      </p>
+      <p *ngIf="name.errors?.maxlength">
+        {{ recipeMessageConstants.nameMaxLengthError }}
+      </p>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="Description"
+      formControlName="description"
+      required
+    ></textarea>
+    <mat-hint>{{ recipeMessageConstants.descriptionMaxLength }}</mat-hint>
+    <mat-error
+      *ngIf="description.invalid && (description.dirty || description.touched)"
+    >
+      <p *ngIf="description.errors?.required">
+        This field is required<span class="cdk-visually-hidden"
+          >Description</span
+        >
+      </p>
+      <p *ngIf="description.errors?.maxlength">
+        {{ recipeMessageConstants.descriptionMaxLengthError }}
+      </p>
+    </mat-error>
+  </mat-form-field>
+
+  <div
+    gdColumns="repeat(2, 1fr)"
+    gdColumns.lt-sm="repeat(1, 1fr)"
+    gdGap="2rem"
+    gdGap.lt-sm="0rem"
+  >
+    <mat-form-field>
+      <mat-label>Cook Time</mat-label>
+      <input matInput placeholder="20" formControlName="cookTime" required />
+      <mat-hint>Number of minutes</mat-hint>
+      <mat-error
+        *ngIf="cookTime.invalid && (cookTime.dirty || cookTime.touched)"
+      >
+        <p *ngIf="cookTime.errors?.required">
+          This field is required<span class="cdk-visually-hidden"
+            >Cook Time</span
+          >
+        </p>
+        <p *ngIf="cookTime.errors?.pattern">Must contain only numbers</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Difficulty</mat-label>
+      <mat-select formControlName="difficulty" required>
+        <mat-option [value]="1">1 (easy)</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
+        <mat-option [value]="4">4</mat-option>
+        <mat-option [value]="5">5 (difficult)</mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="difficulty.invalid && (difficulty.dirty || difficulty.touched)"
+      >
+        <p *ngIf="difficulty.errors?.required">
+          This field is required
+          <span class="cdk-visually-hidden"> Difficulty </span>
+        </p>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <p class="section-title">Ingredients</p>
+  <ul formArrayName="ingredients">
+    <li *ngFor="let _ of ingredients.controls; let i = index" fxLayout="row">
+      <mat-form-field fxFlex="1 1 auto">
+        <mat-label>Ingredient</mat-label>
+        <input
+          matInput
+          [formControlName]="i"
+          placeholder="Ingredient"
+          required
+        />
+        <button
+          matSuffix
+          mat-icon-button
+          aria-label="Add ingredient"
+          type="button"
+          (click)="addIngredient(i)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          matSuffix
+          mat-icon-button
+          aria-label="Remove ingredient"
+          type="button"
+          (click)="removeIngredient(i)"
+          [disabled]="ingredients.length === 1"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            ingredients.at(i).invalid &&
+            (ingredients.at(i).dirty || ingredients.at(i).touched)
+          "
+        >
+          <p *ngIf="ingredients.at(i).errors?.required">
+            This field is required<span class="cdk-visually-hidden"
+              >Ingredient {{ i + 1 }}</span
+            >
+          </p>
+        </mat-error>
+      </mat-form-field>
+    </li>
+  </ul>
+
+  <p class="section-title">Instructions</p>
+  <ul formArrayName="instructions">
+    <li *ngFor="let _ of instructions.controls; let i = index" fxLayout="row">
+      <mat-form-field fxFlex="1 1 auto">
+        <mat-label>Instruction</mat-label>
+        <input
+          matInput
+          [formControlName]="i"
+          placeholder="Instruction"
+          required
+        />
+        <button
+          matSuffix
+          mat-icon-button
+          aria-label="Add instruction"
+          type="button"
+          (click)="addInstruction(i)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          matSuffix
+          mat-icon-button
+          aria-label="Remove instruction"
+          type="button"
+          (click)="removeInstruction(i)"
+          [disabled]="instructions.length === 1"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            instructions.at(i).invalid &&
+            (instructions.at(i).dirty || instructions.at(i).touched)
+          "
+        >
+          <p *ngIf="instructions.at(i).errors?.required">
+            This field is required<span class="cdk-visually-hidden"
+              >Instruction {{ i + 1 }}</span
+            >
+          </p>
+        </mat-error>
+      </mat-form-field>
+    </li>
+  </ul>
+
+  <!-- Errors -->
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <ng-content></ng-content>
+  </div>
+
+  <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="flex-end">
+    <button mat-flat-button sfrRoundedButton color="accent" type="submit">
+      Submit
+    </button>
+  </div>
+</form>

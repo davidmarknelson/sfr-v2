@@ -1,0 +1,9 @@
+<sfr-container>
+  <sfr-page-title>Create Recipe</sfr-page-title>
+
+  <sfr-create-edit-recipe (saveValue)="createRecipe($event)">
+    <sfr-announcement *ngIf="errorMessage">
+      {{ errorMessage }}
+    </sfr-announcement>
+  </sfr-create-edit-recipe>
+</sfr-container>

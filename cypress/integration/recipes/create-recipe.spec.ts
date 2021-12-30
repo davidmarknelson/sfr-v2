@@ -93,7 +93,9 @@ describe('Create recipe page', () => {
         MatFormFieldHarness.with({ floatingLabelText: 'Difficulty *' })
       )
         .getTextErrors()
-        .should('contain', 'This field is requiredDifficulty');
+        .then(($errors) => {
+          expect($errors[0]).contain('This field is required');
+        });
     });
   });
 

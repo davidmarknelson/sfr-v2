@@ -1,4 +1,20 @@
-import { RecipeQuery, RecipesAndCountQuery } from '@sfr/data-access/generated';
+import {
+  RecipeInput,
+  RecipeQuery,
+  RecipesAndCountQuery,
+} from '@sfr/data-access/generated';
+
+export function createMockRecipeInput(): RecipeInput {
+  return {
+    name: 'sandwich',
+    description: 'some description',
+    cookTime: 20,
+    difficulty: 1,
+    instructions: ['make sandwich'],
+    ingredients: ['meat and bread'],
+    photos: [],
+  };
+}
 
 export function createMockRecipeFullData(
   id: number = 1
