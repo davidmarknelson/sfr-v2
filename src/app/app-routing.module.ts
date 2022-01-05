@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SfrUnauthenticatedGuard } from './shared/utils/guards';
 import { SfrAuthenticatedGuard } from './shared/utils/guards/authenticated/authenticated.guard';
-import { SfrCreatorGuard } from './shared/utils/guards/creator/creator.guard';
 import { SfrViewComponent } from './view';
 
 const routes: Routes = [
@@ -21,17 +20,6 @@ const routes: Routes = [
           import('./features/welcome/welcome.module').then(
             (m) => m.SfrWelcomeFeatureModule
           ),
-      },
-      {
-        path: 'recipes/:name/edit',
-        canActivate: [SfrAuthenticatedGuard, SfrCreatorGuard],
-        loadChildren: () =>
-          import(
-            './features/recipes/features/create-edit-recipe/create-edit-recipe.module'
-          ).then((m) => m.SfrCreateEditRecipeFeatureModule),
-        data: {
-          title: 'Edit Recipe',
-        },
       },
       {
         path: 'recipes/:name',

@@ -7,6 +7,13 @@ const routes: Routes = [
     path: '',
     component: SfrRecipeComponent,
   },
+  {
+    path: 'edit',
+    loadChildren: () =>
+      import('../edit-recipe/edit-recipe.module').then(
+        (m) => m.SfrEditRecipeFeatureModule
+      ),
+  },
 ];
 
 @NgModule({

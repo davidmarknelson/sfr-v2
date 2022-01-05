@@ -25,14 +25,14 @@ describe('Create recipe page', () => {
 
   describe('Name', () => {
     it('should show an error if the name is empty', () => {
-      cy.get('[formcontrolname="name"').clear().blur();
+      cy.get('[formcontrolname="name"]').clear().blur();
       getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Name *' }))
         .getTextErrors()
         .should('contain', 'This field is requiredName');
     });
 
     it('should show an error if the name is too long', () => {
-      cy.get('[formcontrolname="name"')
+      cy.get('[formcontrolname="name"]')
         .clear()
         .type('a'.padEnd(101, 'a'))
         .blur();
@@ -44,7 +44,7 @@ describe('Create recipe page', () => {
 
   describe('Description', () => {
     it('should show an error if the description is empty', () => {
-      cy.get('[formcontrolname="description"').clear().blur();
+      cy.get('[formcontrolname="description"]').clear().blur();
       getHarness(
         MatFormFieldHarness.with({ floatingLabelText: 'Description *' })
       )
@@ -53,7 +53,7 @@ describe('Create recipe page', () => {
     });
 
     it('should show an error if the description is too long', () => {
-      cy.get('[formcontrolname="description"')
+      cy.get('[formcontrolname="description"]')
         .clear()
         .type('a'.padEnd(513, 'a'))
         .blur();
@@ -70,14 +70,14 @@ describe('Create recipe page', () => {
 
   describe('Cook time', () => {
     it('should show an error if the cookTime is empty', () => {
-      cy.get('[formcontrolname="cookTime"').clear().blur();
+      cy.get('[formcontrolname="cookTime"]').clear().blur();
       getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Cook Time *' }))
         .getTextErrors()
         .should('contain', 'This field is requiredCook Time');
     });
 
     it('should show an error if the cookTime does not only contain numbers', () => {
-      cy.get('[formcontrolname="cookTime"').clear().type('asdf').blur();
+      cy.get('[formcontrolname="cookTime"]').clear().type('asdf').blur();
       getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Cook Time *' }))
         .getTextErrors()
         .should('contain', 'Must contain only numbers');

@@ -1,0 +1,23 @@
+<sfr-container>
+  <sfr-page-title>Edit Recipe</sfr-page-title>
+
+  <ng-container *ngIf="recipeOrError$ | async as recipeOrError; else loading">
+    <sfr-create-edit-recipe
+      *ngIf="recipeOrError.recipe"
+      (saveValue)="editRecipe(recipeOrError.recipe.id, $event)"
+      [recipe]="recipeOrError.recipe"
+    >
+      <sfr-announcement *ngIf="errorMessage">
+        {{ errorMessage }}
+      </sfr-announcement>
+    </sfr-create-edit-recipe>
+
+    <sfr-announcement *ngIf="recipeOrError.error">
+      {{ recipeOrError.error }}
+    </sfr-announcement>
+  </ng-container>
+</sfr-container>
+
+<ng-template #loading>
+  <sfr-loader></sfr-loader>
+</ng-template>

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
+import { SfrEditRecipeComponent } from './edit-recipe.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SfrCreateEditRecipeComponent,
+    component: SfrEditRecipeComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CreateEditRecipeRoutingModule {}
+export class EditRecipeRoutingModule {}

@@ -3,18 +3,20 @@ import { NgModule } from '@angular/core';
 import {
   SfrUiAnnouncementModule,
   SfrUiContainerModule,
+  SfrUiLoaderModule,
   SfrUiPageTitleModule,
 } from '@sfr/shared/ui';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
 import { SfrCreateEditRecipeUiModule } from '../../ui/create-edit-recipe/create-edit-recipe.module';
-import { CreateRecipeRoutingModule } from './create-recipe-routing.module';
-import { SfrCreateRecipeComponent } from './create-recipe.component';
+import { EditRecipeRoutingModule } from './edit-recipe-routing.module';
+import { SfrEditRecipeComponent } from './edit-recipe.component';
 
 @NgModule({
-  declarations: [SfrCreateRecipeComponent],
+  declarations: [SfrEditRecipeComponent],
   imports: [
     CommonModule,
-    CreateRecipeRoutingModule,
+    EditRecipeRoutingModule,
+    SfrUiLoaderModule,
     SfrUiContainerModule,
     SfrUiPageTitleModule,
     SfrCreateEditRecipeUiModule,
@@ -22,4 +24,4 @@ import { SfrCreateRecipeComponent } from './create-recipe.component';
   ],
   providers: [SfrUrlReplaceSpacePipe],
 })
-export class SfrCreateRecipeFeatureModule {}
+export class SfrEditRecipeFeatureModule {}

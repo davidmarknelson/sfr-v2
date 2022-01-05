@@ -12,7 +12,6 @@ import { CreateRecipeGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
   SfrUiContainerModule,
-  SfrUiLoaderModule,
   SfrUiPageTitleModule,
 } from '@sfr/shared/ui';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
@@ -37,7 +36,6 @@ describe('CreateRecipeComponent', () => {
       imports: [
         RouterTestingModule,
         CreateRecipeRoutingModule,
-        SfrUiLoaderModule,
         SfrUiContainerModule,
         SfrUiPageTitleModule,
         SfrCreateEditRecipeUiModule,

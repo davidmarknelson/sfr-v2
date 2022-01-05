@@ -29,6 +29,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createRecipe: RecipeType;
   deleteRecipe: MessageType;
+  editRecipe: RecipeType;
   signup: AccessTokenType;
 };
 
@@ -40,6 +41,11 @@ export type MutationCreateRecipeArgs = {
 
 export type MutationDeleteRecipeArgs = {
   id: Scalars['Float'];
+};
+
+
+export type MutationEditRecipeArgs = {
+  recipe: RecipeEditInput;
 };
 
 
@@ -70,6 +76,18 @@ export type QueryRecipeArgs = {
 export type QueryRecipesAndCountArgs = {
   skip: Scalars['Float'];
   take: Scalars['Float'];
+};
+
+export type RecipeEditInput = {
+  /** Number of minutes it takes to cook the meal */
+  cookTime: Scalars['Int'];
+  description: Scalars['String'];
+  difficulty: Scalars['Int'];
+  id: Scalars['Int'];
+  ingredients: Array<Scalars['String']>;
+  instructions: Array<Scalars['String']>;
+  name: Scalars['String'];
+  photos?: InputMaybe<Array<RecipePhotoInput>>;
 };
 
 export type RecipeInput = {
@@ -170,7 +188,14 @@ export type CreateRecipeMutationVariables = Exact<{
 }>;
 
 
-export type CreateRecipeMutation = { __typename?: 'Mutation', createRecipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: number, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
+export type CreateRecipeMutation = { __typename?: 'Mutation', createRecipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: number, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, creator: { __typename?: 'RecipeUserType', id: number, username: string }, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
+
+export type EditRecipeMutationVariables = Exact<{
+  recipe: RecipeEditInput;
+}>;
+
+
+export type EditRecipeMutation = { __typename?: 'Mutation', editRecipe: { __typename?: 'RecipeType', cookTime: number, description: string, difficulty: number, id: number, ingredients: Array<string>, instructions: Array<string>, name: string, creator: { __typename?: 'RecipeUserType', id: number, username: string }, photos: Array<{ __typename?: 'RecipePhotoType', id: number, path: string, cloudinaryPublicId: string }> } };
 
 export const RecipesAndCountDocument = gql`
     query recipesAndCount($skip: Float!, $take: Float!) {
@@ -298,6 +323,10 @@ export const CreateRecipeDocument = gql`
     ingredients
     instructions
     name
+    creator {
+      id
+      username
+    }
     photos {
       id
       path
@@ -312,6 +341,39 @@ export const CreateRecipeDocument = gql`
   })
   export class CreateRecipeGQL extends Apollo.Mutation<CreateRecipeMutation, CreateRecipeMutationVariables> {
     document = CreateRecipeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const EditRecipeDocument = gql`
+    mutation editRecipe($recipe: RecipeEditInput!) {
+  editRecipe(recipe: $recipe) {
+    cookTime
+    description
+    difficulty
+    id
+    ingredients
+    instructions
+    name
+    creator {
+      id
+      username
+    }
+    photos {
+      id
+      path
+      cloudinaryPublicId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class EditRecipeGQL extends Apollo.Mutation<EditRecipeMutation, EditRecipeMutationVariables> {
+    document = EditRecipeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

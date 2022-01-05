@@ -63,6 +63,31 @@ mutation createRecipe($recipe: RecipeInput!) {
     ingredients
     instructions
     name
+    creator {
+      id
+      username
+    }
+    photos {
+      id
+      path
+      cloudinaryPublicId
+    }
+  }
+}
+
+mutation editRecipe($recipe: RecipeEditInput!) {
+  editRecipe(recipe: $recipe) {
+    cookTime
+    description
+    difficulty
+    id
+    ingredients
+    instructions
+    name
+    creator {
+      id
+      username
+    }
     photos {
       id
       path

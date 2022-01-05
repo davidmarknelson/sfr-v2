@@ -70,7 +70,7 @@ describe('SfrRecipeComponent', () => {
         errors: [
           {
             message: 'Not Found',
-            extentions: {
+            extensions: {
               code: '404',
               response: {
                 statusCode: 404,
