@@ -64,6 +64,8 @@ export class SfrSignupComponent {
     if (!this.form.valid) {
       return;
     }
+    this.errorMessage = null;
+
     this.signupGQL
       .mutate(
         {

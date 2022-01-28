@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { SfrImageUploadUiModule } from '@sfr/shared/ui';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 
@@ -22,6 +23,7 @@ import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
     MatButtonModule,
     SfrRoundedButtonModule,
     MatIconModule,
+    SfrImageUploadUiModule,
   ],
   exports: [SfrCreateEditRecipeComponent],
 })

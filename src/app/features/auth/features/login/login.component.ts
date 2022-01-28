@@ -43,6 +43,8 @@ export class SfrLoginComponent {
     if (!this.form.valid) {
       return;
     }
+    this.errorMessage = null;
+
     this.loginGQL
       .fetch(
         {

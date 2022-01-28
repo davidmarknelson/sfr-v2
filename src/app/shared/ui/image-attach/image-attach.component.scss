@@ -1,0 +1,21 @@
+@import "/src/assets/css/helpers/variables.scss";
+
+:host {
+  width: 100%;
+  max-width: $max-width-component;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+img,
+sfr-loader {
+  object-fit: cover;
+  height: 5rem;
+  width: 5rem;
+  border-radius: $border-radius;
+}

@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_MENU_DEFAULT_OPTIONS } from '@angular/material/menu';
 import { MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator';
@@ -49,7 +50,16 @@ import { SfrViewModule } from './view/view.module';
     },
     {
       provide: MAT_MENU_DEFAULT_OPTIONS,
-      useValue: { overlayPanelClass: 'rounded-corners' },
+      useValue: {
+        overlayPanelClass: 'rounded-corners',
+      },
+    },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        minWidth: '500px',
+        maxWidth: '90%',
+      },
     },
   ],
   bootstrap: [SfrAppComponent],

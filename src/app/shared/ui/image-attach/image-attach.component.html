@@ -1,0 +1,50 @@
+<button
+  mat-flat-button
+  sfrRoundedButton
+  color="primary"
+  (click)="fileInput.click()"
+  type="button"
+>
+  Attach Image(s) to Upload
+</button>
+<input
+  #fileInput
+  (change)="attachFile($event)"
+  type="file"
+  class="hidden"
+  accept="image/png, image/jpeg"
+  [multiple]="true"
+/>
+
+<div
+  gdColumns="repeat(2, 1fr)"
+  gdGap="1rem"
+  gdColumns.lt-sm="repeat(1, 1fr)"
+  class="mt-1"
+>
+  <div
+    *ngFor="let file of value; let i = index"
+    fxLayout="row"
+    fxLayoutAlign="flex-start center"
+    fxLayoutGap="1rem"
+  >
+    <img
+      *ngIf="file | sfrFileReader$ | async as dataUrl; else loader"
+      [src]="dataUrl"
+      [alt]="'Attached image ' + file.name"
+    />
+    <ng-template #loader>
+      <sfr-loader></sfr-loader>
+    </ng-template>
+    <button
+      mat-button
+      sfrRoundedButton
+      type="button"
+      (click)="removeFile(i)"
+      color="warn"
+    >
+      Remove
+      <span class="cdk-visually-hidden">{{ file.name }}</span>
+    </button>
+  </div>
+</div>

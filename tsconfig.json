@@ -18,7 +18,8 @@
     "lib": ["es2018", "dom", "esnext.asynciterable"],
     "paths": {
       "@sfr/*": ["src/app/*"],
-      "@sfr-testing/*": ["src/sfr-testing/*"]
+      "@sfr-testing/*": ["src/sfr-testing/*"],
+      "@sfr-env/*": ["src/environments/*"]
     }
   },
   "include": ["src", "node_modules/cypress"],

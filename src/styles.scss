@@ -20,6 +20,7 @@ $sfr-typography: mat.define-typography-config(
 @include mat.pseudo-checkbox-color($sfr-darker-theme);
 @include mat.form-field-color($sfr-darker-theme);
 @include mat.option-color($sfr-darker-theme);
+@include mat.progress-bar-color($sfr-darker-theme);
 
 /* Global styles */
 html,

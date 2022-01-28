@@ -6,7 +6,8 @@ $screen-large: 1279px;
 
 $max-width-component: 500px;
 
-$border-radius: 15px;
+$border-radius: 25px;
+$border-radius-small: 10px;
 
 $primary: map.get(sfrTheme.$primary-green, 200);
 $primary-contrast: map.get(sfrTheme.$primary-green, contrast, 200);

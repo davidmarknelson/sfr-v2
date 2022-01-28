@@ -4,5 +4,5 @@ import { Directive, HostBinding } from '@angular/core';
   selector: '[sfrRoundedButton]',
 })
 export class SfrRoundedButtonDirective {
-  @HostBinding('class.sfr-rounded-button') readonly elementClass = true;
+  @HostBinding('class.sfr-rounded-corners') readonly elementClass = true;
 }

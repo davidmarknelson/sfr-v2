@@ -17,8 +17,9 @@ import {
   apiRecipeConstants,
   apiRecipeMessageConstants,
 } from '@sfr/data-access/constants';
-import { RecipeInput, RecipeQuery } from '@sfr/data-access/generated';
+import { RecipeQuery } from '@sfr/data-access/generated';
 import { regexConstants } from '@sfr/shared/utils/constants';
+import { CreateEditRecipe } from '../../utils';
 
 @Component({
   selector: 'sfr-create-edit-recipe',
@@ -28,8 +29,8 @@ import { regexConstants } from '@sfr/shared/utils/constants';
 })
 export class SfrCreateEditRecipeComponent implements OnInit {
   @Input() recipe?: RecipeQuery['recipe'];
-  @Output() saveValue: EventEmitter<RecipeInput> =
-    new EventEmitter<RecipeInput>();
+  @Output() saveValue: EventEmitter<CreateEditRecipe> =
+    new EventEmitter<CreateEditRecipe>();
   form!: FormGroup;
   recipeMessageConstants = apiRecipeMessageConstants;
 
@@ -84,6 +85,7 @@ export class SfrCreateEditRecipeComponent implements OnInit {
       ...this.form.value,
       cookTime: +this.cookTime.value,
       photos: [],
+      photosToRemove: [],
     });
   }
 
@@ -116,6 +118,7 @@ export class SfrCreateEditRecipeComponent implements OnInit {
         recipe?.instructions || [''],
         Validators.required
       ),
+      imageFiles: [[]],
     });
   }
 }

@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+  <p>Uploading Images</p>
+  <div *ngIf="fileUploads$ | async as uploads">
+    <div *ngFor="let upload of uploads" class="my-1">
+      <p class="file-name">{{ upload.fileName }}</p>
+      <mat-progress-bar
+        [mode]="upload.state === 'PENDING' ? 'buffer' : 'determinate'"
+        [value]="upload.progress"
+        [attr.aria-label]="upload.fileName"
+      ></mat-progress-bar>
+    </div>
+  </div>
+</div>
