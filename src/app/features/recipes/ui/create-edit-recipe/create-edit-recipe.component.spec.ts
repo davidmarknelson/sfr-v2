@@ -17,6 +17,7 @@ import {
   apiRecipeConstants,
   apiRecipeMessageConstants,
 } from '@sfr/data-access/constants';
+import { SfrImageUploadUiModule } from '@sfr/shared/ui';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 
@@ -39,6 +40,7 @@ describe('SfrCreateEditRecipeComponent', () => {
         SfrRoundedButtonModule,
         MatIconModule,
         BrowserAnimationsModule,
+        SfrImageUploadUiModule,
       ],
       providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();
@@ -231,6 +233,27 @@ describe('SfrCreateEditRecipeComponent', () => {
       expect(await formFieldHarness.getTextErrors()).toEqual([
         'This field is requiredInstruction 1',
       ]);
+    });
+  });
+
+  describe('Image Files', () => {
+    it('should show an error if there are more than 3 images', () => {
+      fixture.detectChanges();
+      component.imageFiles.setValue([
+        new File([], 'image.jpeg'),
+        new File([], 'image.jpeg'),
+        new File([], 'image.jpeg'),
+      ]);
+      expect(component.imageFiles.errors).toEqual(null);
+      component.imageFiles.setValue([
+        new File([], 'image.jpeg'),
+        new File([], 'image.jpeg'),
+        new File([], 'image.jpeg'),
+        new File([], 'image.jpeg'),
+      ]);
+      expect(component.imageFiles.errors).toEqual({
+        maxlength: { actualLength: 4, requiredLength: 3 },
+      });
     });
   });
 

@@ -171,7 +171,22 @@
   </ul>
 
   <div fxLayout="row" fxLayoutAlign="center center">
-    <sfr-image-attach formControlName="imageFiles"></sfr-image-attach>
+    <sfr-image-attach formControlName="imageFiles">
+      <div class="small-font">
+        <mat-hint
+          *ngIf="
+            !(imageFiles.invalid && (imageFiles.dirty || imageFiles.touched))
+          "
+        >
+          A max of 3 photos can be uploaded per recipe
+        </mat-hint>
+        <mat-error
+          *ngIf="imageFiles.invalid && (imageFiles.dirty || imageFiles.touched)"
+        >
+          <p>Recipes can only have a max of 3 photos</p>
+        </mat-error>
+      </div>
+    </sfr-image-attach>
   </div>
 
   <!-- Errors -->
