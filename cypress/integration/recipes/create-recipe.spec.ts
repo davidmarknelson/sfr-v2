@@ -212,7 +212,7 @@ describe('Create recipe page', () => {
   });
 
   describe('submit', () => {
-    it('should successfully submit and route to the recipe page', () => {
+    it('should successfully submit and route to the recipe page without an image uploaded', () => {
       cy.get('[formcontrolname="name"]').clear().type('some recipe');
       cy.get('[formcontrolname="description"]')
         .clear()
@@ -252,6 +252,89 @@ describe('Create recipe page', () => {
         'instruction 1'
       );
       cy.get('[type="submit"]').click();
+      cy.url().should('equal', 'http://localhost:4200/create-recipe');
+      cy.get('sfr-announcement').should(
+        'contain.text',
+        'A recipe with that name already exists'
+      );
+    });
+
+    it('should upload an image and create a recipe', () => {
+      cy.loginUser();
+      cy.visit('http://localhost:4200/create-recipe');
+      cy.get('[formcontrolname="name"]').clear().type('Recipe with Image');
+      cy.get('[formcontrolname="description"]')
+        .clear()
+        .type('some description');
+      cy.get('[formcontrolname="cookTime"]').clear().type('20');
+      const difficulty = getHarness(MatSelectHarness);
+      difficulty.open();
+      difficulty.clickOptions({ text: '2' });
+      getHarness(MatInputHarness.with({ placeholder: 'Ingredient' })).setValue(
+        'ingredient 1'
+      );
+      getHarness(MatInputHarness.with({ placeholder: 'Instruction' })).setValue(
+        'instruction 1'
+      );
+      cy.get('sfr-image-attach [type="file"]').attachFile('egg-muffin.jpg');
+      cy.intercept(
+        { method: 'POST', url: '**/image/upload' },
+        {
+          delay: 1000,
+          fixture: 'cloudinary-create-response.json',
+          statusCode: 200,
+        }
+      );
+      cy.get('[type="submit"]').click();
+      cy.get('[mode="buffer"]').should('exist');
+      cy.get('[mode="determinate"]').should('exist');
+      cy.url().should(
+        'equal',
+        'http://localhost:4200/recipes/Recipe-with-Image'
+      );
+      cy.get('h1').should('contain.text', 'Recipe with Image');
+      cy.get('figure img').should('have.attr', 'src', 'example');
+    });
+
+    it('should delete an uploaded image when creating a recipe results in an error', () => {
+      cy.loginUser();
+      cy.visit('http://localhost:4200/create-recipe');
+      cy.get('[formcontrolname="name"]').clear().type('Recipe with Image');
+      cy.get('[formcontrolname="description"]')
+        .clear()
+        .type('some description');
+      cy.get('[formcontrolname="cookTime"]').clear().type('20');
+      const difficulty = getHarness(MatSelectHarness);
+      difficulty.open();
+      difficulty.clickOptions({ text: '2' });
+      getHarness(MatInputHarness.with({ placeholder: 'Ingredient' })).setValue(
+        'ingredient 1'
+      );
+      getHarness(MatInputHarness.with({ placeholder: 'Instruction' })).setValue(
+        'instruction 1'
+      );
+      cy.get('sfr-image-attach [type="file"]').attachFile('egg-muffin.jpg');
+      cy.intercept(
+        { method: 'POST', url: '**/image/upload' },
+        {
+          delay: 1000,
+          fixture: 'cloudinary-create-response.json',
+          statusCode: 200,
+        }
+      );
+      cy.intercept(
+        { method: 'POST', url: '**/delete_by_token' },
+        {
+          fixture: 'cloudinary-delete-response.json',
+          statusCode: 200,
+        }
+      ).as('cloudinaryDelete');
+      cy.get('[type="submit"]').click();
+      cy.get('[mode="buffer"]').should('exist');
+      cy.get('[mode="determinate"]').should('exist');
+      cy.wait('@cloudinaryDelete').then(($res) => {
+        expect($res.response.body.result).eq('ok');
+      });
       cy.url().should('equal', 'http://localhost:4200/create-recipe');
       cy.get('sfr-announcement').should(
         'contain.text',

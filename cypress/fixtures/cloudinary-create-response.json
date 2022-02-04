@@ -1,0 +1,22 @@
+{
+  "asset_id": "example",
+  "public_id": "example",
+  "version": "example",
+  "version_id": "example",
+  "signature": "example",
+  "width": "example",
+  "height": "example",
+  "format": "example",
+  "resource_type": "example",
+  "created_at": "example",
+  "tags": "example",
+  "bytes": "example",
+  "type": "example",
+  "etag": "example",
+  "placeholder": "example",
+  "url": "example",
+  "secure_url": "example",
+  "access_mode": "example",
+  "original_filename": "example",
+  "delete_token": "example"
+}

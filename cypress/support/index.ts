@@ -1,5 +1,6 @@
 import '@jscutlery/cypress-harness/support';
 import 'cypress-axe';
+import 'cypress-file-upload';
 import './commands';
 
 declare global {
