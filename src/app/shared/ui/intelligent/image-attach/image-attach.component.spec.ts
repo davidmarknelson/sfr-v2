@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SfrFileReaderPipeModule } from '@sfr/shared/utils/pipes';
-import { SfrUiLoaderModule } from '../loader/ui-loader.module';
+import { SfrLoaderUiModule } from '../../presentational';
 import { SfrImageAttachComponent } from './image-attach.component';
 
 describe('SfrImageAttachComponent', () => {
@@ -11,7 +11,7 @@ describe('SfrImageAttachComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SfrImageAttachComponent],
-      imports: [SfrFileReaderPipeModule, SfrUiLoaderModule],
+      imports: [SfrFileReaderPipeModule, SfrLoaderUiModule],
     }).compileComponents();
   });
 

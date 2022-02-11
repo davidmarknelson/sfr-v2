@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {
   SfrImageCurrentUiModule,
   SfrImageUploadUiModule,
-} from '@sfr/shared/ui';
+} from '@sfr/shared/ui/intelligent';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 

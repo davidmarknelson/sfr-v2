@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { SfrUiAnnouncementModule } from '@sfr/shared/ui';
+import { SfrAnnouncementUiModule } from '@sfr/shared/ui/presentational';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import {
   SfrRecipePhotoPipeModule,
@@ -25,7 +25,7 @@ import { SfrRecipesGridComponent } from './recipes-grid.component';
     MatButtonModule,
     SfrRoundedButtonModule,
     SfrRecipePhotoPipeModule,
-    SfrUiAnnouncementModule,
+    SfrAnnouncementUiModule,
     MatIconModule,
     RouterModule,
     SfrUrlReplaceSpaceModule,

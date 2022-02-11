@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrFileReaderPipeModule } from '@sfr/shared/utils/pipes';
-import { SfrUiLoaderModule } from '../loader/ui-loader.module';
+import { SfrLoaderUiModule } from '../../presentational';
 import { SfrImageAttachComponent } from './image-attach.component';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { SfrImageAttachComponent } from './image-attach.component';
     SfrRoundedButtonModule,
     FlexLayoutModule,
     SfrFileReaderPipeModule,
-    SfrUiLoaderModule,
+    SfrLoaderUiModule,
   ],
   exports: [SfrImageAttachComponent],
 })

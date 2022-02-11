@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CloudinaryUploadedImage } from '@sfr/data-access/cloudinary';
 import { CreateRecipeGQL, RecipeInput } from '@sfr/data-access/generated';
-import { SfrImageUploaderComponent } from '@sfr/shared/ui/image-uploader/image-uploader.component';
+import { SfrImageUploaderComponent } from '@sfr/shared/ui/intelligent';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
 import { SfrCloudinaryService } from '@sfr/shared/utils/services';
 import { CloudinaryProgressResult } from '@sfr/shared/utils/types';

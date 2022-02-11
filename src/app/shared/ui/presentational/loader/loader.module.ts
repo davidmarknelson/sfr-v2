@@ -7,4 +7,4 @@ import { SfrLoaderComponent } from './loader.component';
   imports: [CommonModule],
   exports: [SfrLoaderComponent],
 })
-export class SfrUiLoaderModule {}
+export class SfrLoaderUiModule {}

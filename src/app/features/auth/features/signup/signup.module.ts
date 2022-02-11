@@ -7,10 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {
-  SfrUiAnnouncementModule,
-  SfrUiContainerModule,
-  SfrUiPageTitleModule,
-} from '@sfr/shared/ui';
+  SfrAnnouncementUiModule,
+  SfrContainerUiModule,
+  SfrPageTitleUiModule,
+} from '@sfr/shared/ui/presentational';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SignupRoutingModule } from './signup-routing.module';
 import { SfrSignupComponent } from './signup.component';
@@ -23,12 +23,12 @@ import { SfrSignupComponent } from './signup.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    SfrUiContainerModule,
-    SfrUiPageTitleModule,
+    SfrContainerUiModule,
+    SfrPageTitleUiModule,
     SfrRoundedButtonModule,
     MatButtonModule,
     MatIconModule,
-    SfrUiAnnouncementModule,
+    SfrAnnouncementUiModule,
     FlexLayoutModule,
   ],
 })

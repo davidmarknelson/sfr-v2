@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SfrUiContainerModule } from '@sfr/shared/ui';
+import { SfrContainerUiModule } from '@sfr/shared/ui/presentational';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrWelcomeRoutingModule } from './welcome-routing.module';
 import { SfrWelcomeComponent } from './welcome.component';
@@ -14,7 +14,7 @@ import { SfrWelcomeComponent } from './welcome.component';
     CommonModule,
     SfrWelcomeRoutingModule,
     MatButtonModule,
-    SfrUiContainerModule,
+    SfrContainerUiModule,
     SfrRoundedButtonModule,
     MatIconModule,
     FlexLayoutModule,

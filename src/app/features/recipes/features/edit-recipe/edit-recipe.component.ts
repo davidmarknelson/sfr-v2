@@ -13,7 +13,7 @@ import {
   RecipeGQL,
   RecipeQuery,
 } from '@sfr/data-access/generated';
-import { SfrImageUploaderComponent } from '@sfr/shared/ui/image-uploader/image-uploader.component';
+import { SfrImageUploaderComponent } from '@sfr/shared/ui/intelligent';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
 import { SfrCloudinaryService } from '@sfr/shared/utils/services';
 import { CloudinaryProgressResult } from '@sfr/shared/utils/types';

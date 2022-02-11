@@ -7,4 +7,4 @@ import { SfrPageTitleComponent } from './page-title.component';
   imports: [CommonModule],
   exports: [SfrPageTitleComponent],
 })
-export class SfrUiPageTitleModule {}
+export class SfrPageTitleUiModule {}

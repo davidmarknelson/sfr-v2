@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { SfrUiContainerModule } from '@sfr/shared/ui';
+import { SfrContainerUiModule } from '@sfr/shared/ui/presentational';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrFooterComponent } from './footer/footer.component';
 import { SfrHeaderComponent } from './header/header.component';
@@ -17,7 +17,7 @@ import { SfrViewComponent } from './view/view.component';
     CommonModule,
     RouterModule,
     MatToolbarModule,
-    SfrUiContainerModule,
+    SfrContainerUiModule,
     MatButtonModule,
     SfrRoundedButtonModule,
     FlexLayoutModule,

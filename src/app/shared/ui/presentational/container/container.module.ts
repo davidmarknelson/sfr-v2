@@ -7,4 +7,4 @@ import { SfrContainerComponent } from './container.component';
   imports: [CommonModule],
   exports: [SfrContainerComponent],
 })
-export class SfrUiContainerModule {}
+export class SfrContainerUiModule {}

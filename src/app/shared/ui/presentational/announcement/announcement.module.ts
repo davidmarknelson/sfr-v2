@@ -7,4 +7,4 @@ import { SfrUiAnnouncementComponent } from './announcement.component';
   imports: [CommonModule],
   exports: [SfrUiAnnouncementComponent],
 })
-export class SfrUiAnnouncementModule {}
+export class SfrAnnouncementUiModule {}
