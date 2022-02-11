@@ -103,6 +103,7 @@ export type RecipeInput = {
 
 export type RecipePhotoInput = {
   cloudinaryPublicId: Scalars['String'];
+  id?: InputMaybe<Scalars['Int']>;
   path: Scalars['String'];
 };
 

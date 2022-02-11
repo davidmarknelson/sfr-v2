@@ -33,11 +33,11 @@ export class SfrCreateRecipeComponent {
     private readonly cloudinary: SfrCloudinaryService
   ) {}
 
-  createRecipe(recipeInput: CreateEditRecipe): void {
+  createRecipe(createEditRecipe: CreateEditRecipe): void {
     this.errorMessage = null;
     const deleteTokens: string[] = [];
 
-    of(recipeInput.imageFiles)
+    of(createEditRecipe.imageFiles)
       .pipe(
         mergeMap((imageFiles) =>
           !imageFiles.length ? of([]) : this.uploadImages$(imageFiles)
@@ -51,7 +51,7 @@ export class SfrCreateRecipeComponent {
           return this.createRecipeGQL.mutate(
             {
               recipe: this.formatRecipeForMutation(
-                recipeInput,
+                createEditRecipe,
                 imageResults!.map((imageResult) => imageResult.result!)
               ),
             },

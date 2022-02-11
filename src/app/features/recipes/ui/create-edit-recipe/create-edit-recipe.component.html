@@ -170,6 +170,31 @@
     </li>
   </ul>
 
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="recipe">
+    <sfr-image-current formControlName="currentPhotos">
+      <div class="small-font">
+        <mat-hint
+          *ngIf="
+            !(
+              currentPhotos.invalid &&
+              (currentPhotos.dirty || currentPhotos.touched)
+            )
+          "
+        >
+          Recipes can have a max of 3 photos
+        </mat-hint>
+        <mat-error
+          *ngIf="
+            currentPhotos.invalid &&
+            (currentPhotos.dirty || currentPhotos.touched)
+          "
+        >
+          <p>Recipes can only have a max of 3 photos</p>
+        </mat-error>
+      </div>
+    </sfr-image-current>
+  </div>
+
   <div fxLayout="row" fxLayoutAlign="center center">
     <sfr-image-attach formControlName="imageFiles">
       <div class="small-font">
@@ -178,7 +203,7 @@
             !(imageFiles.invalid && (imageFiles.dirty || imageFiles.touched))
           "
         >
-          A max of 3 photos can be uploaded per recipe
+          Recipes can have a max of 3 photos
         </mat-hint>
         <mat-error
           *ngIf="imageFiles.invalid && (imageFiles.dirty || imageFiles.touched)"

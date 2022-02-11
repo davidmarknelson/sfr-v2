@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import {
   SfrUiAnnouncementModule,
   SfrUiContainerModule,
@@ -21,6 +22,7 @@ import { SfrEditRecipeComponent } from './edit-recipe.component';
     SfrUiPageTitleModule,
     SfrCreateEditRecipeUiModule,
     SfrUiAnnouncementModule,
+    MatDialogModule,
   ],
   providers: [SfrUrlReplaceSpacePipe],
 })

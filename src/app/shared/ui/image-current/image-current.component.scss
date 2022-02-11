@@ -8,12 +8,11 @@
   margin-bottom: 2rem;
 }
 
-.hidden {
-  display: none;
+.title {
+  color: $primary-dark;
 }
 
-img,
-sfr-loader {
+img {
   object-fit: cover;
   height: 5rem;
   width: 5rem;

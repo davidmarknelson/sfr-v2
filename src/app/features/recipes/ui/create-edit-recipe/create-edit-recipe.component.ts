@@ -61,6 +61,9 @@ export class SfrCreateEditRecipeComponent implements OnInit {
   get imageFiles(): FormControl {
     return this.form.get('imageFiles') as FormControl;
   }
+  get currentPhotos(): FormControl {
+    return this.form.get('currentPhotos') as FormControl;
+  }
 
   removeIngredient(index: number): void {
     this.ingredients.removeAt(index);
@@ -87,8 +90,6 @@ export class SfrCreateEditRecipeComponent implements OnInit {
     this.saveValue.emit({
       ...this.form.value,
       cookTime: +this.cookTime.value,
-      photos: [],
-      photosToRemove: [],
     });
   }
 
@@ -122,6 +123,7 @@ export class SfrCreateEditRecipeComponent implements OnInit {
         Validators.required
       ),
       imageFiles: [[], [Validators.maxLength(3)]],
+      currentPhotos: [recipe?.photos || [], [Validators.maxLength(3)]],
     });
   }
 }

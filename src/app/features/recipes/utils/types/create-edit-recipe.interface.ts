@@ -1,6 +1,6 @@
-import { RecipeInput } from '@sfr/data-access/generated';
+import { RecipeInput, RecipeQuery } from '@sfr/data-access/generated';
 
-export interface CreateEditRecipe extends RecipeInput {
-  photosToRemove: string[];
+export interface CreateEditRecipe extends Omit<RecipeInput, 'photos'> {
+  currentPhotos: RecipeQuery['recipe']['photos'];
   imageFiles: File[];
 }

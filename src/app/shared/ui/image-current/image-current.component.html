@@ -1,0 +1,29 @@
+<p class="title">Current Images</p>
+
+<ng-content></ng-content>
+
+<div
+  gdColumns="repeat(2, 1fr)"
+  gdGap="1rem"
+  gdColumns.lt-sm="repeat(1, 1fr)"
+  class="mt-1"
+>
+  <div
+    *ngFor="let image of value; let i = index"
+    fxLayout="row"
+    fxLayoutAlign="flex-start center"
+    fxLayoutGap="1rem"
+  >
+    <img [src]="image.path" [alt]="'Current image ' + (i + 1)" />
+    <button
+      mat-button
+      sfrRoundedButton
+      type="button"
+      (click)="removeFile(i)"
+      color="warn"
+    >
+      Remove
+      <span class="cdk-visually-hidden">{{ "Current image " + (i + 1) }}</span>
+    </button>
+  </div>
+</div>
