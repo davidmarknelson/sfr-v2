@@ -7,13 +7,20 @@
       gdGap="4rem"
       gdColumns.lt-sm="repeat(1, 1fr)"
     >
-      <figure class="img-container">
+      <figure
+        class="img-container"
+        *ngIf="recipe.photos.length < 2; else carousel"
+      >
         <img
           [src]="recipe.photos[0]?.path | sfrRecipePhoto"
           [alt]="'Photo of ' + recipe.name"
           class="img"
         />
       </figure>
+
+      <ng-template #carousel>
+        <sfr-carousel [images]="recipe.photos"></sfr-carousel>
+      </ng-template>
 
       <section class="meta-container" fxLayout="column" fxLayoutAlign="center">
         <p>{{ recipe.description }}</p>

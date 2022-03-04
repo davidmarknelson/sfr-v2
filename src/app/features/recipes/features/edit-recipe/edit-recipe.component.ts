@@ -135,7 +135,7 @@ export class SfrEditRecipeComponent implements OnInit {
         return {
           id: photo.id,
           path: photo.path,
-          cloudinaryPublicId: photo.path,
+          cloudinaryPublicId: photo.cloudinaryPublicId,
         };
       }),
     ];

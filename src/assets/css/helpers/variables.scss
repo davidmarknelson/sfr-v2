@@ -9,11 +9,15 @@ $max-width-component: 500px;
 $border-radius: 25px;
 $border-radius-small: 10px;
 
-$primary: map.get(sfrTheme.$primary-green, 200);
-$primary-contrast: map.get(sfrTheme.$primary-green, contrast, 200);
+$primary: map.get(sfrTheme.$primary-green, 100);
+$primary-contrast: map.get(sfrTheme.$primary-green, contrast, 100);
+$primary-medium: map.get(sfrTheme.$primary-green, 400);
+$primary-medium-contrast: map.get(sfrTheme.$primary-green, contrast, 400);
 $primary-dark: map.get(sfrTheme.$primary-green, 800);
 $primary-dark-contrast: map.get(sfrTheme.$primary-green, contrast, 800);
 $gray-light: map.get(sfrTheme.$grey-palette, 200);
 $gray-light-contrast: map.get(sfrTheme.$grey-palette, contrast, 200);
+$gray: map.get(sfrTheme.$grey-palette, 500);
+$gray-contrast: map.get(sfrTheme.$grey-palette, contrast, 500);
 $red: map.get(sfrTheme.$warn-red, 700);
 $red-contrast: map.get(sfrTheme.$warn-red, contrast, 700);

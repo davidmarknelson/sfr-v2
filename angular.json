@@ -27,8 +27,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
-            "styles": ["src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "src/styles.scss",
+              "node_modules/glider-js/glider.min.css"
+            ],
+            "scripts": ["node_modules/glider-js/glider.min.js"]
           },
           "configurations": {
             "production": {

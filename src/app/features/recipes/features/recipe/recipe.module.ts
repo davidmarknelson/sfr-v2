@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {
   SfrAnnouncementUiModule,
+  SfrCarouselUiModule,
   SfrContainerUiModule,
   SfrLoaderUiModule,
   SfrPageTitleUiModule,
@@ -30,6 +31,7 @@ import { SfrRecipeComponent } from './recipe.component';
     FlexLayoutModule,
     MatButtonModule,
     SfrRoundedButtonModule,
+    SfrCarouselUiModule,
   ],
 })
 export class SfrRecipeFeatureModule {}

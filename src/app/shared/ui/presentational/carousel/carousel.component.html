@@ -1,0 +1,20 @@
+<div class="glider-contain">
+  <div #glider class="figure-contain">
+    <figure *ngFor="let image of images; let i = index">
+      <img [src]="image.path" [alt]="'Recipe image ' + (i + 1)" />
+    </figure>
+  </div>
+
+  <button
+    mat-mini-fab
+    color="primary"
+    aria-label="Previous"
+    class="glider-prev"
+  >
+    «
+  </button>
+  <button mat-mini-fab color="primary" aria-label="Next" class="glider-next">
+    »
+  </button>
+  <div role="tablist" class="dots"></div>
+</div>

@@ -1,0 +1,28 @@
+@import "/src/assets/css/helpers/variables.scss";
+
+.mat-mini-fab.glider-next,
+.mat-mini-fab.glider-prev {
+  position: absolute !important;
+}
+
+.glider-track {
+  height: 100%;
+}
+
+.glider-dot {
+  background: $gray-light !important;
+
+  &:focus,
+  &:hover {
+    background: $gray !important;
+  }
+
+  &.active {
+    background: $primary !important;
+
+    &:focus,
+    &:hover {
+      background: $primary-medium !important;
+    }
+  }
+}
