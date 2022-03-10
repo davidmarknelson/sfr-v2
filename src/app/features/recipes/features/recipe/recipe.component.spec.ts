@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipeFullData } from '@sfr-testing/helpers';
-import { MockActivateRoute, MockAuthService } from '@sfr-testing/mocks';
+import { MockActivatedRoute, MockAuthService } from '@sfr-testing/mocks';
 import { RecipeGQL } from '@sfr/data-access/generated';
 import {
   SfrUiAnnouncementModule,
@@ -50,7 +50,7 @@ describe('SfrRecipeComponent', () => {
         },
         {
           provide: ActivatedRoute,
-          useClass: MockActivateRoute,
+          useClass: MockActivatedRoute,
         },
         {
           provide: SfrAuthService,

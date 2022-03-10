@@ -1,7 +1,7 @@
 import { paramMapDefault } from '@sfr-testing/mock-helpers';
 import { of } from 'rxjs';
 
-export class MockActivateRoute {
+export class MockActivatedRoute {
   get queryParamMap() {
     return of({
       get: () => null,
@@ -13,5 +13,7 @@ export class MockActivateRoute {
   get data() {
     return of(null);
   }
-  snapshot = {};
+  get snapshot() {
+    return {};
+  }
 }

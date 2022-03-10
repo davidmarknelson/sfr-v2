@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { SfrRoutes } from '@sfr/shared/utils/types';
 import { SfrWelcomeComponent } from './welcome.component';
 
-const routes: Routes = [
+const routes: SfrRoutes = [
   {
     path: '',
     component: SfrWelcomeComponent,
+    data: {
+      title: 'Welcome',
+    },
   },
 ];
 

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeGQL, RecipeQuery } from '@sfr/data-access/generated';
-import { SfrAuthService } from '@sfr/shared/utils/services';
+import { SfrAuthService, SfrTitleService } from '@sfr/shared/utils/services';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'sfr-recipe',
@@ -21,7 +21,8 @@ export class SfrRecipeComponent {
   constructor(
     private recipeGQL: RecipeGQL,
     private route: ActivatedRoute,
-    private authService: SfrAuthService
+    private authService: SfrAuthService,
+    private readonly titleService: SfrTitleService
   ) {}
 
   private getRecipeFromRoute$(): Observable<RecipeQuery['recipe'] | null> {
@@ -30,7 +31,11 @@ export class SfrRecipeComponent {
       switchMap((name) => this.recipeGQL.watch({ name }).valueChanges),
       map(({ data, loading }) => {
         this.loading = loading;
+
         return data.recipe;
+      }),
+      tap((recipe) => {
+        this.titleService.setTabTitle(recipe.name);
       }),
       catchError(() => {
         this.error = true;

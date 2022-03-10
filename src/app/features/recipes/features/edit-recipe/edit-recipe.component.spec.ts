@@ -9,17 +9,17 @@ import {
 } from '@sfr-testing/helpers';
 import { paramMapDefault } from '@sfr-testing/mock-helpers';
 import {
-  MockActivateRoute,
+  MockActivatedRoute,
   MockRouter,
   MockUrlReplaceSpacePipe,
 } from '@sfr-testing/mocks';
 import { EditRecipeGQL, RecipeGQL } from '@sfr/data-access/generated';
 import {
-  SfrUiAnnouncementModule,
-  SfrUiContainerModule,
-  SfrUiLoaderModule,
-  SfrUiPageTitleModule,
-} from '@sfr/shared/ui';
+  SfrAnnouncementUiModule,
+  SfrContainerUiModule,
+  SfrLoaderUiModule,
+  SfrPageTitleUiModule,
+} from '@sfr/shared/ui/presentational';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
 import { of } from 'rxjs';
 import { SfrCreateEditRecipeUiModule } from '../../ui/create-edit-recipe/create-edit-recipe.module';
@@ -44,11 +44,11 @@ describe('SfrEditRecipeComponent', () => {
       declarations: [SfrEditRecipeComponent],
       imports: [
         RouterTestingModule,
-        SfrUiContainerModule,
-        SfrUiPageTitleModule,
+        SfrContainerUiModule,
+        SfrPageTitleUiModule,
         SfrCreateEditRecipeUiModule,
-        SfrUiAnnouncementModule,
-        SfrUiLoaderModule,
+        SfrAnnouncementUiModule,
+        SfrLoaderUiModule,
         BrowserAnimationsModule,
       ],
       providers: [
@@ -78,7 +78,7 @@ describe('SfrEditRecipeComponent', () => {
         },
         {
           provide: ActivatedRoute,
-          useClass: MockActivateRoute,
+          useClass: MockActivatedRoute,
         },
       ],
     }).compileComponents();

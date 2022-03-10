@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { paramMapDefault } from '@sfr-testing/mock-helpers';
-import { MockActivateRoute } from '@sfr-testing/mocks';
+import { MockActivatedRoute } from '@sfr-testing/mocks';
 import { of } from 'rxjs';
 import { SfrPaginationService } from './pagination.service';
 
@@ -16,7 +16,7 @@ describe('SfrPaginationService', () => {
       providers: [
         {
           provide: ActivatedRoute,
-          useClass: MockActivateRoute,
+          useClass: MockActivatedRoute,
         },
       ],
     }).compileComponents();

@@ -15,10 +15,13 @@ import {
 } from '@sfr/data-access/generated';
 import { SfrImageUploaderComponent } from '@sfr/shared/ui/intelligent';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
-import { SfrCloudinaryService } from '@sfr/shared/utils/services';
+import {
+  SfrCloudinaryService,
+  SfrTitleService,
+} from '@sfr/shared/utils/services';
 import { CloudinaryProgressResult } from '@sfr/shared/utils/types';
 import { Observable, of, zip } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { CreateEditRecipe } from '../../utils';
 
 interface RecipeOrError {
@@ -44,7 +47,8 @@ export class SfrEditRecipeComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private recipeGQL: RecipeGQL,
     private readonly dialog: MatDialog,
-    private readonly cloudinary: SfrCloudinaryService
+    private readonly cloudinary: SfrCloudinaryService,
+    private readonly titleService: SfrTitleService
   ) {}
 
   ngOnInit(): void {
@@ -157,7 +161,7 @@ export class SfrEditRecipeComponent implements OnInit {
         return paramMap.get('name') || '';
       }),
       mergeMap((name) => {
-        return this.recipeGQL.fetch({ name }).pipe(
+        return this.recipeGQL.fetch({ name }, { errorPolicy: 'all' }).pipe(
           map(({ data, errors }) => {
             return {
               recipe: data?.recipe,
@@ -165,6 +169,13 @@ export class SfrEditRecipeComponent implements OnInit {
             };
           })
         );
+      }),
+      tap((recipeOrError) => {
+        if (recipeOrError.recipe) {
+          this.titleService.setTabTitle(`Edit ${recipeOrError.recipe.name}`);
+        } else {
+          this.titleService.setTabTitle('Edit Recipe Not Found');
+        }
       })
     );
   }

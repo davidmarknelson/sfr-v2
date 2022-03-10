@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { SfrRoutes } from '@sfr/shared/utils/types';
 import { SfrRecipeComponent } from './recipe.component';
 
-const routes: Routes = [
+const routes: SfrRoutes = [
   {
     path: '',
     component: SfrRecipeComponent,

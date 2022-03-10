@@ -17,12 +17,29 @@
     <mat-menu #menu="matMenu">
       <a routerLink="/recipes" mat-menu-item>Recipes</a>
       <ng-container *ngIf="(isAuthenticated$ | async) === false">
-        <a routerLink="/signup" mat-menu-item>Sign up</a>
-        <a routerLink="/login" mat-menu-item>Login</a>
+        <a routerLink="/signup" mat-menu-item
+          >Sign up
+          <mat-icon>chevron_right</mat-icon>
+        </a>
+        <a routerLink="/login" mat-menu-item
+          >Login
+          <mat-icon>chevron_right</mat-icon>
+        </a>
       </ng-container>
       <ng-container *ngIf="isAuthenticated$ | async">
-        <a routerLink="/create-recipe" mat-menu-item>Create recipe</a>
-        <a routerLink="/logout" mat-menu-item>Logout</a>
+        <a routerLink="/create-recipe" mat-menu-item
+          >Create recipe
+          <mat-icon>chevron_right</mat-icon>
+        </a>
+        <button
+          mat-flat-button
+          color="primary"
+          sfrRoundedButton
+          (click)="logout()"
+          class="ml-1"
+        >
+          Logout
+        </button>
       </ng-container>
     </mat-menu>
   </nav>
@@ -31,6 +48,7 @@
   <nav fxHide.lt-sm="true">
     <a routerLink="/recipes" mat-flat-button color="primary" sfrRoundedButton>
       Recipes
+      <mat-icon>chevron_right</mat-icon>
     </a>
     <ng-container *ngIf="(isAuthenticated$ | async) === false">
       <a
@@ -41,6 +59,7 @@
         sfrRoundedButton
       >
         Sign up
+        <mat-icon>chevron_right</mat-icon>
       </a>
       <a
         class="ml-1"
@@ -50,6 +69,7 @@
         sfrRoundedButton
       >
         Login
+        <mat-icon>chevron_right</mat-icon>
       </a>
     </ng-container>
     <ng-container *ngIf="isAuthenticated$ | async">
@@ -61,6 +81,7 @@
         sfrRoundedButton
       >
         Create recipe
+        <mat-icon>chevron_right</mat-icon>
       </a>
       <button
         mat-flat-button
