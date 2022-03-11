@@ -1,21 +1,56 @@
 @import "/src/assets/css/helpers/variables.scss";
 
+:host {
+  position: relative;
+}
+
+button.left {
+  position: absolute;
+  left: 4px;
+  top: 45%;
+}
+
+button.right {
+  position: absolute;
+  right: 4px;
+  top: 45%;
+}
+
+.dots {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+
+  & button {
+    margin-left: 8px;
+    margin-right: 8px;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    padding: 0;
+    border: none;
+    background: $gray-light;
+    cursor: pointer;
+
+    &.active {
+      background: $primary;
+    }
+  }
+}
+
+.container {
+  overflow-y: auto;
+}
+
 figure {
   display: block;
   position: relative;
-  border-radius: $border-radius;
-}
-
-// border-radius is removed so the alt text
-// can be visible
-.glider-contain {
-  display: block;
-  position: relative;
   padding-top: 75%;
+  border-radius: $border-radius;
+  width: 100%;
 }
 
-img,
-.figure-contain {
+img {
   height: 100%;
   width: 100%;
   bottom: 0;
@@ -25,29 +60,4 @@ img,
   top: 0;
   border-radius: $border-radius;
   object-fit: cover;
-}
-
-.glider-next,
-.glider-prev {
-  top: 45%;
-
-  &:hover,
-  &:focus {
-    color: inherit;
-  }
-}
-
-.glider-next {
-  right: 4px;
-}
-
-.glider-prev {
-  left: 4px;
-}
-
-.dots {
-  position: absolute;
-  bottom: 12px;
-  left: 0;
-  right: 0;
 }

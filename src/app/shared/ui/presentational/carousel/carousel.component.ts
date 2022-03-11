@@ -1,13 +1,12 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   Input,
-  ViewChild,
+  QueryList,
+  ViewChildren,
 } from '@angular/core';
 import { RecipePhotoType } from '@sfr/data-access/generated';
-import * as Glider from 'glider-js';
 
 @Component({
   selector: 'sfr-carousel',
@@ -15,21 +14,34 @@ import * as Glider from 'glider-js';
   styleUrls: ['./carousel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SfrCarouselComponent implements AfterViewInit {
+export class SfrCarouselComponent {
   @Input() images!: RecipePhotoType[];
-  @ViewChild('glider') glider!: ElementRef;
+  @ViewChildren('img') private readonly imageElements!: QueryList<ElementRef>;
+  currentIndex: number = 0;
 
-  ngAfterViewInit(): void {
-    new Glider(this.glider.nativeElement, {
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      draggable: true,
-      rewind: true,
-      dots: '.dots',
-      arrows: {
-        prev: '.glider-prev',
-        next: '.glider-next',
-      },
-    });
+  scroll(direction: 'left' | 'right'): void {
+    let scrollIndex: number;
+    if (direction === 'left' && this.currentIndex === 0) {
+      scrollIndex = this.images.length - 1;
+    } else if (
+      direction === 'right' &&
+      this.currentIndex === this.images.length - 1
+    ) {
+      scrollIndex = 0;
+    } else if (direction === 'left') {
+      scrollIndex = this.currentIndex - 1;
+    } else {
+      scrollIndex = this.currentIndex + 1;
+    }
+
+    this.scrollToIndex(scrollIndex);
+  }
+
+  scrollToIndex(index: number): void {
+    this.currentIndex = index;
+
+    this.imageElements
+      .get(index)
+      ?.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
   }
 }

@@ -1,20 +1,42 @@
-<div class="glider-contain">
-  <div #glider class="figure-contain">
-    <figure *ngFor="let image of images; let i = index">
-      <img [src]="image.path" [alt]="'Recipe image ' + (i + 1)" />
+<div class="container">
+  <div fxLayout="row">
+    <figure
+      *ngFor="let image of images; let i = index"
+      [ngStyle]="{ 'margin-right': '-' + i * 100 + '%' }"
+      [attr.aria-hidden]="currentIndex !== i"
+    >
+      <img #img [src]="image.path" [alt]="'Recipe image ' + (i + 1)" />
     </figure>
   </div>
-
-  <button
-    mat-mini-fab
-    color="primary"
-    aria-label="Previous"
-    class="glider-prev"
-  >
-    «
-  </button>
-  <button mat-mini-fab color="primary" aria-label="Next" class="glider-next">
-    »
-  </button>
-  <div role="tablist" class="dots"></div>
 </div>
+
+<button
+  mat-mini-fab
+  color="primary"
+  class="left"
+  (click)="scroll('left')"
+  aria-label="View previous image"
+>
+  <mat-icon>chevron_left</mat-icon>
+</button>
+
+<button
+  mat-mini-fab
+  color="primary"
+  class="right"
+  (click)="scroll('right')"
+  aria-label="View next image"
+>
+  <mat-icon>chevron_right</mat-icon>
+</button>
+
+<ul class="dots" fxLayout="row" fxLayoutAlign="center center">
+  <li>
+    <button
+      *ngFor="let image of images; let i = index"
+      (click)="scrollToIndex(i)"
+      [attr.aria-current]="currentIndex === i"
+      [class.active]="currentIndex === i"
+    ></button>
+  </li>
+</ul>
