@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SfrAuthService } from '@sfr/shared/utils/services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'sfr-footer',
@@ -6,4 +8,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SfrFooterComponent {}
+export class SfrFooterComponent {
+  isAuthenticated$: Observable<boolean>;
+
+  constructor(private readonly auth: SfrAuthService) {
+    this.isAuthenticated$ = this.auth.isAuthenticated$;
+  }
+}

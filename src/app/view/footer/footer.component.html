@@ -1,1 +1,10 @@
 <a routerLink="/recipes">Recipes</a>
+<a
+  *ngIf="isAuthenticated$ | async; else isUnauthenticated"
+  routerLink="/profile"
+  >Profile</a
+>
+<ng-template #isUnauthenticated>
+  <a routerLink="/signup">Sign up</a>
+  <a routerLink="/login">Login</a>
+</ng-template>
