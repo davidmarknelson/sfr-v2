@@ -1,20 +1,23 @@
-import { TestBed } from '@angular/core/testing';
+import { DomSanitizer } from '@angular/platform-browser';
 import { SfrFileReaderPipe } from './file-reader.pipe';
 
+class MockDomSanitizer {
+  sanitize() {
+    return 'safe-url';
+  }
+}
+
 describe('SfrFileReaderPipe', () => {
-  let pipe: SfrFileReaderPipe;
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [SfrFileReaderPipe],
-    });
-    pipe = TestBed.inject(SfrFileReaderPipe);
-  });
+  const sanitizerInstance = new MockDomSanitizer() as unknown as DomSanitizer;
+  const domSanitizerSpy = jest.spyOn(sanitizerInstance, 'sanitize');
+  const pipe = new SfrFileReaderPipe(sanitizerInstance);
 
   it('should return a string', (done) => {
     pipe
       .transform(new File([new Blob()], 'image.jpeg', { type: 'image/jpeg' }))
       .subscribe((res) => {
-        expect(typeof res).toEqual('string');
+        expect(res).toEqual('safe-url');
+        expect(domSanitizerSpy).toHaveBeenCalled();
         done();
       });
   });

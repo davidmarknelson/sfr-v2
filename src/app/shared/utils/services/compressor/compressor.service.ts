@@ -9,7 +9,7 @@ export class SfrCompressorService {
   constructor() {}
 
   compressImage$(file: File): Observable<File> {
-    return new Observable((observable) => {
+    return new Observable((observer) => {
       new Compressor(file, {
         quality: 0.6,
         success(blobResult) {
@@ -17,11 +17,11 @@ export class SfrCompressorService {
             type: file.type,
             lastModified: Date.now(),
           });
-          observable.next(compressedFile);
-          observable.complete();
+          observer.next(compressedFile);
+          observer.complete();
         },
         error(err) {
-          observable.error(err);
+          observer.error(err);
         },
       });
     });
