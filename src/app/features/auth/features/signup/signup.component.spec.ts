@@ -16,10 +16,10 @@ import { MockAuthService, MockRouter } from '@sfr-testing/mocks';
 import { apiUserConstants } from '@sfr/data-access/constants';
 import { SignupGQL } from '@sfr/data-access/generated';
 import {
-  SfrUiAnnouncementModule,
-  SfrUiContainerModule,
-  SfrUiPageTitleModule,
-} from '@sfr/shared/ui';
+  SfrAnnouncementUiModule,
+  SfrContainerUiModule,
+  SfrPageTitleUiModule,
+} from '@sfr/shared/ui/presentational';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrAuthService } from '@sfr/shared/utils/services';
 import { of } from 'rxjs';
@@ -42,10 +42,10 @@ describe('SignupComponent', () => {
       declarations: [SfrSignupComponent],
       imports: [
         RouterTestingModule,
-        SfrUiContainerModule,
-        SfrUiPageTitleModule,
+        SfrContainerUiModule,
+        SfrPageTitleUiModule,
         SfrRoundedButtonModule,
-        SfrUiAnnouncementModule,
+        SfrAnnouncementUiModule,
         MatFormFieldModule,
         ReactiveFormsModule,
         MatInputModule,

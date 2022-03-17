@@ -12,7 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipesAndCountData } from '@sfr-testing/helpers';
-import { SfrUiAnnouncementModule } from '@sfr/shared/ui/announcement/ui-announcement.module';
+import { SfrAnnouncementUiModule } from '@sfr/shared/ui/presentational';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import {
   SfrRecipePhotoPipeModule,
@@ -35,7 +35,7 @@ describe('SfrRecipesGridComponent', () => {
         MatButtonModule,
         SfrRoundedButtonModule,
         SfrRecipePhotoPipeModule,
-        SfrUiAnnouncementModule,
+        SfrAnnouncementUiModule,
         SfrUrlReplaceSpaceModule,
         RouterTestingModule,
         MatIconModule,

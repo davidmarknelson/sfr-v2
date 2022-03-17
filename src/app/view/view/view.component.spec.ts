@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockAuthService } from '@sfr-testing/mocks';
-import { SfrUiContainerModule } from '@sfr/shared/ui';
+import { SfrContainerUiModule } from '@sfr/shared/ui/presentational';
 import { SfrAuthService } from '@sfr/shared/utils/services';
 import { SfrFooterComponent } from '../footer/footer.component';
 import { SfrHeaderComponent } from '../header/header.component';
@@ -19,9 +20,10 @@ describe('ViewComponent', () => {
       declarations: [SfrViewComponent, SfrFooterComponent, SfrHeaderComponent],
       imports: [
         RouterTestingModule,
-        SfrUiContainerModule,
+        SfrContainerUiModule,
         MatToolbarModule,
         MatMenuModule,
+        MatIconModule,
       ],
       providers: [
         { provide: MATERIAL_SANITY_CHECKS, useValue: false },

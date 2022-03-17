@@ -10,11 +10,12 @@ import { createMockRecipeFullData } from '@sfr-testing/helpers';
 import { MockActivatedRoute, MockAuthService } from '@sfr-testing/mocks';
 import { RecipeGQL } from '@sfr/data-access/generated';
 import {
-  SfrUiAnnouncementModule,
-  SfrUiContainerModule,
-  SfrUiLoaderModule,
-  SfrUiPageTitleModule,
-} from '@sfr/shared/ui';
+  SfrAnnouncementUiModule,
+  SfrCarouselUiModule,
+  SfrContainerUiModule,
+  SfrLoaderUiModule,
+  SfrPageTitleUiModule,
+} from '@sfr/shared/ui/presentational';
 import { SfrRecipePhotoPipeModule } from '@sfr/shared/utils/pipes';
 import { SfrAuthService } from '@sfr/shared/utils/services';
 import { of } from 'rxjs';
@@ -29,14 +30,15 @@ describe('SfrRecipeComponent', () => {
       declarations: [SfrRecipeComponent],
       imports: [
         RouterTestingModule,
-        SfrUiContainerModule,
-        SfrUiPageTitleModule,
-        SfrUiLoaderModule,
-        SfrUiAnnouncementModule,
+        SfrContainerUiModule,
+        SfrPageTitleUiModule,
+        SfrLoaderUiModule,
+        SfrAnnouncementUiModule,
         SfrRecipePhotoPipeModule,
         MatListModule,
         MatIconModule,
         MatTooltipModule,
+        SfrCarouselUiModule,
       ],
       providers: [
         { provide: MATERIAL_SANITY_CHECKS, useValue: false },

@@ -24,6 +24,6 @@ describe('RoundedButtonDirective', () => {
   });
 
   it('should apply the rounded button class', () => {
-    expect(button.classList).toContain('sfr-rounded-button');
+    expect(button.classList).toContain('sfr-rounded-corners');
   });
 });

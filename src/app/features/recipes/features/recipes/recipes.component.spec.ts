@@ -4,8 +4,11 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipesAndCountData } from '@sfr-testing/helpers';
 import { RecipesAndCountGQL } from '@sfr/data-access/generated';
-import { SfrUiContainerModule, SfrUiLoaderModule } from '@sfr/shared/ui';
-import { SfrUiPageTitleModule } from '@sfr/shared/ui/page-title/ui-page-title.module';
+import {
+  SfrContainerUiModule,
+  SfrLoaderUiModule,
+  SfrPageTitleUiModule,
+} from '@sfr/shared/ui/presentational';
 import { SfrPaginationService } from '@sfr/shared/utils/services';
 import { of } from 'rxjs';
 import { SfrRecipesGridUiModule } from '../../ui/recipes-grid/recipes-grid.module';
@@ -21,9 +24,9 @@ describe('SfrRecipesComponent', () => {
       declarations: [SfrRecipesComponent],
       imports: [
         SfrRecipesGridUiModule,
-        SfrUiContainerModule,
-        SfrUiPageTitleModule,
-        SfrUiLoaderModule,
+        SfrContainerUiModule,
+        SfrPageTitleUiModule,
+        SfrLoaderUiModule,
         RouterTestingModule,
       ],
       providers: [

@@ -17,7 +17,10 @@ import {
   apiRecipeConstants,
   apiRecipeMessageConstants,
 } from '@sfr/data-access/constants';
-import { SfrImageUploadUiModule } from '@sfr/shared/ui';
+import {
+  SfrImageCurrentUiModule,
+  SfrImageUploadUiModule,
+} from '@sfr/shared/ui/intelligent';
 import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 
@@ -41,6 +44,7 @@ describe('SfrCreateEditRecipeComponent', () => {
         MatIconModule,
         BrowserAnimationsModule,
         SfrImageUploadUiModule,
+        SfrImageCurrentUiModule,
       ],
       providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();
@@ -295,7 +299,8 @@ describe('SfrCreateEditRecipeComponent', () => {
         ingredients: ['Meat and bread'],
         instructions: ['Make the sandwich'],
         name: 'sandwich',
-        photos: [],
+        currentPhotos: [],
+        imageFiles: [],
       });
     });
   });

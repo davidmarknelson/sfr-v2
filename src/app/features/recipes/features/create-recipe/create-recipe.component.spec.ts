@@ -12,10 +12,10 @@ import {
 } from '@sfr-testing/mocks';
 import { CreateRecipeGQL } from '@sfr/data-access/generated';
 import {
-  SfrUiAnnouncementModule,
-  SfrUiContainerModule,
-  SfrUiPageTitleModule,
-} from '@sfr/shared/ui';
+  SfrAnnouncementUiModule,
+  SfrContainerUiModule,
+  SfrPageTitleUiModule,
+} from '@sfr/shared/ui/presentational';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
 import { SfrCloudinaryService } from '@sfr/shared/utils/services';
 import { CloudinaryProgressResult } from '@sfr/shared/utils/types';
@@ -42,10 +42,10 @@ describe('CreateRecipeComponent', () => {
       imports: [
         RouterTestingModule,
         CreateRecipeRoutingModule,
-        SfrUiContainerModule,
-        SfrUiPageTitleModule,
+        SfrContainerUiModule,
+        SfrPageTitleUiModule,
         SfrCreateEditRecipeUiModule,
-        SfrUiAnnouncementModule,
+        SfrAnnouncementUiModule,
         BrowserAnimationsModule,
       ],
       providers: [

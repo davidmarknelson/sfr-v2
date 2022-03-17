@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { By } from '@angular/platform-browser';
@@ -19,6 +20,7 @@ describe('SfrHeaderComponent', () => {
       imports: [
         MatToolbarModule,
         MatMenuModule,
+        MatIconModule,
         RouterTestingModule.withRoutes([
           {
             path: 'welcome',

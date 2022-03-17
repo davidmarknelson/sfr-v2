@@ -40,12 +40,12 @@ export class SfrEditRecipeComponent implements OnInit {
   errorMessage: string | null = null;
 
   constructor(
-    private editRecipeGQL: EditRecipeGQL,
-    private route: ActivatedRoute,
-    private router: Router,
-    private urlReplaceSpace: SfrUrlReplaceSpacePipe,
-    private cd: ChangeDetectorRef,
-    private recipeGQL: RecipeGQL,
+    private readonly editRecipeGQL: EditRecipeGQL,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly urlReplaceSpace: SfrUrlReplaceSpacePipe,
+    private readonly cd: ChangeDetectorRef,
+    private readonly recipeGQL: RecipeGQL,
     private readonly dialog: MatDialog,
     private readonly cloudinary: SfrCloudinaryService,
     private readonly titleService: SfrTitleService

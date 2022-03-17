@@ -1,28 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import {
-  createMockRecipeFullData,
-  createMockRecipeInput,
-} from '@sfr-testing/helpers';
+import { createMockRecipeFullData } from '@sfr-testing/helpers';
 import { paramMapDefault } from '@sfr-testing/mock-helpers';
 import {
   MockActivatedRoute,
+  MockCloudinaryService,
   MockRouter,
-  MockUrlReplaceSpacePipe,
+  MockUrlReplaceSpacePipe
 } from '@sfr-testing/mocks';
 import { EditRecipeGQL, RecipeGQL } from '@sfr/data-access/generated';
 import {
   SfrAnnouncementUiModule,
   SfrContainerUiModule,
   SfrLoaderUiModule,
-  SfrPageTitleUiModule,
+  SfrPageTitleUiModule
 } from '@sfr/shared/ui/presentational';
 import { SfrUrlReplaceSpacePipe } from '@sfr/shared/utils/pipes';
+import { SfrCloudinaryService } from '@sfr/shared/utils/services';
+import { CloudinaryProgressResult } from '@sfr/shared/utils/types';
 import { of } from 'rxjs';
 import { SfrCreateEditRecipeUiModule } from '../../ui/create-edit-recipe/create-edit-recipe.module';
+import { CreateEditRecipe } from '../../utils';
 import { SfrEditRecipeComponent } from './edit-recipe.component';
 
 let returnRecipeData: any = {
@@ -38,6 +40,8 @@ describe('SfrEditRecipeComponent', () => {
   let activatedRoute: ActivatedRoute;
   let router: Router;
   let urlReplaceSpace: SfrUrlReplaceSpacePipe;
+  let cloudinaryService: SfrCloudinaryService;
+  let dialog: MatDialog;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -80,11 +84,37 @@ describe('SfrEditRecipeComponent', () => {
           provide: ActivatedRoute,
           useClass: MockActivatedRoute,
         },
+        {
+          provide: SfrCloudinaryService,
+          useClass: MockCloudinaryService,
+        },
+        {
+          provide: MatDialog,
+          useValue: {
+            open: jest.fn().mockReturnValue({
+              afterClosed: jest.fn().mockReturnValue(
+                of([
+                  {
+                    state: 'DONE',
+                    progress: 100,
+                    result: {
+                      secure_url: 'some-url',
+                      public_id: 'some-id',
+                      delete_token: 'some-token',
+                    },
+                  } as CloudinaryProgressResult,
+                ])
+              ),
+            }),
+          },
+        },
       ],
     }).compileComponents();
     activatedRoute = TestBed.inject(ActivatedRoute);
     urlReplaceSpace = TestBed.inject(SfrUrlReplaceSpacePipe);
     router = TestBed.inject(Router);
+    cloudinaryService = TestBed.inject(SfrCloudinaryService);
+    dialog = TestBed.inject(MatDialog)
   });
 
   beforeEach(() => {
@@ -177,16 +207,60 @@ describe('SfrEditRecipeComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should edit a recipe and route to the newly edited recipe', () => {
+    it('should edit a recipe and route to the newly edited recipe and upload an image', () => {
       const routerSpy = jest.spyOn(router, 'navigate');
       const urlReplaceSpaceSpy = jest
         .spyOn(urlReplaceSpace, 'transform')
         .mockReturnValue('sandwich');
+      const deleteUploadedImagesSpy = jest.spyOn(
+        cloudinaryService,
+        'deleteImageByToken$'
+      );
+      const dialogSpy = jest.spyOn(dialog, 'open')
       fixture.debugElement
         .query(By.css('sfr-create-edit-recipe'))
-        .componentInstance.saveValue.emit(createMockRecipeInput());
+        .componentInstance.saveValue.emit({
+          name: 'sandwich',
+          description: 'some description',
+          cookTime: 20,
+          difficulty: 1,
+          instructions: ['make sandwich'],
+          ingredients: ['meat and bread'],
+          imageFiles: [new File([], 'image.jpeg')],
+          currentPhotos: [],
+        } as CreateEditRecipe);
       expect(urlReplaceSpaceSpy).toHaveBeenCalled();
       expect(routerSpy).toHaveBeenCalledWith(['recipes', 'sandwich']);
+      expect(deleteUploadedImagesSpy).not.toHaveBeenCalled();
+      expect(dialogSpy).toHaveBeenCalled();
+    });
+
+    it('should edit a recipe and route to the newly edited recipe and not upload an image', () => {
+      const routerSpy = jest.spyOn(router, 'navigate');
+      const urlReplaceSpaceSpy = jest
+        .spyOn(urlReplaceSpace, 'transform')
+        .mockReturnValue('sandwich');
+      const deleteUploadedImagesSpy = jest.spyOn(
+        cloudinaryService,
+        'deleteImageByToken$'
+      );
+      const dialogSpy = jest.spyOn(dialog, 'open')
+      fixture.debugElement
+        .query(By.css('sfr-create-edit-recipe'))
+        .componentInstance.saveValue.emit({
+          name: 'sandwich',
+          description: 'some description',
+          cookTime: 20,
+          difficulty: 1,
+          instructions: ['make sandwich'],
+          ingredients: ['meat and bread'],
+          imageFiles: [],
+          currentPhotos: [],
+        } as CreateEditRecipe);
+      expect(urlReplaceSpaceSpy).toHaveBeenCalled();
+      expect(routerSpy).toHaveBeenCalledWith(['recipes', 'sandwich']);
+      expect(deleteUploadedImagesSpy).not.toHaveBeenCalled();
+      expect(dialogSpy).not.toHaveBeenCalled();
     });
 
     it('should show an error if the name is already used', () => {
@@ -208,9 +282,23 @@ describe('SfrEditRecipeComponent', () => {
       const urlReplaceSpaceSpy = jest
         .spyOn(urlReplaceSpace, 'transform')
         .mockReturnValue('sandwich');
+      const deleteUploadedImagesSpy = jest.spyOn(
+        cloudinaryService,
+        'deleteImageByToken$'
+      );
       fixture.debugElement
         .query(By.css('sfr-create-edit-recipe'))
-        .componentInstance.saveValue.emit(createMockRecipeInput());
+        .componentInstance.saveValue.emit({
+          name: 'sandwich',
+          description: 'some description',
+          cookTime: 20,
+          difficulty: 1,
+          instructions: ['make sandwich'],
+          ingredients: ['meat and bread'],
+          imageFiles: [new File([], 'image.jpeg')],
+          currentPhotos: [],
+        } as CreateEditRecipe);
+      fixture.detectChanges();
       expect(urlReplaceSpaceSpy).not.toHaveBeenCalled();
       expect(routerSpy).not.toHaveBeenCalled();
       expect(component.errorMessage).toEqual(
@@ -219,6 +307,7 @@ describe('SfrEditRecipeComponent', () => {
       expect(
         fixture.debugElement.query(By.css('sfr-announcement'))
       ).toBeTruthy();
+      expect(deleteUploadedImagesSpy).toHaveBeenCalledTimes(1);
     });
   });
 });
