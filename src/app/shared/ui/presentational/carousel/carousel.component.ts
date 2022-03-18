@@ -21,6 +21,7 @@ export class SfrCarouselComponent {
 
   scroll(direction: 'left' | 'right'): void {
     let scrollIndex: number;
+
     if (direction === 'left' && this.currentIndex === 0) {
       scrollIndex = this.images.length - 1;
     } else if (
@@ -41,7 +42,7 @@ export class SfrCarouselComponent {
     this.currentIndex = index;
 
     this.imageElements
-      .get(index)
+      .get(this.currentIndex)
       ?.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
   }
 }

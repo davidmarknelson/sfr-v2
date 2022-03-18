@@ -19,6 +19,7 @@ import {
 } from '@sfr/data-access/constants';
 import { RecipeQuery } from '@sfr/data-access/generated';
 import { regexConstants } from '@sfr/shared/utils/constants';
+import { SfrValidators } from '@sfr/shared/utils/validators';
 import { CreateEditRecipe } from '../../utils';
 
 @Component({
@@ -94,36 +95,44 @@ export class SfrCreateEditRecipeComponent implements OnInit {
   }
 
   private createForm(recipe?: RecipeQuery['recipe']): FormGroup {
-    return this.fb.group({
-      name: [
-        recipe?.name || '',
-        [
-          Validators.required,
-          Validators.maxLength(apiRecipeConstants.nameMaxLength),
+    return this.fb.group(
+      {
+        name: [
+          recipe?.name || '',
+          [
+            Validators.required,
+            Validators.maxLength(apiRecipeConstants.nameMaxLength),
+          ],
         ],
-      ],
-      description: [
-        recipe?.description || '',
-        [
-          Validators.required,
-          Validators.maxLength(apiRecipeConstants.descriptionMaxLength),
+        description: [
+          recipe?.description || '',
+          [
+            Validators.required,
+            Validators.maxLength(apiRecipeConstants.descriptionMaxLength),
+          ],
         ],
-      ],
-      cookTime: [
-        recipe?.cookTime || '',
-        [Validators.required, Validators.pattern(regexConstants.numbersOnly)],
-      ],
-      difficulty: [recipe?.difficulty || null, Validators.required],
-      ingredients: this.fb.array(
-        recipe?.ingredients || [''],
-        Validators.required
-      ),
-      instructions: this.fb.array(
-        recipe?.instructions || [''],
-        Validators.required
-      ),
-      imageFiles: [[], [Validators.maxLength(3)]],
-      currentPhotos: [recipe?.photos || [], [Validators.maxLength(3)]],
-    });
+        cookTime: [
+          recipe?.cookTime || '',
+          [Validators.required, Validators.pattern(regexConstants.numbersOnly)],
+        ],
+        difficulty: [recipe?.difficulty || null, Validators.required],
+        ingredients: this.fb.array(
+          recipe?.ingredients || [''],
+          Validators.required
+        ),
+        instructions: this.fb.array(
+          recipe?.instructions || [''],
+          Validators.required
+        ),
+        imageFiles: [[]],
+        currentPhotos: [recipe?.photos || []],
+      },
+      {
+        validators: SfrValidators.combinedMaxLength(
+          ['imageFiles', 'currentPhotos'],
+          3
+        ),
+      }
+    );
   }
 }

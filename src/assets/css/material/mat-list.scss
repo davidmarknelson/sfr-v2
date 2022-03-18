@@ -16,3 +16,12 @@ mat-list-option[aria-selected="true"] .mat-list-text {
   height: 100% !important;
   flex-grow: 1 !important;
 }
+
+.mat-list-option:hover,
+.mat-list-option:focus,
+.mat-nav-list .mat-list-item:hover,
+.mat-nav-list .mat-list-item:focus,
+.mat-action-list .mat-list-item:hover,
+.mat-action-list .mat-list-item:focus {
+  background: rgba(0, 0, 0, 0.1) !important;
+}

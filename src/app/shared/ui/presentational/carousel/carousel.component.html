@@ -1,8 +1,8 @@
 <div class="container">
   <div fxLayout="row">
     <figure
-      *ngFor="let image of images; let i = index"
-      [ngStyle]="{ 'margin-right': '-' + i * 100 + '%' }"
+      *ngFor="let image of images; let i = index; let last = last"
+      [ngStyle]="{ 'margin-right': last ? '-' + i * 100 + '%' : null }"
       [attr.aria-hidden]="currentIndex !== i"
     >
       <img #img [src]="image.path" [alt]="'Recipe image ' + (i + 1)" />

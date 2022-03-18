@@ -240,27 +240,6 @@ describe('SfrCreateEditRecipeComponent', () => {
     });
   });
 
-  describe('Image Files', () => {
-    it('should show an error if there are more than 3 images', () => {
-      fixture.detectChanges();
-      component.imageFiles.setValue([
-        new File([], 'image.jpeg'),
-        new File([], 'image.jpeg'),
-        new File([], 'image.jpeg'),
-      ]);
-      expect(component.imageFiles.errors).toEqual(null);
-      component.imageFiles.setValue([
-        new File([], 'image.jpeg'),
-        new File([], 'image.jpeg'),
-        new File([], 'image.jpeg'),
-        new File([], 'image.jpeg'),
-      ]);
-      expect(component.imageFiles.errors).toEqual({
-        maxlength: { actualLength: 4, requiredLength: 3 },
-      });
-    });
-  });
-
   describe('submit', () => {
     it('should not emit the form values if there are form errors', () => {
       fixture.detectChanges();
@@ -277,6 +256,41 @@ describe('SfrCreateEditRecipeComponent', () => {
         .nativeElement.click();
       fixture.detectChanges();
       expect(saveValueSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not emit the form values if there are form errors with too many image files and current images', () => {
+      fixture.detectChanges();
+      const saveValueSpy = jest.spyOn(component.saveValue, 'emit');
+      component.name.setValue('sandwich');
+      component.description.setValue('Make it');
+      component.cookTime.setValue('asdf');
+      component.difficulty.setValue(1);
+      component.ingredients.at(0).setValue('Meat and bread');
+      component.instructions.at(0).setValue('Make the sandwich');
+      // Field with error
+      component.imageFiles.setValue([
+        new File([], 'image1.jpeg'),
+        new File([], 'image2.jpeg'),
+      ]);
+      // Field with error
+      component.currentPhotos.setValue([
+        {
+          id: 1,
+          path: 'path1',
+          cloudinaryPublicId: 'publicId1',
+        },
+        {
+          id: 2,
+          path: 'path2',
+          cloudinaryPublicId: 'publicId2',
+        },
+      ]);
+      fixture.debugElement
+        .query(By.css('[type="submit"]'))
+        .nativeElement.click();
+      fixture.detectChanges();
+      expect(saveValueSpy).not.toHaveBeenCalled();
+      expect(component.form.errors).toEqual({ combinedMaxLength: true });
     });
 
     it('should emit the form values if there are no errors', () => {
