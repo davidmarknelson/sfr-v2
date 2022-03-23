@@ -9,6 +9,8 @@ $max-width-component: 500px;
 $border-radius: 25px;
 $border-radius-small: 10px;
 
+$focus-background: rgba(0, 0, 0, 0.09);
+
 $primary: map.get(sfrTheme.$primary-green, 100);
 $primary-contrast: map.get(sfrTheme.$primary-green, contrast, 100);
 $primary-medium: map.get(sfrTheme.$primary-green, 400);

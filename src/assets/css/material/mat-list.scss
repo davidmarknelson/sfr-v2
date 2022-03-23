@@ -1,3 +1,5 @@
+@import "../helpers/variables.scss";
+
 mat-list-option[aria-selected="true"] .mat-list-text {
   text-decoration: line-through;
 }
@@ -23,5 +25,5 @@ mat-list-option[aria-selected="true"] .mat-list-text {
 .mat-nav-list .mat-list-item:focus,
 .mat-action-list .mat-list-item:hover,
 .mat-action-list .mat-list-item:focus {
-  background: rgba(0, 0, 0, 0.1) !important;
+  background: $focus-background !important;
 }

@@ -15,7 +15,10 @@
       Menu
     </button>
     <mat-menu #menu="matMenu">
-      <a routerLink="/recipes" mat-menu-item>Recipes</a>
+      <a routerLink="/recipes" mat-menu-item
+        >Recipes
+        <mat-icon>chevron_right</mat-icon>
+      </a>
       <ng-container *ngIf="(isAuthenticated$ | async) === false">
         <a routerLink="/signup" mat-menu-item
           >Sign up
@@ -31,15 +34,7 @@
           >Create recipe
           <mat-icon>chevron_right</mat-icon>
         </a>
-        <button
-          mat-flat-button
-          color="primary"
-          sfrRoundedButton
-          (click)="logout()"
-          class="ml-1"
-        >
-          Logout
-        </button>
+        <button mat-menu-item (click)="logout()">Logout</button>
       </ng-container>
     </mat-menu>
   </nav>
