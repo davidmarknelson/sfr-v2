@@ -18,7 +18,7 @@ button.right {
 
 .dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 0;
   width: 100%;
 
   & button {
@@ -39,7 +39,7 @@ button.right {
 }
 
 .container {
-  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 figure {
