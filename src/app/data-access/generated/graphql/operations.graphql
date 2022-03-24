@@ -48,6 +48,17 @@ query login($email: String!, $password: String!) {
   }
 }
 
+query profile {
+  profile {
+    id
+    email
+    username
+    recipes {
+      id
+    }
+  }
+}
+
 mutation signup($user: UserInput!) {
   signup(user: $user) {
     accessToken

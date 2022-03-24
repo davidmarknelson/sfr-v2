@@ -56,6 +56,7 @@ export type MutationSignupArgs = {
 export type Query = {
   __typename?: 'Query';
   login: AccessTokenType;
+  profile: UserType;
   recipe: RecipeType;
   recipesAndCount: RecipesAndCountType;
   refreshToken: AccessTokenType;
@@ -149,6 +150,14 @@ export type UserInput = {
   username: Scalars['String'];
 };
 
+export type UserType = {
+  __typename?: 'UserType';
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  recipes: Array<RecipeType>;
+  username: Scalars['String'];
+};
+
 export type RecipesAndCountQueryVariables = Exact<{
   skip: Scalars['Float'];
   take: Scalars['Float'];
@@ -176,6 +185,11 @@ export type LoginQueryVariables = Exact<{
 
 
 export type LoginQuery = { __typename?: 'Query', login: { __typename?: 'AccessTokenType', accessToken: string } };
+
+export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'UserType', id: number, email: string, username: string, recipes: Array<{ __typename?: 'RecipeType', id: number }> } };
 
 export type SignupMutationVariables = Exact<{
   user: UserInput;
@@ -291,6 +305,29 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
     document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ProfileDocument = gql`
+    query profile {
+  profile {
+    id
+    email
+    username
+    recipes {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ProfileGQL extends Apollo.Query<ProfileQuery, ProfileQueryVariables> {
+    document = ProfileDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

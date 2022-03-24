@@ -4,9 +4,14 @@
       <a routerLink="/recipes">Recipes</a>
     </li>
 
-    <li *ngIf="isAuthenticated$ | async; else isUnauthenticated">
-      <a routerLink="/profile">Profile</a>
-    </li>
+    <ng-container *ngIf="isAuthenticated$ | async; else isUnauthenticated">
+      <li>
+        <a routerLink="/create-recipe">Create recipe</a>
+      </li>
+      <li>
+        <a routerLink="/profile">Profile</a>
+      </li>
+    </ng-container>
 
     <ng-template #isUnauthenticated>
       <li>

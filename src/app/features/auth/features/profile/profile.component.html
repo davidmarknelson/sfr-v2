@@ -1,1 +1,36 @@
-<p>profile works!</p>
+<sfr-container [isSmall]="true">
+  <sfr-page-title> Profile </sfr-page-title>
+
+  <section *ngIf="profile$ | async as profile; else loading">
+    <p>{{ profile.username }}</p>
+    <p>{{ profile.email }}</p>
+  </section>
+
+  <!--
+    Commenting out until pages are done
+    <section class="mt-1" fxLayout="row" fxLayoutGap="1rem">
+      <a
+        mat-flat-button
+        color="primary"
+        sfrRoundedButton
+        routerLink="edit-profile"
+      >
+        Edit Profile
+        <mat-icon>chevron_right</mat-icon>
+      </a>
+      <a
+        mat-flat-button
+        color="primary"
+        sfrRoundedButton
+        routerLink="edit-password"
+      >
+        Edit Password
+        <mat-icon>chevron_right</mat-icon>
+      </a>
+    </section>
+  -->
+</sfr-container>
+
+<ng-template #loading>
+  <sfr-loader></sfr-loader>
+</ng-template>
