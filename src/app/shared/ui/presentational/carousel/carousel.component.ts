@@ -41,8 +41,10 @@ export class SfrCarouselComponent {
   scrollToIndex(index: number): void {
     this.currentIndex = index;
 
-    this.imageElements
-      .get(this.currentIndex)
-      ?.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    this.imageElements.get(this.currentIndex)?.nativeElement.scrollIntoView({
+      block: 'nearest',
+      behavior: 'smooth',
+      inline: 'start',
+    });
   }
 }
