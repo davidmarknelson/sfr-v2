@@ -38,7 +38,7 @@ export class SfrProfileEditComponent implements OnInit {
     return this.form.get('email') as FormControl;
   }
 
-  submit(form: { username: string; email: string }): void {
+  submit(): void {
     this.form.markAllAsTouched();
     if (!this.form.valid) {
       return;
@@ -49,12 +49,13 @@ export class SfrProfileEditComponent implements OnInit {
       .mutate(
         {
           profile: {
-            ...form,
+            username: this.username.value,
+            email: this.email.value,
           },
         },
         { errorPolicy: 'all' }
       )
-      .subscribe(({ data, errors }) => {
+      .subscribe(({ errors }) => {
         if (!errors) {
           this.router.navigate(['profile']);
         } else {
