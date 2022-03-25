@@ -11,6 +11,13 @@ const routes: SfrRoutes = [
       title: 'Profile',
     },
   },
+  {
+    path: 'edit-profile',
+    loadChildren: () =>
+      import('../profile-edit/profile-edit.module').then(
+        (m) => m.SfrProfileEditFeatureModule
+      ),
+  },
 ];
 
 @NgModule({

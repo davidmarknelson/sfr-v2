@@ -29,6 +29,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createRecipe: RecipeType;
   deleteRecipe: MessageType;
+  editProfile: UserType;
   editRecipe: RecipeType;
   signup: AccessTokenType;
 };
@@ -44,6 +45,11 @@ export type MutationDeleteRecipeArgs = {
 };
 
 
+export type MutationEditProfileArgs = {
+  profile: ProfileEditInput;
+};
+
+
 export type MutationEditRecipeArgs = {
   recipe: RecipeEditInput;
 };
@@ -51,6 +57,12 @@ export type MutationEditRecipeArgs = {
 
 export type MutationSignupArgs = {
   user: UserInput;
+};
+
+export type ProfileEditInput = {
+  email: Scalars['String'];
+  /** Must be between 5 and 25 characters long and not contain a space */
+  username: Scalars['String'];
 };
 
 export type Query = {
@@ -197,6 +209,13 @@ export type SignupMutationVariables = Exact<{
 
 
 export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AccessTokenType', accessToken: string } };
+
+export type EditProfileMutationVariables = Exact<{
+  profile: ProfileEditInput;
+}>;
+
+
+export type EditProfileMutation = { __typename?: 'Mutation', editProfile: { __typename?: 'UserType', id: number, username: string, email: string } };
 
 export type CreateRecipeMutationVariables = Exact<{
   recipe: RecipeInput;
@@ -346,6 +365,26 @@ export const SignupDocument = gql`
   })
   export class SignupGQL extends Apollo.Mutation<SignupMutation, SignupMutationVariables> {
     document = SignupDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const EditProfileDocument = gql`
+    mutation editProfile($profile: ProfileEditInput!) {
+  editProfile(profile: $profile) {
+    id
+    username
+    email
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class EditProfileGQL extends Apollo.Mutation<EditProfileMutation, EditProfileMutationVariables> {
+    document = EditProfileDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

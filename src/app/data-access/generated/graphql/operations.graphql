@@ -65,6 +65,14 @@ mutation signup($user: UserInput!) {
   }
 }
 
+mutation editProfile($profile: ProfileEditInput!) {
+  editProfile(profile: $profile) {
+    id
+    username
+    email
+  }
+}
+
 mutation createRecipe($recipe: RecipeInput!) {
   createRecipe(recipe: $recipe) {
     cookTime

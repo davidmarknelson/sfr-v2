@@ -1,0 +1,74 @@
+<sfr-container [isSmall]="true">
+  <sfr-page-title> Edit Profile </sfr-page-title>
+
+  <form
+    *ngIf="form; else loading"
+    [formGroup]="form"
+    fxLayout="column wrap"
+    (submit)="submit(form.value)"
+  >
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="Username"
+        formControlName="username"
+        required
+        fxFlex="1 1 auto"
+      />
+      <mat-hint>
+        Must be between 5 and 25 characters and must not contain a
+        space</mat-hint
+      >
+      <mat-error
+        *ngIf="username.invalid && (username.dirty || username.touched)"
+      >
+        <p *ngIf="username.errors?.required">
+          This field is required<span class="cdk-visually-hidden"
+            >Username</span
+          >
+        </p>
+        <p *ngIf="username.errors?.minlength">
+          Username must be at least 5 characters
+        </p>
+        <p *ngIf="username.errors?.maxlength">
+          Username must not be longer than 25 characters
+        </p>
+        <p *ngIf="username.errors?.pattern">
+          Username must not contain a space
+        </p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Email"
+        formControlName="email"
+        required
+        fxFlex="1 1 auto"
+      />
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+        <p *ngIf="email.errors?.required">
+          This field is required<span class="cdk-visually-hidden">Email</span>
+        </p>
+        <p *ngIf="email.errors?.email">This must be a valid email</p>
+      </mat-error>
+    </mat-form-field>
+
+    <sfr-announcement class="mb-1" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </sfr-announcement>
+
+    <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="flex-end">
+      <button mat-flat-button sfrRoundedButton color="accent" type="submit">
+        Update
+      </button>
+    </div>
+  </form>
+</sfr-container>
+
+<ng-template #loading>
+  <sfr-loader></sfr-loader>
+</ng-template>
