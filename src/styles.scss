@@ -12,6 +12,7 @@ $sfr-typography: mat.define-typography-config(
     Arial,
     sans-serif,
   ),
+  $body-1: mat.define-typography-level(16px, 20px, 400),
 );
 
 @include mat.core($sfr-typography);
@@ -30,5 +31,5 @@ body {
 body {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: unset !important;
+  // font-size: unset !important;
 }
