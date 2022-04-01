@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -14,6 +19,7 @@ import { regexConstants } from '@sfr/shared/utils/constants';
   selector: 'sfr-profile-edit',
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SfrProfileEditComponent implements OnInit {
   form!: FormGroup;

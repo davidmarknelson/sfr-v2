@@ -32,6 +32,7 @@ export type Mutation = {
   editProfile: UserType;
   editRecipe: RecipeType;
   signup: AccessTokenType;
+  updatePassword: MessageType;
 };
 
 
@@ -57,6 +58,16 @@ export type MutationEditRecipeArgs = {
 
 export type MutationSignupArgs = {
   user: UserInput;
+};
+
+
+export type MutationUpdatePasswordArgs = {
+  password: PasswordEditInput;
+};
+
+export type PasswordEditInput = {
+  /** Must contain a letter, a number, a special character, and be at least 12 characters long */
+  password: Scalars['String'];
 };
 
 export type ProfileEditInput = {
@@ -216,6 +227,13 @@ export type EditProfileMutationVariables = Exact<{
 
 
 export type EditProfileMutation = { __typename?: 'Mutation', editProfile: { __typename?: 'UserType', id: number, username: string, email: string } };
+
+export type UpdatePasswordMutationVariables = Exact<{
+  password: PasswordEditInput;
+}>;
+
+
+export type UpdatePasswordMutation = { __typename?: 'Mutation', updatePassword: { __typename?: 'MessageType', message: string } };
 
 export type CreateRecipeMutationVariables = Exact<{
   recipe: RecipeInput;
@@ -385,6 +403,24 @@ export const EditProfileDocument = gql`
   })
   export class EditProfileGQL extends Apollo.Mutation<EditProfileMutation, EditProfileMutationVariables> {
     document = EditProfileDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdatePasswordDocument = gql`
+    mutation updatePassword($password: PasswordEditInput!) {
+  updatePassword(password: $password) {
+    message
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdatePasswordGQL extends Apollo.Mutation<UpdatePasswordMutation, UpdatePasswordMutationVariables> {
+    document = UpdatePasswordDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

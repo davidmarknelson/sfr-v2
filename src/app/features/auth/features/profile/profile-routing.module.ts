@@ -18,6 +18,13 @@ const routes: SfrRoutes = [
         (m) => m.SfrProfileEditFeatureModule
       ),
   },
+  {
+    path: 'edit-password',
+    loadChildren: () =>
+      import('../password-edit/password-edit.module').then(
+        (m) => m.SfrPasswordEditFeatureModule
+      ),
+  },
 ];
 
 @NgModule({

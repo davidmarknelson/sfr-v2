@@ -73,6 +73,12 @@ mutation editProfile($profile: ProfileEditInput!) {
   }
 }
 
+mutation updatePassword($password: PasswordEditInput!) {
+  updatePassword(password: $password) {
+    message
+  }
+}
+
 mutation createRecipe($recipe: RecipeInput!) {
   createRecipe(recipe: $recipe) {
     cookTime
