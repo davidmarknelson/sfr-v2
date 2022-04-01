@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { ProfileGQL } from '@sfr/data-access/generated';
 import {
@@ -20,7 +21,12 @@ describe('SfrProfileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SfrProfileComponent],
-      imports: [SfrLoaderUiModule, SfrContainerUiModule, SfrPageTitleUiModule],
+      imports: [
+        SfrLoaderUiModule,
+        SfrContainerUiModule,
+        SfrPageTitleUiModule,
+        MatIconModule,
+      ],
       providers: [
         {
           provide: ProfileGQL,

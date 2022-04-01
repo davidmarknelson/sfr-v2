@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SfrImageUploaderUiModule } from '@sfr/shared/ui/intelligent';
 import {
   SfrAnnouncementUiModule,
@@ -23,6 +24,7 @@ import { SfrCreateRecipeComponent } from './create-recipe.component';
     SfrAnnouncementUiModule,
     MatDialogModule,
     SfrImageUploaderUiModule,
+    MatSnackBarModule,
   ],
   providers: [SfrUrlReplaceSpacePipe],
 })

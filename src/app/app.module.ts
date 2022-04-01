@@ -1,9 +1,22 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { MAT_MENU_DEFAULT_OPTIONS } from '@angular/material/menu';
+import {
+  MatDialogConfig,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
+import {
+  MatFormFieldDefaultOptions,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
+import {
+  MatMenuDefaultOptions,
+  MAT_MENU_DEFAULT_OPTIONS,
+} from '@angular/material/menu';
 import { MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator';
+import {
+  MatSnackBarConfig,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -46,20 +59,27 @@ import { SfrViewModule } from './view/view.module';
     },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline' },
+      useValue: { appearance: 'outline' } as MatFormFieldDefaultOptions,
     },
     {
       provide: MAT_MENU_DEFAULT_OPTIONS,
       useValue: {
         overlayPanelClass: 'rounded-corners',
-      },
+      } as MatMenuDefaultOptions,
     },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {
         minWidth: '500px',
         maxWidth: '90%',
-      },
+      } as MatDialogConfig,
+    },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 5000,
+        verticalPosition: 'top',
+      } as MatSnackBarConfig,
     },
   ],
   bootstrap: [SfrAppComponent],

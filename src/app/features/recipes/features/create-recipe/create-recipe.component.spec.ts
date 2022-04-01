@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { createMockRecipeFullData } from '@sfr-testing/helpers';
 import {
   MockCloudinaryService,
   MockRouter,
+  MockSnackbar,
   MockUrlReplaceSpacePipe,
 } from '@sfr-testing/mocks';
 import { CreateRecipeGQL } from '@sfr/data-access/generated';
@@ -35,6 +37,7 @@ describe('CreateRecipeComponent', () => {
   let urlReplaceSpace: SfrUrlReplaceSpacePipe;
   let cloudinaryService: SfrCloudinaryService;
   let matDialog: MatDialog;
+  let snackbar: MatSnackBar;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -47,6 +50,7 @@ describe('CreateRecipeComponent', () => {
         SfrCreateEditRecipeUiModule,
         SfrAnnouncementUiModule,
         BrowserAnimationsModule,
+        MatSnackBarModule,
       ],
       providers: [
         {
@@ -89,12 +93,17 @@ describe('CreateRecipeComponent', () => {
           provide: SfrCloudinaryService,
           useClass: MockCloudinaryService,
         },
+        {
+          provide: MatSnackBar,
+          useClass: MockSnackbar,
+        },
       ],
     }).compileComponents();
     router = TestBed.inject(Router);
     urlReplaceSpace = TestBed.inject(SfrUrlReplaceSpacePipe);
     cloudinaryService = TestBed.inject(SfrCloudinaryService);
     matDialog = TestBed.inject(MatDialog);
+    snackbar = TestBed.inject(MatSnackBar);
   });
 
   beforeEach(() => {
@@ -106,6 +115,7 @@ describe('CreateRecipeComponent', () => {
   it('should route to the recipe page on success with no image', () => {
     const routerSpy = jest.spyOn(router, 'navigate');
     const matDialogSpy = jest.spyOn(matDialog, 'open');
+    const snackbarSpy = jest.spyOn(snackbar, 'open');
     const urlReplaceSpaceSpy = jest
       .spyOn(urlReplaceSpace, 'transform')
       .mockReturnValue('sandwich');
@@ -123,11 +133,13 @@ describe('CreateRecipeComponent', () => {
     expect(matDialogSpy).not.toHaveBeenCalled();
     expect(routerSpy).toHaveBeenCalledWith(['recipes', 'sandwich']);
     expect(urlReplaceSpaceSpy).toHaveBeenCalled();
+    expect(snackbarSpy).toHaveBeenCalledWith('Recipe successfully created');
   });
 
   it('should upload an image', () => {
     const routerSpy = jest.spyOn(router, 'navigate');
     const matDialogSpy = jest.spyOn(matDialog, 'open');
+    const snackbarSpy = jest.spyOn(snackbar, 'open');
     const urlReplaceSpaceSpy = jest
       .spyOn(urlReplaceSpace, 'transform')
       .mockReturnValue('sandwich');
@@ -145,6 +157,7 @@ describe('CreateRecipeComponent', () => {
     expect(matDialogSpy).toHaveBeenCalled();
     expect(routerSpy).toHaveBeenCalledWith(['recipes', 'sandwich']);
     expect(urlReplaceSpaceSpy).toHaveBeenCalled();
+    expect(snackbarSpy).toHaveBeenCalledWith('Recipe successfully created');
   });
 
   it('should show an error if the recipe already exists and delete an image', () => {
@@ -163,6 +176,7 @@ describe('CreateRecipeComponent', () => {
     const matDialogSpy = jest.spyOn(matDialog, 'open');
     const urlReplaceSpaceSpy = jest.spyOn(urlReplaceSpace, 'transform');
     const cloudinarySpy = jest.spyOn(cloudinaryService, 'deleteImageByToken$');
+    const snackbarSpy = jest.spyOn(snackbar, 'open');
     fixture.debugElement
       .query(By.css('sfr-create-edit-recipe'))
       .componentInstance.saveValue.emit({
@@ -182,5 +196,6 @@ describe('CreateRecipeComponent', () => {
       'A recipe with that name already exists'
     );
     expect(fixture.debugElement.query(By.css('sfr-announcement'))).toBeTruthy();
+    expect(snackbarSpy).not.toHaveBeenCalled();
   });
 });

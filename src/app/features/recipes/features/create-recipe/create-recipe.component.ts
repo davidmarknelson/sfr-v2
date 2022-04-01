@@ -4,6 +4,7 @@ import {
   Component,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CloudinaryUploadedImage } from '@sfr/data-access/cloudinary';
 import { CreateRecipeGQL, RecipeInput } from '@sfr/data-access/generated';
@@ -30,7 +31,8 @@ export class SfrCreateRecipeComponent {
     private readonly urlReplaceSpace: SfrUrlReplaceSpacePipe,
     private readonly cd: ChangeDetectorRef,
     private readonly dialog: MatDialog,
-    private readonly cloudinary: SfrCloudinaryService
+    private readonly cloudinary: SfrCloudinaryService,
+    private readonly snackBar: MatSnackBar
   ) {}
 
   createRecipe(createEditRecipe: CreateEditRecipe): void {
@@ -66,6 +68,7 @@ export class SfrCreateRecipeComponent {
               'recipes',
               this.urlReplaceSpace.transform(data?.createRecipe.name!),
             ]);
+            this.snackBar.open('Recipe successfully created');
           } else {
             this.deleteUploadedImage(deleteTokens);
             this.errorMessage =

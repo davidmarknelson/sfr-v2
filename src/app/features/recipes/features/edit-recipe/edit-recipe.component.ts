@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CloudinaryUploadedImage } from '@sfr/data-access/cloudinary';
 import {
@@ -48,7 +49,8 @@ export class SfrEditRecipeComponent implements OnInit {
     private readonly recipeGQL: RecipeGQL,
     private readonly dialog: MatDialog,
     private readonly cloudinary: SfrCloudinaryService,
-    private readonly titleService: SfrTitleService
+    private readonly titleService: SfrTitleService,
+    private readonly snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -89,6 +91,7 @@ export class SfrEditRecipeComponent implements OnInit {
               'recipes',
               this.urlReplaceSpace.transform(data?.editRecipe.name!),
             ]);
+            this.snackBar.open('Recipe successfully edited');
           } else {
             this.deleteUploadedImage(deleteTokens);
             this.errorMessage = errors[0].extensions?.response.message;
