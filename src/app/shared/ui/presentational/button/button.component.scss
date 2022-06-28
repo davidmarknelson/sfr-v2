@@ -1,7 +1,7 @@
 @use "abstracts" as vars;
 @use "themes" as sfrThemes;
 
-.sfr-button {
+:host.sfr-button {
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -39,14 +39,14 @@
     height: 40px;
   }
 
-  &__content {
+  .sfr-button__content {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
 
-  & &__ripple {
+  & .sfr-button__ripple {
     position: absolute;
     left: 0;
     right: 0;

@@ -20,6 +20,7 @@ type SfrColor = 'primary' | 'accent' | 'warn' | null;
   selector:
     'button[sfr-button], a[sfr-button], button[sfr-flat-button], a[sfr-flat-button], button[sfr-icon-button], a[sfr-icon-button]',
   templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss'],
   host: {
     '[attr.disabled]': 'disabled || null',
     '[class.sfr-button--disabled]': 'disabled',
