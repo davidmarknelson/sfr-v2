@@ -1,0 +1,5 @@
+@use "abstracts" as vars;
+
+.mat-dialog-container {
+  border-radius: vars.$border-radius !important;
+}

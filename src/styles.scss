@@ -2,9 +2,10 @@
 // For more information: https://material.angular.io/guide/theming
 @use "~@angular/material" as mat;
 // Plus imports for other components in your app.
-@import "./assets/themes";
-@import "./assets/css/material";
-@import "./assets/css/globals/index.scss";
+@use "base" as *;
+@use "themes" as *;
+@use "vendors" as *;
+@use "components/button" as *;
 
 $sfr-typography: mat.define-typography-config(
   $font-family: (
@@ -22,6 +23,7 @@ $sfr-typography: mat.define-typography-config(
 @include mat.form-field-color($sfr-darker-theme);
 @include mat.option-color($sfr-darker-theme);
 @include mat.progress-bar-color($sfr-darker-theme);
+@include sfr-button-theme($sfr-theme);
 
 /* Global styles */
 html,
@@ -31,5 +33,4 @@ body {
 body {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
-  // font-size: unset !important;
 }

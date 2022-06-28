@@ -2,7 +2,6 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,8 +11,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipesAndCountData } from '@sfr-testing/helpers';
-import { SfrAnnouncementUiModule } from '@sfr/shared/ui/presentational';
-import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
+import {
+  SfrAnnouncementUiModule,
+  SfrButtonModule,
+} from '@sfr/shared/ui/presentational';
 import {
   SfrRecipePhotoPipeModule,
   SfrUrlReplaceSpaceModule,
@@ -32,8 +33,7 @@ describe('SfrRecipesGridComponent', () => {
       imports: [
         MatPaginatorModule,
         MatCardModule,
-        MatButtonModule,
-        SfrRoundedButtonModule,
+        SfrButtonModule,
         SfrRecipePhotoPipeModule,
         SfrAnnouncementUiModule,
         SfrUrlReplaceSpaceModule,

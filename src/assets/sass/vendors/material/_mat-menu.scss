@@ -1,12 +1,12 @@
-@import "../helpers/variables.scss";
+@use "abstracts" as vars;
 
 .rounded-corners .mat-menu-panel {
-  border-radius: $border-radius;
+  border-radius: vars.$border-radius;
 }
 
 .mat-menu-item:hover:not([disabled]),
 .mat-menu-item.cdk-program-focused:not([disabled]),
 .mat-menu-item.cdk-keyboard-focused:not([disabled]),
 .mat-menu-item-highlighted:not([disabled]) {
-  background: $focus-background !important;
+  background: vars.$focus-background !important;
 }

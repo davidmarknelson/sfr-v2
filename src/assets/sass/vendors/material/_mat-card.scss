@@ -1,7 +1,7 @@
-@import "/src/assets/css/helpers/variables.scss";
+@use "abstracts" as vars;
 
 .mat-card {
-  border-radius: $border-radius !important;
+  border-radius: vars.$border-radius !important;
 }
 
 .mat-card-header .mat-card-title {

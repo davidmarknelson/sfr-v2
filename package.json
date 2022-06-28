@@ -25,6 +25,7 @@
     "@angular/router": "~12.2.0",
     "@apollo/client": "^3.4.16",
     "@auth0/angular-jwt": "^5.0.2",
+    "@ngneat/until-destroy": "^9.2.1",
     "apollo-angular": "^2.6.0",
     "compressorjs": "^1.1.1",
     "graphql": "^15.6.1",

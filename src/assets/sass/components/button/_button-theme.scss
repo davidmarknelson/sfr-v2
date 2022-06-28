@@ -1,0 +1,15 @@
+@use "@angular/material" as mat;
+@use "./button-color" as *;
+@use "./button-typography" as *;
+
+@mixin sfr-button-theme($theme) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include sfr-button-color($theme);
+  }
+
+  $typography-config: mat.get-typography-config($theme);
+  @if $typography-config != null {
+    @include sfr-button-typography($theme);
+  }
+}

@@ -1,6 +1,5 @@
 <button
-  mat-flat-button
-  sfrRoundedButton
+  sfr-flat-button
   color="primary"
   (click)="fileInput.click()"
   type="button"
@@ -38,13 +37,7 @@
     <ng-template #loader>
       <sfr-loader></sfr-loader>
     </ng-template>
-    <button
-      mat-button
-      sfrRoundedButton
-      type="button"
-      (click)="removeFile(i)"
-      color="warn"
-    >
+    <button sfr-button type="button" (click)="removeFile(i)" color="warn">
       Remove
       <span class="cdk-visually-hidden">{{ file.name }}</span>
     </button>

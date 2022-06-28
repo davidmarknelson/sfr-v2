@@ -15,13 +15,7 @@
     fxLayoutGap="1rem"
   >
     <img [src]="image.path" [alt]="'Current image ' + (i + 1)" />
-    <button
-      mat-button
-      sfrRoundedButton
-      type="button"
-      (click)="removeFile(i)"
-      color="warn"
-    >
+    <button sfr-button type="button" (click)="removeFile(i)" color="warn">
       Remove
       <span class="cdk-visually-hidden">{{ "Current image " + (i + 1) }}</span>
     </button>

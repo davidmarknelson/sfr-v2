@@ -2,16 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {
   SfrAnnouncementUiModule,
+  SfrButtonModule,
   SfrContainerUiModule,
   SfrPageTitleUiModule,
 } from '@sfr/shared/ui/presentational';
-import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { PasswordEditRoutingModule } from './password-edit-routing.module';
 import { SfrPasswordEditComponent } from './password-edit.component';
 
@@ -21,8 +20,7 @@ import { SfrPasswordEditComponent } from './password-edit.component';
     CommonModule,
     PasswordEditRoutingModule,
     SfrContainerUiModule,
-    MatButtonModule,
-    SfrRoundedButtonModule,
+    SfrButtonModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     MatFormFieldModule,

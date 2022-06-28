@@ -1,0 +1,5 @@
+@use "abstracts" as vars;
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: vars.$primary-dark !important;
+}

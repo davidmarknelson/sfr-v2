@@ -1,4 +1,4 @@
-@import "/src/assets/css/helpers/variables.scss";
+@use "abstracts" as *;
 
 .page-title {
   text-align: center;

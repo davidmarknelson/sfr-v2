@@ -1,0 +1,19 @@
+@use "themes" as *;
+@use "sass:map";
+
+$screen-small: 599px;
+$screen-large: 1279px;
+
+$max-width-component: 500px;
+
+$border-radius: 25px;
+$border-radius-small: 10px;
+
+$focus-background: rgba(0, 0, 0, 0.09);
+
+$primary: map.get($primary-green, default);
+$primary-dark: map.get($primary-green-dark, default);
+$gray-light: map.get($grey-palette, 200);
+$gray-light-contrast: map.get($grey-palette, contrast, 200);
+$red: map.get($warn-red, 700);
+$red-contrast: map.get($warn-red, contrast, 700);

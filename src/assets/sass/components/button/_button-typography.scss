@@ -1,0 +1,9 @@
+@use "@angular/material" as mat;
+
+@mixin sfr-button-typography($theme) {
+  $typography-config: mat.get-typography-config($theme);
+
+  .sfr-button {
+    font-family: mat.font-family($typography-config);
+  }
+}

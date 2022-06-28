@@ -91,7 +91,7 @@
         />
         <button
           matSuffix
-          mat-icon-button
+          sfr-icon-button
           aria-label="Add ingredient"
           type="button"
           (click)="addIngredient(i)"
@@ -100,7 +100,7 @@
         </button>
         <button
           matSuffix
-          mat-icon-button
+          sfr-icon-button
           aria-label="Remove ingredient"
           type="button"
           (click)="removeIngredient(i)"
@@ -137,7 +137,7 @@
         />
         <button
           matSuffix
-          mat-icon-button
+          sfr-icon-button
           aria-label="Add instruction"
           type="button"
           (click)="addInstruction(i)"
@@ -146,7 +146,7 @@
         </button>
         <button
           matSuffix
-          mat-icon-button
+          sfr-icon-button
           aria-label="Remove instruction"
           type="button"
           (click)="removeInstruction(i)"
@@ -226,8 +226,6 @@
   </div>
 
   <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="flex-end">
-    <button mat-flat-button sfrRoundedButton color="accent" type="submit">
-      Submit
-    </button>
+    <button sfr-flat-button color="accent" type="submit">Submit</button>
   </div>
 </form>

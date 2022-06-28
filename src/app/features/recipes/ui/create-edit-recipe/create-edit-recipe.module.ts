@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -11,7 +10,7 @@ import {
   SfrImageCurrentUiModule,
   SfrImageUploadUiModule,
 } from '@sfr/shared/ui/intelligent';
-import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
+import { SfrButtonModule } from '@sfr/shared/ui/presentational';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 
 @NgModule({
@@ -23,8 +22,7 @@ import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
     MatInputModule,
     FlexLayoutModule,
     MatSelectModule,
-    MatButtonModule,
-    SfrRoundedButtonModule,
+    SfrButtonModule,
     MatIconModule,
     SfrImageUploadUiModule,
     SfrImageCurrentUiModule,

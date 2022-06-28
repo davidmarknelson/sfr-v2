@@ -68,7 +68,7 @@
         characters long
       </mat-hint>
       <button
-        mat-icon-button
+        sfr-icon-button
         matSuffix
         type="button"
         (click)="togglePasswordVisibility()"
@@ -110,7 +110,7 @@
         fxFlex="1 1 auto"
       />
       <button
-        mat-icon-button
+        sfr-icon-button
         matSuffix
         type="button"
         (click)="togglePasswordConfirmationVisibility()"
@@ -145,9 +145,7 @@
     </sfr-announcement>
 
     <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="flex-end">
-      <button mat-flat-button sfrRoundedButton color="accent" type="submit">
-        Sign up
-      </button>
+      <button sfr-flat-button color="accent" type="submit">Sign up</button>
     </div>
   </form>
 </sfr-container>

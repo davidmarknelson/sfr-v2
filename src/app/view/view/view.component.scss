@@ -1,4 +1,4 @@
-@import "/src/assets/css/helpers/variables.scss";
+@use "abstracts" as *;
 
 :host {
   min-height: 100%;

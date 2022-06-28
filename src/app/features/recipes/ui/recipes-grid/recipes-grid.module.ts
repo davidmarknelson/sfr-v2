@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { SfrAnnouncementUiModule } from '@sfr/shared/ui/presentational';
-import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
+import {
+  SfrAnnouncementUiModule,
+  SfrButtonModule,
+} from '@sfr/shared/ui/presentational';
 import {
   SfrRecipePhotoPipeModule,
   SfrUrlReplaceSpaceModule,
@@ -22,8 +23,7 @@ import { SfrRecipesGridComponent } from './recipes-grid.component';
     CommonModule,
     MatPaginatorModule,
     MatCardModule,
-    MatButtonModule,
-    SfrRoundedButtonModule,
+    SfrButtonModule,
     SfrRecipePhotoPipeModule,
     SfrAnnouncementUiModule,
     MatIconModule,

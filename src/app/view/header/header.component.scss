@@ -1,8 +1,9 @@
 @use "~@angular/material" as mat;
-@import "/src/assets/themes";
+@use "components/button" as *;
+@use "themes";
 
-@include mat.button-color($sfr-darker-theme);
-@include mat.menu-color($sfr-darker-theme);
+@include mat.menu-color(themes.$sfr-darker-theme);
+@include sfr-button-theme(themes.$sfr-darker-theme);
 
 img {
   width: 112px;

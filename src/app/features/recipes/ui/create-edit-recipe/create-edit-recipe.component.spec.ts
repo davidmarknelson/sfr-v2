@@ -3,7 +3,6 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
@@ -21,7 +20,7 @@ import {
   SfrImageCurrentUiModule,
   SfrImageUploadUiModule,
 } from '@sfr/shared/ui/intelligent';
-import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
+import { SfrButtonModule } from '@sfr/shared/ui/presentational';
 import { SfrCreateEditRecipeComponent } from './create-edit-recipe.component';
 
 describe('SfrCreateEditRecipeComponent', () => {
@@ -39,8 +38,7 @@ describe('SfrCreateEditRecipeComponent', () => {
         MatInputModule,
         FlexLayoutModule,
         MatSelectModule,
-        MatButtonModule,
-        SfrRoundedButtonModule,
+        SfrButtonModule,
         MatIconModule,
         BrowserAnimationsModule,
         SfrImageUploadUiModule,

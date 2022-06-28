@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createMockRecipeData } from '@sfr-testing/helpers';
-import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
+import { SfrButtonModule } from '@sfr/shared/ui/presentational';
 import {
   SfrRecipePhotoPipeModule,
   SfrUrlReplaceSpaceModule,
@@ -22,8 +21,7 @@ describe('SfrRecipeCardComponent', () => {
       declarations: [SfrRecipeCardComponent],
       imports: [
         MatCardModule,
-        MatButtonModule,
-        SfrRoundedButtonModule,
+        SfrButtonModule,
         SfrRecipePhotoPipeModule,
         RouterTestingModule,
         SfrUrlReplaceSpaceModule,

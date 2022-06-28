@@ -20,7 +20,6 @@ import {
   SfrContainerUiModule,
   SfrPageTitleUiModule,
 } from '@sfr/shared/ui/presentational';
-import { SfrRoundedButtonModule } from '@sfr/shared/utils/directives';
 import { SfrAuthService } from '@sfr/shared/utils/services';
 import { of } from 'rxjs';
 import { SfrSignupComponent } from './signup.component';
@@ -44,7 +43,6 @@ describe('SignupComponent', () => {
         RouterTestingModule,
         SfrContainerUiModule,
         SfrPageTitleUiModule,
-        SfrRoundedButtonModule,
         SfrAnnouncementUiModule,
         MatFormFieldModule,
         ReactiveFormsModule,

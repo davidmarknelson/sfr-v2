@@ -1,4 +1,4 @@
-@import "/src/assets/css/helpers/variables.scss";
+@use "abstracts" as vars;
 
 :host {
   position: relative;
@@ -29,11 +29,11 @@ button.right {
     border-radius: 50%;
     padding: 0;
     border: none;
-    background: $gray-light;
+    background-color: vars.$gray-light;
     cursor: pointer;
 
     &.active {
-      background: $primary;
+      background-color: vars.$primary;
     }
   }
 }
@@ -46,7 +46,7 @@ figure {
   display: block;
   position: relative;
   padding-top: 75%;
-  border-radius: $border-radius;
+  border-radius: vars.$border-radius;
   width: 100%;
 }
 
@@ -58,6 +58,6 @@ img {
   position: absolute;
   right: 0;
   top: 0;
-  border-radius: $border-radius;
+  border-radius: vars.$border-radius;
   object-fit: cover;
 }

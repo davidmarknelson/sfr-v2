@@ -1,0 +1,58 @@
+@use "abstracts" as vars;
+@use "themes" as sfrThemes;
+
+.sfr-button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 36px;
+  overflow: hidden;
+  outline: none;
+  text-decoration: none;
+  background-color: transparent;
+  color: sfrThemes.$dark-primary-text;
+  border: none;
+
+  &:hover,
+  &.cdk-keyboard-focused {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  &:not([sfr-icon-button]) {
+    border-radius: vars.$border-radius;
+    min-width: 64px;
+  }
+
+  &[sfr-icon-button] {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & &__ripple {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    border-radius: vars.$border-radius;
+  }
+}

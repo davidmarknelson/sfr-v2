@@ -6,11 +6,10 @@
   <!-- Mobile navigation -->
   <nav fxHide.gt-xs="true">
     <button
-      mat-flat-button
+      sfr-flat-button
       color="primary"
       [matMenuTriggerFor]="menu"
       aria-label="Open menu"
-      sfrRoundedButton
     >
       Menu
     </button>
@@ -45,42 +44,30 @@
 
   <!-- Desktop navigation -->
   <nav fxHide.lt-sm="true" fxLayoutGap="0.5rem">
-    <a routerLink="/recipes" mat-flat-button color="primary" sfrRoundedButton>
+    <a routerLink="/recipes" sfr-flat-button color="primary">
       Recipes
       <mat-icon>chevron_right</mat-icon>
     </a>
     <ng-container *ngIf="(isAuthenticated$ | async) === false">
-      <a routerLink="/signup" mat-flat-button color="primary" sfrRoundedButton>
+      <a routerLink="/signup" sfr-flat-button color="primary">
         Sign up
         <mat-icon>chevron_right</mat-icon>
       </a>
-      <a routerLink="/login" mat-flat-button color="primary" sfrRoundedButton>
+      <a routerLink="/login" sfr-flat-button color="primary">
         Login
         <mat-icon>chevron_right</mat-icon>
       </a>
     </ng-container>
     <ng-container *ngIf="isAuthenticated$ | async">
-      <a
-        routerLink="/create-recipe"
-        mat-flat-button
-        color="primary"
-        sfrRoundedButton
-      >
+      <a routerLink="/create-recipe" sfr-flat-button color="primary">
         Create recipe
         <mat-icon>chevron_right</mat-icon>
       </a>
-      <a routerLink="/profile" mat-flat-button color="primary" sfrRoundedButton>
+      <a routerLink="/profile" sfr-flat-button color="primary">
         Profile
         <mat-icon>chevron_right</mat-icon>
       </a>
-      <button
-        mat-flat-button
-        color="primary"
-        sfrRoundedButton
-        (click)="logout()"
-      >
-        Logout
-      </button>
+      <button sfr-flat-button color="primary" (click)="logout()">Logout</button>
     </ng-container>
   </nav>
 </mat-toolbar>
